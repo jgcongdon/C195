@@ -40,6 +40,7 @@ public class LogIn implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+        JDBC.openConnection();
     }
 
     @Override

@@ -10,15 +10,18 @@
 <AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.Customers">
    <children>
       <Label layoutX="622.0" layoutY="25.0" text="Customers" />
-      <TableView layoutX="50.0" layoutY="50.0" prefWidth="1200.0">
+      <TableView fx:id="CustomerTable" layoutX="50.0" layoutY="50.0" prefWidth="1200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Customer ID" />
-          <TableColumn prefWidth="75.0" text="Customer Name" />
-            <TableColumn prefWidth="75.0" text="Phone Number" />
-            <TableColumn prefWidth="75.0" text="Address" />
-            <TableColumn prefWidth="75.0" text="Postal Code" />
-            <TableColumn prefWidth="75.0" text="Division" />
-            <TableColumn prefWidth="75.0" text="Country" />
+          <TableColumn fx:id="Customer_ID" prefWidth="75.0" text="Customer ID" />
+          <TableColumn fx:id="Customer_Name" prefWidth="75.0" text="Customer Name" />
+            <TableColumn fx:id="Address" prefWidth="75.0" text="Address" />
+            <TableColumn fx:id="Postal_Code" prefWidth="75.0" text="Postal Code" />
+            <TableColumn fx:id="Phone_Number" prefWidth="75.0" text="Phone Number" />
+            <TableColumn fx:id="Create_Date" prefWidth="75.0" text="Create Date" />
+            <TableColumn fx:id="Create_By" prefWidth="75.0" text="Created By" />
+            <TableColumn fx:id="Last_Update" prefWidth="75.0" text="Last Update" />
+            <TableColumn fx:id="Last_Updated_By" prefWidth="75.0" text="Last Updated By" />
+            <TableColumn fx:id="Division_ID" prefWidth="75.0" text="Division" />
         </columns>
       </TableView>
       <AnchorPane layoutX="579.0" layoutY="600.0">
