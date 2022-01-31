@@ -3,6 +3,9 @@ package DAO;
 import model.Customer;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,15 +31,17 @@ public class CustomerDaoImpl {
                 //if(active==1) act=true;
                 String postalCode=result.getString("Postal_Code");
                 String phone=result.getString("Phone");
-                String createDate=result.getString("Create_Date");
-                String createdBy=result.getString("Create_By");
-                String lastUpdate=result.getString("Last_Update");
-                String lastUpdateby=result.getString("Last_Updated_By");
-                Calendar createDateCalendar=stringToCalendar(createDate);
-                Calendar lastUpdateCalendar=stringToCalendar(lastUpdate);
-               int divisionid=result.getInt("Division_ID");
+                Timestamp createDate=result.getTimestamp("Create_Date");
+               LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+               String createdBy=result.getString("Created_By");
+               Timestamp lastUpdate=result.getTimestamp("Last_Update");
+               LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
+               String lastUpdateby=result.getString("Last_Updated_By");
+
+               int Division_ID=result.getInt("Division_ID");
+
              //   s(int addressId, String address, String address2, int cityId, String postalCode, String phone, Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy)
-                customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, /*act,*/ createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, divisionid);
+                customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, /*act,*/ createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, Division_ID);
                 return customerResult;
            }
              //JDBC.closeConnection();
@@ -56,17 +61,19 @@ public class CustomerDaoImpl {
                  //if(active==1) act=true;
                  String postalCode=result.getString("Postal_Code");
                  String phone=result.getString("Phone");
-                 String createDate=result.getString("Create_Date");
+                 Timestamp createDate=result.getTimestamp("Create_Date");
+                 LocalDateTime createDateCalendar=createDate.toLocalDateTime();
                  String createdBy=result.getString("Created_By");
-                 String lastUpdate=result.getString("Last_Update");
+                 Timestamp lastUpdate=result.getTimestamp("Last_Update");
+                 LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
                  String lastUpdateby=result.getString("Last_Updated_By");
-                 Calendar createDateCalendar=stringToCalendar(createDate);
-                 Calendar lastUpdateCalendar=stringToCalendar(lastUpdate);
-                 int divisionid=result.getInt("Division_ID");
+
+                 int Division_ID=result.getInt("Division_ID");
+
              //   s(int addressId, String address, String address2, int cityId, String postalCode, String phone, Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy)
-                Customer customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, /*act,*/ createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, divisionid);
+                Customer customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, /*act,*/ createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, Division_ID);
                 allCustomers.add(customerResult);
-                
+
             }
              //JDBC.closeConnection();
         return allCustomers;

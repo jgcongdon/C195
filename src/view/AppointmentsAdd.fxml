@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AppointmentsAdd">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsAdd">
    <children>
       <AnchorPane layoutX="602.0" layoutY="25.0">
          <children>
@@ -63,7 +63,7 @@
                   <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <ComboBox fx:id="userCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                </children>
             </GridPane>
          </children>

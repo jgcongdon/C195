@@ -1,6 +1,6 @@
 package controller;
 
-import helper.JDBC;
+import helper.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +40,7 @@ public class LogIn implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-        JDBC.openConnection();
+
     }
 
     @Override

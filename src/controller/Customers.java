@@ -104,17 +104,18 @@ public class Customers implements Initializable {
         Create_By.setCellValueFactory(new PropertyValueFactory<>("createdBy"));
         Last_Update.setCellValueFactory(new PropertyValueFactory<>("lastUpdate"));
         Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("lastUpdateBy"));
-        Division_ID.setCellValueFactory(new PropertyValueFactory<>("division"));
+        Division_ID.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
 
 
         try {
             Customer.addAll(CustomerDaoImpl.getAllCustomers());
 
-
         } catch (Exception ex) {
             Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+
         }
         CustomerTable.setItems(Customer);
 
     }
+
 }

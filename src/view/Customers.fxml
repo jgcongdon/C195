@@ -21,7 +21,7 @@
             <TableColumn fx:id="Create_By" prefWidth="75.0" text="Created By" />
             <TableColumn fx:id="Last_Update" prefWidth="75.0" text="Last Update" />
             <TableColumn fx:id="Last_Updated_By" prefWidth="75.0" text="Last Updated By" />
-            <TableColumn fx:id="Division_ID" prefWidth="75.0" text="Division" />
+            <TableColumn fx:id="Division_ID" prefWidth="75.0" text="Division_ID" />
         </columns>
       </TableView>
       <AnchorPane layoutX="579.0" layoutY="600.0">

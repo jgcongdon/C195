@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class Customer {
@@ -9,13 +10,13 @@ public class Customer {
     private String customerAddress;
     private String postalCode;
     private String customerPhone;
-    private Calendar createDate;
+    private LocalDateTime createDate;
     private String createdBy;
-    private Calendar lastUpdate;
+    private LocalDateTime lastUpdate;
     private String lastUpdateBy;
-    private int divisionId;
+    private int Division_ID;
 
-    public Customer(int customerId, String customerName, String customerAddress, String postalCode, String customerPhone, Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy, int divisionId) {
+    public Customer(int customerId, String customerName, String customerAddress, String postalCode, String customerPhone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy, int Division_ID) {
         this.customerId = customerId;
         this.customerName = customerName;
         this.customerAddress = customerAddress;
@@ -25,7 +26,7 @@ public class Customer {
         this.createdBy = createdBy;
         this.lastUpdate = lastUpdate;
         this.lastUpdateBy = lastUpdateBy;
-        this.divisionId = divisionId;
+        this.Division_ID = Division_ID;
     }
 
 
@@ -69,11 +70,11 @@ public class Customer {
         this.customerPhone = customerPhone;
     }
 
-    public Calendar getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Calendar createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -85,11 +86,11 @@ public class Customer {
         this.createdBy = createdBy;
     }
 
-    public Calendar getLastUpdate() {
+    public LocalDateTime getLastUpdate() {
         return lastUpdate;
     }
 
-    public void setLastUpdate(Calendar lastUpdate) {
+    public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
 
@@ -101,11 +102,11 @@ public class Customer {
         this.lastUpdateBy = lastUpdateBy;
     }
 
-    public int getDivisionId() {
-        return divisionId;
+    public int getDivision_ID() {
+        return Division_ID;
     }
 
-    public void setDivisionId(int divisionId) {
-        this.divisionId = divisionId;
+    public void setDivisionId(int Division_ID) {
+        this.Division_ID = Division_ID;
     }
 }
