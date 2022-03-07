@@ -1,5 +1,7 @@
 package controller;
 
+import DAO.ContactDaoImpl;
+import DAO.CustomerDaoImpl;
 import DAO.UserDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import model.Contact;
+import model.Customer;
 import model.User;
 
 import java.io.IOException;
@@ -21,6 +25,11 @@ public class AppointmentsAdd implements Initializable {
     public ComboBox<User> userCombo;
     Stage stage;
     Parent scene;
+
+    public ComboBox<Customer> customerCombo;
+
+    public ComboBox<Contact> contactCombo;
+
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -45,6 +54,8 @@ public class AppointmentsAdd implements Initializable {
 
         try {
             userCombo.setItems(UserDaoImpl.getAllUsers());
+            customerCombo.setItems(CustomerDaoImpl.getAllCustomers());
+            contactCombo.setItems(ContactDaoImpl.getAllContacts());
         } catch (Exception e) {
             e.printStackTrace();
         }

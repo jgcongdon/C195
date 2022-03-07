@@ -109,4 +109,7 @@ public class Customer {
     public void setDivisionId(int Division_ID) {
         this.Division_ID = Division_ID;
     }
+
+    @Override
+    public String toString(){return customerName;}
 }
