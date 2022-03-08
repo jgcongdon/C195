@@ -11,11 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AppointmentsAdd">
+
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AppointmentsModify">
    <children>
-      <AnchorPane layoutX="602.0" layoutY="25.0">
+      <AnchorPane layoutX="595.0" layoutY="25.0">
          <children>
-            <Label text="Add Appointment" />
+            <Label text="Modify Appointment" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="550.0" layoutY="100.0">
@@ -50,7 +51,7 @@
                   <Label text="Start date" GridPane.rowIndex="6" />
                   <Label text="Start time" GridPane.rowIndex="7" />
                   <Label text="End date" GridPane.rowIndex="8" />
-                  <ComboBox fx:id="contactCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -62,8 +63,8 @@
                   <Label text="User ID" GridPane.rowIndex="11" />
                   <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="8" />
                   <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <ComboBox fx:id="customerCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <ComboBox fx:id="userCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
                </children>
             </GridPane>
          </children>

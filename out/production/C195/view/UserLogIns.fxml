@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.UserLogIns">
+   <children>
+      <AnchorPane layoutX="507.0" layoutY="200.0">
+         <children>
+            <TableView fx:id="UserTable" prefHeight="200.0" prefWidth="287.0">
+              <columns>
+                <TableColumn fx:id="ID" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="UserName" prefWidth="94.0" text="UserName" />
+                  <TableColumn fx:id="Password" prefWidth="117.0" text="Password" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="612.0" layoutY="500.0">
+         <children>
+            <Button mnemonicParsing="false" onAction="#onActionMainMenu" text="Main Menu" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
