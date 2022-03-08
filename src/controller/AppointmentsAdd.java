@@ -11,13 +11,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AppointmentsAdd implements Initializable {
@@ -29,6 +32,10 @@ public class AppointmentsAdd implements Initializable {
     public ComboBox<Customer> customerCombo;
 
     public ComboBox<Contact> contactCombo;
+
+    public ComboBox<LocalTime> startCombo;
+    public ComboBox<LocalTime> endCombo;
+
 
 
     @FXML
@@ -60,5 +67,12 @@ public class AppointmentsAdd implements Initializable {
             e.printStackTrace();
         }
 
+        LocalTime start = LocalTime.of(8,0);
+        LocalTime end = LocalTime.of(22,0);
+
+        while(start.isBefore(end.plusSeconds(1))){
+            startCombo.getItems().add(start);
+            start = start.plusMinutes(15);
+        }
     }
 }
