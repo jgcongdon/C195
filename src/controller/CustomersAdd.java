@@ -1,9 +1,6 @@
 package controller;
 
-import DAO.ContactDaoImpl;
-import DAO.CountryDaoImpl;
-import DAO.CustomerDaoImpl;
-import DAO.UserDaoImpl;
+import DAO.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import model.Country;
+import model.FirstLevelDivision;
 import model.User;
 
 import java.io.IOException;
@@ -26,6 +24,7 @@ public class CustomersAdd implements Initializable {
     Parent scene;
 
     public ComboBox<Country> countryCombo;
+    public ComboBox<FirstLevelDivision> divisionCombo;
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -49,9 +48,17 @@ public class CustomersAdd implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             countryCombo.setItems(CountryDaoImpl.getAllCountries());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        //Does not work
+        /*if (countryCombo.toString() == "U.S") {
+            try {
+                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUS());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }*/
     }
     }

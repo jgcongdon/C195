@@ -12,11 +12,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import java.time.ZoneOffset;
+import java.util.TimeZone;
 
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -27,9 +31,13 @@ public class LogIn implements Initializable {
     Parent scene;
 
 
+    TimeZone tz = TimeZone.getDefault();
+    String tz1 = tz.getID();
 
     @FXML
     private Label locationLabel;
+
+
 
     @FXML
     void onActionExit(ActionEvent event) {
@@ -50,10 +58,11 @@ public class LogIn implements Initializable {
 
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-
+        locationLabel.setText(tz1);
 
     }
 
