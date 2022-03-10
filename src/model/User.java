@@ -7,17 +7,15 @@ public class User {
         private int userId;
         private String userName;
         private String password;
-        //private boolean active;
         private Calendar createDate;
         private String createdBy;
         private Calendar lastUpdate;
         private String lastUpdateBy;
 
-        public User(int userId, String userName, String password, /*boolean active,*/ Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy) {
+        public User(int userId, String userName, String password, Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy) {
             this.userId = userId;
             this.userName = userName;
             this.password = password;
-            //this.active = active;
             this.createDate = createDate;
             this.createdBy = createdBy;
             this.lastUpdate = lastUpdate;
@@ -65,21 +63,7 @@ public class User {
         public void setPassword(String password) {
             this.password = password;
         }
-/*
-        /**
-         * @return the active
-         */
-/*        public boolean isActive() {
-            return active;
-        }
 
-        /**
-         * @param active the active to set
-         */
-/*        public void setActive(boolean active) {
-            this.active = active;
-        }
-*/
         /**
          * @return the createDate
          */
@@ -137,5 +121,6 @@ public class User {
         }
 
         @Override
-    public String toString(){return userName;}
+        public String toString(){return userName;}
+
     }

@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import model.Country;
 import model.FirstLevelDivision;
-import model.User;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,21 +43,37 @@ public class CustomersAdd implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            countryCombo.setItems(CountryDaoImpl.getAllCountries());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        //Does not work
-        /*if (countryCombo.toString() == "U.S") {
+    @FXML
+    void OnActionCountryCombo(ActionEvent event) {
+        if (countryCombo.getValue().toString().equals("U.S")) {
             try {
                 divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUS());
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }*/
+        }
+        else if (countryCombo.getValue().toString().equals("UK")) {
+            try {
+                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUK());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if (countryCombo.getValue().toString().equals("Canada")){
+            try {
+                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivCAN());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            countryCombo.setItems(CountryDaoImpl.getAllCountries());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+}

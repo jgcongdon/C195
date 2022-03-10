@@ -8,14 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.sql.PreparedStatement;
-import java.sql.Statement;
-
 public class Main extends Application {
     @Override
     public void start (Stage stage) throws Exception {
-
-
 
         Parent root = FXMLLoader.load(getClass().getResource("/view/LogIn.fxml"));
         stage.setTitle("Log In");

@@ -27,6 +27,8 @@ public class UserLogIns implements Initializable {
     Stage stage;
     Parent scene;
 
+    ObservableList<User> User = FXCollections.observableArrayList();
+
     @FXML
     private TableView<User> UserTable;
     @FXML
@@ -44,30 +46,19 @@ public class UserLogIns implements Initializable {
             stage.show();
     }
 
-
-        ObservableList<User> User = FXCollections.observableArrayList();
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         ID.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        // CustomerName.setCellValueFactory(new PropertyValueFactory<>("address"));
         UserName.setCellValueFactory(new PropertyValueFactory<>("userName"));
-//       CustomerAddress2.setCellValueFactory(new PropertyValueFactory<>("customerAddress2"));
         Password.setCellValueFactory(new PropertyValueFactory<>("password"));
-
 
         try {
             User.addAll(UserDaoImpl.getAllUsers());
-
-
         } catch (Exception ex) {
             Logger.getLogger(UserLogIns.class.getName()).log(Level.SEVERE, null, ex);
         }
+
         UserTable.setItems(User);
-        //Using Lambda for efficient selection off a tableview
 
     }
-
 }

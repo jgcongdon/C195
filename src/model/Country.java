@@ -11,6 +11,15 @@ public class Country {
     private LocalDateTime Last_Update;
     private String Last_Updated_By;
 
+    public Country(int Country_ID, String Country, LocalDateTime Create_Date, String Created_By, LocalDateTime Last_Update, String Last_Updated_By){
+        this.Country_ID = Country_ID;
+        this.Country = Country;
+        this.Create_Date = Create_Date;
+        this.Created_By = Created_By;
+        this.Last_Update = Last_Update;
+        this.Last_Updated_By = Last_Updated_By;
+    }
+
     public int getCountry_ID() {
         return Country_ID;
     }
@@ -57,15 +66,6 @@ public class Country {
 
     public void setLast_Updated_By(String last_Updated_By) {
         Last_Updated_By = last_Updated_By;
-    }
-
-    public Country(int Country_ID, String Country, LocalDateTime Create_Date, String Created_By, LocalDateTime Last_Update, String Last_Updated_By){
-        this.Country_ID = Country_ID;
-        this.Country = Country;
-        this.Create_Date = Create_Date;
-        this.Created_By = Created_By;
-        this.Last_Update = Last_Update;
-        this.Last_Updated_By = Last_Updated_By;
     }
 
     @Override

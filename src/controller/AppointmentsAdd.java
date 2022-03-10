@@ -11,9 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import model.Appointment;
 import model.Contact;
 import model.Customer;
 import model.User;
@@ -25,18 +23,14 @@ import java.util.ResourceBundle;
 
 public class AppointmentsAdd implements Initializable {
 
-    public ComboBox<User> userCombo;
     Stage stage;
     Parent scene;
 
+    public ComboBox<User> userCombo;
     public ComboBox<Customer> customerCombo;
-
     public ComboBox<Contact> contactCombo;
-
     public ComboBox<LocalTime> startCombo;
     public ComboBox<LocalTime> endCombo;
-
-
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {

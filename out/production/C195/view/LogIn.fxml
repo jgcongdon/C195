@@ -52,7 +52,7 @@
             <HBox>
                <children>
                   <Label text="Location: " />
-                  <Label text="Label" />
+                  <Label fx:id="locationLabel" />
                </children>
             </HBox>
          </children>

@@ -12,6 +12,16 @@ public class FirstLevelDivision {
     private String Last_Updated_By;
     private int COUNTRY_ID;
 
+    public FirstLevelDivision(int Division_ID, String Division, LocalDateTime Create_Date, String Created_By, LocalDateTime Last_Update, String Last_Updated_By, int COUNTRY_ID){
+        this.Division_ID=Division_ID;
+        this.Division=Division;
+        this.Create_Date=Create_Date;
+        this.Created_By=Created_By;
+        this.Last_Update=Last_Update;
+        this.Last_Updated_By=Last_Updated_By;
+        this.COUNTRY_ID=COUNTRY_ID;
+    }
+
     public int getDivision_ID() {
         return Division_ID;
     }
@@ -66,16 +76,6 @@ public class FirstLevelDivision {
 
     public void setCOUNTRY_ID(int COUNTRY_ID) {
         this.COUNTRY_ID = COUNTRY_ID;
-    }
-
-    public FirstLevelDivision(int Division_ID, String Division, LocalDateTime Create_Date, String Created_By, LocalDateTime Last_Update, String Last_Updated_By, int COUNTRY_ID){
-        this.Division_ID=Division_ID;
-        this.Division=Division;
-        this.Create_Date=Create_Date;
-        this.Created_By=Created_By;
-        this.Last_Update=Last_Update;
-        this.Last_Updated_By=Last_Updated_By;
-        this.COUNTRY_ID=COUNTRY_ID;
     }
 
     @Override

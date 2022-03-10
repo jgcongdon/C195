@@ -1,7 +1,6 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.Calendar;
 
 public class Customer {
 
@@ -28,7 +27,6 @@ public class Customer {
         this.lastUpdateBy = lastUpdateBy;
         this.Division_ID = Division_ID;
     }
-
 
     public int getCustomerId() {
         return customerId;
@@ -112,4 +110,5 @@ public class Customer {
 
     @Override
     public String toString(){return customerName;}
+
 }

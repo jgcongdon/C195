@@ -5,6 +5,12 @@ public class Contact {
     private String Contact_Name;
     private String Email;
 
+    public Contact(int Contact_ID, String Contact_Name, String Email) {
+        this.Contact_ID = Contact_ID;
+        this.Contact_Name = Contact_Name;
+        this.Email = Email;
+    }
+
     public int getContact_ID() {
         return Contact_ID;
     }
@@ -29,14 +35,7 @@ public class Contact {
         Email = email;
     }
 
-    public Contact(int Contact_ID, String Contact_Name, String Email) {
-        this.Contact_ID = Contact_ID;
-        this.Contact_Name = Contact_Name;
-        this.Email = Email;
-    }
-
     @Override
     public String toString(){return Contact_Name;}
-
 
 }

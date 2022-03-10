@@ -28,6 +28,8 @@ public class Customers implements Initializable {
     Stage stage;
     Parent scene;
 
+    ObservableList<model.Customer> Customer = FXCollections.observableArrayList();
+
     @FXML
     private TableView<Customer> CustomerTable;
 
@@ -90,8 +92,6 @@ public class Customers implements Initializable {
         stage.show();
     }
 
-    ObservableList<model.Customer> Customer = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -106,16 +106,15 @@ public class Customers implements Initializable {
         Last_Updated_By.setCellValueFactory(new PropertyValueFactory<>("lastUpdateBy"));
         Division_ID.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
 
-
         try {
             Customer.addAll(CustomerDaoImpl.getAllCustomers());
-
-        } catch (Exception ex) {
-            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
-
         }
+
+        catch (Exception ex) {
+            Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         CustomerTable.setItems(Customer);
 
     }
-
 }

@@ -1,7 +1,6 @@
 package controller;
 
 import DAO.AppointmentDaoImpl;
-import DAO.CustomerDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +27,8 @@ public class Appointments implements Initializable {
 
     Stage stage;
     Parent scene;
+
+    ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
 
     @FXML
     private TableView<Appointment> AppointmentTable;
@@ -108,8 +109,6 @@ public class Appointments implements Initializable {
 
     }
 
-    ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -129,8 +128,8 @@ public class Appointments implements Initializable {
 
         } catch (Exception ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
-
         }
+
         AppointmentTable.setItems(Appointment);
     }
 }
