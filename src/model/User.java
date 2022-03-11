@@ -22,7 +22,7 @@ public class User {
             this.lastUpdateBy = lastUpdateBy;
         }
 
-        /**
+    /**
          * @return the userId
          */
         public int getUserId() {

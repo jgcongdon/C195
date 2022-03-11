@@ -30,6 +30,17 @@ public class FirstLevelDivisionDaoImpl {
         return null;
     }
 
+    public static int getDivID(String FirstLevelDivision) throws SQLException, Exception {
+        String sqlStatement = "select Division_ID from first_level_divisions where Division = '" + FirstLevelDivision + "'";
+        Query.makeQuery(sqlStatement);
+        ResultSet result = Query.getResult();
+        while (result.next()) {
+            int Division_ID = result.getInt("Division_ID");
+            return Division_ID;
+        }
+        return Integer.parseInt(null);
+    }
+
     public static ObservableList<FirstLevelDivision> getAllDivisions() throws SQLException, Exception {
         ObservableList<FirstLevelDivision> allDivisions = FXCollections.observableArrayList();
         String sqlStatement = "select * from first_level_divisions";

@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.UserDaoImpl;
 import helper.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,11 +8,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.User;
+
 import java.util.TimeZone;
 
 import java.io.IOException;
@@ -27,6 +27,12 @@ public class LogIn implements Initializable {
     String tz1 = tz.getID();
 
     @FXML
+    private TextField logInUsernameLabel;
+
+    @FXML
+    private PasswordField logInPasswordLabel;
+
+    @FXML
     private Label locationLabel;
 
     @FXML
@@ -40,12 +46,40 @@ public class LogIn implements Initializable {
     }
 
     @FXML
-    void onActionLogIn(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+    void onActionLogIn(ActionEvent event) throws Exception {
+        String userName = logInUsernameLabel.getText();
+        String password = logInPasswordLabel.getText();
+        User userResult = UserDaoImpl.getUser(userName);
 
+        if (userName.isEmpty() || userName.isBlank()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: Invalid login");
+            alert.showAndWait();
+        }
+
+        else if (UserDaoImpl.validateLogIn(userResult.getUserName(), password ) == true) {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
+            loader.load();
+
+            String activeUser = userResult.getUserName();
+            MainMenu MMController = loader.getController();
+            MMController.sendUser(activeUser);
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            Parent scene = loader.getRoot();
+            stage.setScene(new Scene(scene));
+            stage.show();
+
+
+        }
+        else{
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: Invalid login");
+            alert.showAndWait();
+        }
     }
 
     @Override

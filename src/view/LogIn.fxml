@@ -25,10 +25,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
+                  <TextField fx:id="logInUsernameLabel" GridPane.columnIndex="1" />
+                  <PasswordField fx:id="logInPasswordLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                     <Label text="Username" />
                   <Label text="Password" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" />
-                  <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>
@@ -37,7 +37,7 @@
          <children>
             <HBox>
                <children>
-                    <Button mnemonicParsing="false" onAction="#onActionLogIn" text="Log In">
+                    <Button fx:id="logInButton" mnemonicParsing="false" onAction="#onActionLogIn" text="Log In">
                         <font>
                             <Font size="14.0" />
                         </font>
