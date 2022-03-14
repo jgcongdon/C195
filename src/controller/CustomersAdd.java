@@ -51,24 +51,16 @@ public class CustomersAdd implements Initializable {
     void onActionSave(ActionEvent event) throws IOException {
 
         try {
-            int customerId = 0;
             String customerName = customersAddNameLabel.getText();
             String customerAddress = customersAddAddressLabel.getText();
             String postalCode = customersAddPostalLabel.getText();
             String customerPhone = customersAddPhoneLabel.getText();
-            LocalDateTime createDate = LocalDateTime.now();
             String createdBy = Globals.userName;
-            LocalDateTime lastUpdate = LocalDateTime.now();
             String lastUpdateBy = Globals.userName;
             FirstLevelDivision D = divisionCombo.getValue();;
             int Division_ID = D.getDivision_ID();
 
-            //int customerId, String customerName, String customerAddress, String postalCode, String customerPhone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy, int Division_ID
-
-            Customer addCust = new Customer(customerId, customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
-            //CustomerDaoImpl.addCustomer(new Customer(customerId, customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID));
-
-            CustomerDaoImpl.addCustomer(addCust);
+            CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createdBy, lastUpdateBy, Division_ID);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -100,27 +92,6 @@ public class CustomersAdd implements Initializable {
     void OnActionCountryCombo(ActionEvent event) throws SQLException {
         Country C = countryCombo.getValue();
         divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
-        /*if (countryCombo.getValue().toString().equals("U.S")) {
-            try {
-                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUS());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (countryCombo.getValue().toString().equals("UK")) {
-            try {
-                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUK());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        else if (countryCombo.getValue().toString().equals("Canada")){
-            try {
-                divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivCAN());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
 
     }
 

@@ -20,9 +20,6 @@ public class MainMenu implements Initializable {
     Parent scene;
 
     @FXML
-    private Label mainMenuActiveUserLabel;
-
-    @FXML
     void onActionAppointments(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -65,10 +62,6 @@ public class MainMenu implements Initializable {
         stage.show();
     }
 
-    public void sendUser(String activeUser){
-        mainMenuActiveUserLabel.setText(activeUser);
-        String activeUserMM = mainMenuActiveUserLabel.getText();
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

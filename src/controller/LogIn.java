@@ -65,8 +65,6 @@ public class LogIn implements Initializable {
             loader.load();
 
             Globals.userName = userResult.getUserName();
-            MainMenu MMController = loader.getController();
-            MMController.sendUser(Globals.userName);
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
