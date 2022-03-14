@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Country;
+import model.Customer;
 import model.FirstLevelDivision;
 
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class CustomersAdd implements Initializable {
     void onActionSave(ActionEvent event) throws IOException {
 
         try {
-            //int customerId = Integer.parseInt(customersAddIDLabel.getText());
+            int customerId = 0;
             String customerName = customersAddNameLabel.getText();
             String customerAddress = customersAddAddressLabel.getText();
             String postalCode = customersAddPostalLabel.getText();
@@ -61,6 +62,14 @@ public class CustomersAdd implements Initializable {
             String lastUpdateBy = Globals.userName;
             FirstLevelDivision D = divisionCombo.getValue();;
             int Division_ID = D.getDivision_ID();
+
+            //int customerId, String customerName, String customerAddress, String postalCode, String customerPhone, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy, int Division_ID
+
+            Customer addCust = new Customer(customerId, customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
+            //CustomerDaoImpl.addCustomer(new Customer(customerId, customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID));
+
+            CustomerDaoImpl.addCustomer(addCust);
+
         } catch (Exception e) {
             e.printStackTrace();
             return;
