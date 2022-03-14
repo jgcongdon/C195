@@ -26,6 +26,7 @@ public class LogIn implements Initializable {
     TimeZone tz = TimeZone.getDefault();
     String tz1 = tz.getID();
 
+
     @FXML
     private TextField logInUsernameLabel;
 
@@ -63,15 +64,14 @@ public class LogIn implements Initializable {
             loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
             loader.load();
 
-            String activeUser = userResult.getUserName();
+            Globals.userName = userResult.getUserName();
             MainMenu MMController = loader.getController();
-            MMController.sendUser(activeUser);
+            MMController.sendUser(Globals.userName);
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
             stage.show();
-
 
         }
         else{
@@ -82,10 +82,10 @@ public class LogIn implements Initializable {
         }
     }
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         locationLabel.setText(tz1);
-
     }
 }

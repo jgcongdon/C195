@@ -126,4 +126,24 @@ public class FirstLevelDivisionDaoImpl {
         return divCAN;
     }
 
+    public static ObservableList<FirstLevelDivision> getDiv(int country_id) throws SQLException {
+        ObservableList<FirstLevelDivision> divCAN = FXCollections.observableArrayList();
+        String sqlStatement = "select * from first_level_divisions where COUNTRY_ID = " + country_id;
+        Query.makeQuery(sqlStatement);
+        ResultSet result = Query.getResult();
+        while (result.next()) {
+            int Division_ID = result.getInt("Division_ID");
+            String Division = result.getString("Division");
+            Timestamp Create_Date = result.getTimestamp("Create_Date");
+            LocalDateTime createDateCalendar = Create_Date.toLocalDateTime();
+            String Created_By = result.getString("Created_By");
+            Timestamp Last_Update = result.getTimestamp("Last_Update");
+            LocalDateTime lastUpdateCalendar = Last_Update.toLocalDateTime();
+            String Last_Updated_By = result.getString("Last_Updated_By");
+            int COUNTRY_ID = result.getInt("COUNTRY_ID");
+            FirstLevelDivision divCANResult = new FirstLevelDivision(Division_ID, Division, createDateCalendar, Created_By, lastUpdateCalendar, Last_Updated_By, COUNTRY_ID);
+            divCAN.add(divCANResult);
+        }
+        return divCAN;
+    }
 }

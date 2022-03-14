@@ -26,7 +26,7 @@ public class UserDaoImpl {
             }
 
         } catch (SQLException e) {
-            // print SQL exception information
+         e.printStackTrace();
 
         }
 

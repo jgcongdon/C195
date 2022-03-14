@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.*;
+import helper.Globals;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +23,6 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class CustomersAdd implements Initializable {
-
 
 
     Stage stage;
@@ -48,25 +48,28 @@ public class CustomersAdd implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
         try {
-            int customerId = Integer.parseInt(customersAddIDLabel.getText());
+            //int customerId = Integer.parseInt(customersAddIDLabel.getText());
             String customerName = customersAddNameLabel.getText();
             String customerAddress = customersAddAddressLabel.getText();
             String postalCode = customersAddPostalLabel.getText();
             String customerPhone = customersAddPhoneLabel.getText();
             LocalDateTime createDate = LocalDateTime.now();
-            String createdBy;
+            String createdBy = Globals.userName;
             LocalDateTime lastUpdate = LocalDateTime.now();
-            String lastUpdateBy;
-            int Division_ID = FirstLevelDivisionDaoImpl.getDivID(divisionCombo.getValue().toString());
+            String lastUpdateBy = Globals.userName;
+            FirstLevelDivision D = divisionCombo.getValue();;
+            int Division_ID = D.getDivision_ID();
         } catch (Exception e) {
             e.printStackTrace();
+            return;
         }
+
+        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+        stage.setScene(new Scene(scene));
+        stage.show();
 
     }
 
@@ -85,8 +88,10 @@ public class CustomersAdd implements Initializable {
     }
 
     @FXML
-    void OnActionCountryCombo(ActionEvent event) {
-        if (countryCombo.getValue().toString().equals("U.S")) {
+    void OnActionCountryCombo(ActionEvent event) throws SQLException {
+        Country C = countryCombo.getValue();
+        divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
+        /*if (countryCombo.getValue().toString().equals("U.S")) {
             try {
                 divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDivUS());
             } catch (Exception e) {
@@ -106,7 +111,7 @@ public class CustomersAdd implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
     }
 
