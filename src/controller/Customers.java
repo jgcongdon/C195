@@ -28,7 +28,13 @@ public class Customers implements Initializable {
     Stage stage;
     Parent scene;
 
-    ObservableList<model.Customer> Customer = FXCollections.observableArrayList();
+    ObservableList<model.Customer> CustomerList = FXCollections.observableArrayList();
+
+    /*private static Customer selectedCustomer;
+
+    public static void sendSelectedCustomer(Customer customer){
+        selectedCustomer = customer;
+    }*/
 
     @FXML
     private TableView<Customer> CustomerTable;
@@ -86,10 +92,15 @@ public class Customers implements Initializable {
 
     @FXML
     void onActionModifyCustomer(ActionEvent event) throws IOException {
+
+        CustomersModify.receiveSelectedCustomer(CustomerTable.getSelectionModel().getSelectedItem());
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CustomersModify.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
+
+
     }
 
     @Override
@@ -107,14 +118,14 @@ public class Customers implements Initializable {
         Division_ID.setCellValueFactory(new PropertyValueFactory<>("Division_ID"));
 
         try {
-            Customer.addAll(CustomerDaoImpl.getAllCustomers());
+            CustomerList.addAll(CustomerDaoImpl.getAllCustomers());
         }
 
         catch (Exception ex) {
             Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        CustomerTable.setItems(Customer);
+        CustomerTable.setItems(CustomerList);
 
     }
 }
