@@ -48,4 +48,24 @@ public class CountryDaoImpl {
         }
         return allCountries;
     }
+
+    public static Country getCountryFromCountryID(int CountryID) throws SQLException, Exception{
+        String sqlStatement="select * FROM countries WHERE Country_ID  = '" + CountryID + "'";
+        Query.makeQuery(sqlStatement);
+        Country countryResult;
+        ResultSet result=Query.getResult();
+        while(result.next()){
+            int Country_ID=result.getInt("Country_ID");
+            String Country=result.getString("Country");
+            Timestamp Create_Date=result.getTimestamp("Create_Date");
+            LocalDateTime createDateCalendar=Create_Date.toLocalDateTime();
+            String Created_By=result.getString("Created_By");
+            Timestamp Last_Update=result.getTimestamp("Last_Update");
+            LocalDateTime lastUpdateCalendar=Last_Update.toLocalDateTime();
+            String Last_Updated_By=result.getString("Last_Updated_By");
+            countryResult= new Country(Country_ID, Country, createDateCalendar, Created_By, lastUpdateCalendar, Last_Updated_By);
+            return countryResult;
+        }
+        return null;
+    }
 }

@@ -39,7 +39,7 @@
                   <Label text="Country" GridPane.rowIndex="6" />
                   <Label fx:id="customersModifyIDLabel" minWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
                   <ComboBox fx:id="divisionCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="countryCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="countryCombo" onAction="#onActionCountryCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <TextField fx:id="customersModifyNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="customersModifyPhoneLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="customersModifyAddressLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
