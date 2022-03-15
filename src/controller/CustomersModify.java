@@ -1,7 +1,9 @@
 package controller;
 
 import DAO.CountryDaoImpl;
+import DAO.CustomerDaoImpl;
 import DAO.FirstLevelDivisionDaoImpl;
+import helper.Globals;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,6 +24,8 @@ import model.FirstLevelDivision;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class CustomersModify implements Initializable {
@@ -68,6 +72,25 @@ public class CustomersModify implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+
+        try {
+            int customerID = Integer.parseInt(customersModifyIDLabel.getText());
+            String customerName = customersModifyNameLabel.getText();
+            String customerAddress = customersModifyAddressLabel.getText();
+            String postalCode = customersModifyPostalLabel.getText();
+            String customerPhone = customersModifyPhoneLabel.getText();
+            Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
+            String lastUpdateBy = Globals.userName;
+            FirstLevelDivision D = divisionCombo.getValue();;
+            int Division_ID = D.getDivision_ID();
+
+            CustomerDaoImpl.modifyCustomer(customerID, customerName, customerAddress, postalCode, customerPhone, lastUpdate, lastUpdateBy, Division_ID);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return;
+        }
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
         stage.setScene(new Scene(scene));
@@ -103,25 +126,6 @@ public class CustomersModify implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        /*
-        try {
-            countryCombo.setItems(CountryDaoImpl.getAllCountries());
-            FirstLevelDivision selectedDivision = FirstLevelDivisionDaoImpl.getDivision(divisionCombo.getValue());
-            selectedCountryID = selectedDivision.getCOUNTRY_ID();
-            selectedCountry = CountryDaoImpl.getCountryFromCountryID(selectedCountryID);
-            countryCombo.setValue(selectedCountry);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Country C = countryCombo.getValue();
-        try {
-            divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        */
 
         customersModifyIDLabel.setText(Integer.toString(selectedCustomer.getCustomerId()));
         customersModifyNameLabel.setText(selectedCustomer.getCustomerName());

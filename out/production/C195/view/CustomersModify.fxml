@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.CustomersAdd">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.CustomersModify">
    <children>
       <Label layoutX="604.0" layoutY="50.0" text="Modify Customer" />
       <AnchorPane layoutX="550.0" layoutY="100.0">
@@ -37,13 +37,13 @@
                   <Label text="Postal Code" GridPane.rowIndex="4" />
                   <Label text="Division" GridPane.rowIndex="5" />
                   <Label text="Country" GridPane.rowIndex="6" />
-                  <Label minWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Label fx:id="customersModifyIDLabel" minWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
+                  <ComboBox fx:id="divisionCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="countryCombo" onAction="#onActionCountryCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <TextField fx:id="customersModifyNameLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="customersModifyPhoneLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="customersModifyAddressLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="customersModifyPostalLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </children>

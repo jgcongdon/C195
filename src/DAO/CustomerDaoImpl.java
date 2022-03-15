@@ -1,6 +1,8 @@
 package DAO;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
+import controller.CustomersModify;
+import helper.Globals;
 import helper.JDBC;
 import model.Customer;
 
@@ -83,7 +85,28 @@ public class CustomerDaoImpl {
         }
     }
 
+    public static void modifyCustomer(int customerID, String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
+        try {
+            String sqlcm = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
 
-    public static void addCustomer(Customer addCust) {
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlcm);
+
+            psti.setString(1, customerName);
+            psti.setString(2, customerAddress);
+            psti.setString(3, postalCode);
+            psti.setString(4, customerPhone);
+            psti.setTimestamp(5, lastUpdate);
+            psti.setString(6, lastUpdateBy);
+            psti.setInt(7, Division_ID);
+            psti.setInt(8, customerID);
+
+            psti.execute();
+
+
+    } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
+
+
 }
