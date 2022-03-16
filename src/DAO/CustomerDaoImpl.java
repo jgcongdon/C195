@@ -63,9 +63,9 @@ public class CustomerDaoImpl {
         return allCustomers;
     }
 
-    public static void addCustomer(String customerName, String customerAddress, String postalCode, String customerPhone, String createdBy, String lastUpdateBy, int Division_ID) {
+    public static void addCustomer(String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
-            String sqlca = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Created_By, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?)";
+            String sqlca = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlca);
 
@@ -73,9 +73,11 @@ public class CustomerDaoImpl {
             psti.setString(2, customerAddress);
             psti.setString(3, postalCode);
             psti.setString(4, customerPhone);
-            psti.setString(5, createdBy);
-            psti.setString(6, lastUpdateBy);
-            psti.setInt(7, Division_ID);
+            psti.setTimestamp(5, createDate);
+            psti.setString(6, createdBy);
+            psti.setTimestamp(7, lastUpdate);
+            psti.setString(8, lastUpdateBy);
+            psti.setInt(9, Division_ID);
 
             psti.execute();
 

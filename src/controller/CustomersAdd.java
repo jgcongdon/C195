@@ -20,6 +20,7 @@ import model.FirstLevelDivision;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -55,12 +56,14 @@ public class CustomersAdd implements Initializable {
             String customerAddress = customersAddAddressLabel.getText();
             String postalCode = customersAddPostalLabel.getText();
             String customerPhone = customersAddPhoneLabel.getText();
+            Timestamp createDate = Timestamp.valueOf(LocalDateTime.now());
             String createdBy = Globals.userName;
+            Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
             String lastUpdateBy = Globals.userName;
             FirstLevelDivision D = divisionCombo.getValue();;
             int Division_ID = D.getDivision_ID();
 
-            CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createdBy, lastUpdateBy, Division_ID);
+            CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
 
         } catch (Exception e) {
             e.printStackTrace();

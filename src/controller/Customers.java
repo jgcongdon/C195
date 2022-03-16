@@ -78,9 +78,12 @@ public class Customers implements Initializable {
     }
 
     @FXML
-    void onActionDeleteCustomer(ActionEvent event) {
+    void onActionDeleteCustomer(ActionEvent event) throws Exception {
 
         CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
+        CustomerList = CustomerDaoImpl.getAllCustomers();
+        CustomerTable.setItems(CustomerList);
+        CustomerTable.refresh();
     }
 
     @FXML
