@@ -80,6 +80,7 @@ public class Customers implements Initializable {
     @FXML
     void onActionDeleteCustomer(ActionEvent event) {
 
+        CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
     }
 
     @FXML

@@ -108,5 +108,17 @@ public class CustomerDaoImpl {
         }
     }
 
+    public static void deleteCustomer(int customerID) {
+        try {
+            String sqlcd = "DELETE FROM customers WHERE Customer_ID = ?";
 
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlcd);
+
+            psti.setInt(1, customerID);
+
+            psti.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 }
