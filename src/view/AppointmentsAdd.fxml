@@ -42,17 +42,17 @@
                   <Label text="Appointment ID" />
                   <Label text="Title" GridPane.rowIndex="1" />
                   <Label text="Description" GridPane.rowIndex="2" />
-                  <Label prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
+                  <Label fx:id="appointmentAddIDLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
                   <Label text="Location" GridPane.rowIndex="3" />
                   <Label text="Contact" GridPane.rowIndex="4" />
                   <Label text="Type" GridPane.rowIndex="5" />
                   <Label text="Start date" GridPane.rowIndex="6" />
                   <Label text="Start time" GridPane.rowIndex="7" />
                   <ComboBox fx:id="contactCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <TextField fx:id="appointmentAddLocationLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="appointmentAddTitleLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentAddDescriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="appointmentAddTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                   <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="startCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <Label text="End time" GridPane.rowIndex="8" />

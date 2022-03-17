@@ -9,8 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Contact;
 import model.Customer;
@@ -18,7 +17,7 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalTime;
+import java.time.*;
 import java.util.ResourceBundle;
 
 public class AppointmentsAdd implements Initializable {
@@ -33,6 +32,25 @@ public class AppointmentsAdd implements Initializable {
     public ComboBox<LocalTime> endCombo;
 
     @FXML
+    private Label appointmentAddIDLabel;
+
+    @FXML
+    private TextField appointmentAddLocationLabel;
+
+    @FXML
+    private TextField appointmentAddTitleLabel;
+
+    @FXML
+    private TextField appointmentAddDescriptionLabel;
+
+    @FXML
+    private TextField appointmentAddTypeLabel;
+
+    @FXML
+    private DatePicker appointmentAddDatePicker;
+
+
+    @FXML
     void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -43,6 +61,21 @@ public class AppointmentsAdd implements Initializable {
 
     @FXML
     void onActionSave(ActionEvent event) throws IOException {
+
+        try{
+            String appointmentTitle = appointmentAddTitleLabel.getText();
+            String appointmentDescription = appointmentAddDescriptionLabel.getText();
+            String appointmentLocation = appointmentAddLocationLabel.getText();
+            String appointmentType = appointmentAddTypeLabel.getText();
+            LocalDateTime appointmentStart = LocalDateTime.of
+
+
+        } catch (Exception e){
+            e.printStackTrace();
+            return;
+        }
+
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
         stage.setScene(new Scene(scene));
@@ -61,12 +94,21 @@ public class AppointmentsAdd implements Initializable {
             e.printStackTrace();
         }
 
-        LocalTime start = LocalTime.of(8,0);
-        LocalTime end = LocalTime.of(22,0);
 
-        while(start.isBefore(end.plusSeconds(1))){
-            startCombo.getItems().add(start);
-            start = start.plusMinutes(15);
+
+        LocalTime startStart = LocalTime.of(8,0);
+        LocalTime startEnd = LocalTime.of(21,45);
+        LocalTime endStart = LocalTime.of(8,15);
+        LocalTime endEnd = LocalTime.of(22,0);
+
+        while(startStart.isBefore(startEnd.plusSeconds(1))){
+            startCombo.getItems().add(startStart);
+            startStart = startStart.plusMinutes(15);
+
+            while(endStart.isBefore(endEnd.plusSeconds(1))){
+                endCombo.getItems().add(endStart);
+                endStart = endStart.plusMinutes(15);
+            }
         }
     }
 }
