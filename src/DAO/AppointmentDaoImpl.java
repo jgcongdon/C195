@@ -1,5 +1,6 @@
 package DAO;
 
+import helper.Globals;
 import helper.JDBC;
 import model.Appointment;
 
@@ -102,4 +103,31 @@ public class AppointmentDaoImpl {
             }
         }
 
+    public static void modifyAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
+        try{
+
+            String sqlam = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ?";
+
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlam);
+
+            psti.setString(1, appointmentTitle);
+            psti.setString(2, appointmentDescription);
+            psti.setString(3, appointmentLocation);
+            psti. setString(4, appointmentType);
+            psti.setTimestamp(5, Timestamp.valueOf(appointmentStart));
+            psti.setTimestamp(6, Timestamp.valueOf(appointmentEnd));
+            psti.setTimestamp(7, lastUpdate);
+            psti.setString(8, lastUpdateBy);
+            psti.setInt(9, customerID);
+            psti.setInt(10, userID);
+            psti.setInt(11, contactID);
+
+            psti.execute();
+
+
+        } catch(SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
     }

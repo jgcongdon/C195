@@ -11,8 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AppointmentsModify">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsModify">
    <children>
       <AnchorPane layoutX="595.0" layoutY="25.0">
          <children>
@@ -38,33 +37,30 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label text="Appointment ID" />
                   <Label text="Title" GridPane.rowIndex="1" />
                   <Label text="Description" GridPane.rowIndex="2" />
-                  <Label prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
+                  <Label fx:id="appointmentModifyIDLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
                   <Label text="Location" GridPane.rowIndex="3" />
                   <Label text="Contact" GridPane.rowIndex="4" />
                   <Label text="Type" GridPane.rowIndex="5" />
                   <Label text="Start date" GridPane.rowIndex="6" />
                   <Label text="Start time" GridPane.rowIndex="7" />
-                  <Label text="End date" GridPane.rowIndex="8" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <Label text="End time" GridPane.rowIndex="9" />
-                  <Label text="Customer ID" GridPane.rowIndex="10" />
-                  <Label text="User ID" GridPane.rowIndex="11" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
-                  <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                  <ComboBox fx:id="appointmentModifyContactCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <TextField fx:id="appointmentModifyLocationLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="appointmentModifyTitleLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="appointmentModifyDescriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="appointmentModifyTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <DatePicker fx:id="appointmentModifyDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="appointmentModifyStartCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label text="End time" GridPane.rowIndex="8" />
+                  <Label text="Customer ID" GridPane.rowIndex="9" />
+                  <Label text="User ID" GridPane.rowIndex="10" />
+                  <ComboBox fx:id="appointmentModifyEndCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                  <ComboBox fx:id="appointmentModifyCustomerIDCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                  <ComboBox fx:id="appointmentModifyUserIDCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                </children>
             </GridPane>
          </children>

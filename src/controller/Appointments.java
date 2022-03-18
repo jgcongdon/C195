@@ -87,6 +87,9 @@ public class Appointments implements Initializable {
 
     @FXML
     void onActionModifyAppointment(ActionEvent event) throws IOException {
+
+        AppointmentsModify.receiveSelectedAppointment(AppointmentTable.getSelectionModel().getSelectedItem());
+
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/AppointmentsModify.fxml"));
         stage.setScene(new Scene(scene));
