@@ -60,7 +60,7 @@ public class CustomersAdd implements Initializable {
             String createdBy = Globals.userName;
             Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
             String lastUpdateBy = Globals.userName;
-            FirstLevelDivision D = divisionCombo.getValue();;
+            FirstLevelDivision D = divisionCombo.getValue();
             int Division_ID = D.getDivision_ID();
 
             CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);

@@ -1,6 +1,9 @@
 package DAO;
 
+import helper.JDBC;
 import model.Appointment;
+
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -72,4 +75,31 @@ public class AppointmentDaoImpl {
         return allAppointments;
     }
 
-}
+    public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
+        try{
+            String sqlaa = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlaa);
+
+            psti.setString(1, appointmentTitle);
+            psti.setString(2, appointmentDescription);
+            psti.setString(3, appointmentLocation);
+            psti.setString(4, appointmentType);
+            psti.setTimestamp(5, Timestamp.valueOf(appointmentStart));
+            psti.setTimestamp(6, Timestamp.valueOf(appointmentEnd));
+            psti. setTimestamp(7, createDate);
+            psti.setString(8, createdBy);
+            psti.setTimestamp(9, lastUpdate);
+            psti.setString(10, lastUpdateBy);
+            psti.setInt(11, customerID);
+            psti.setInt(12, userID);
+            psti.setInt(13, contactID);
+
+            psti.execute();
+
+        } catch(SQLException ex){
+            ex.printStackTrace();
+            }
+        }
+
+    }

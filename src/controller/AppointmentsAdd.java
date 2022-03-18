@@ -1,8 +1,10 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.ContactDaoImpl;
 import DAO.CustomerDaoImpl;
 import DAO.UserDaoImpl;
+import helper.Globals;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +19,7 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.*;
 import java.util.ResourceBundle;
 
@@ -67,7 +70,18 @@ public class AppointmentsAdd implements Initializable {
             String appointmentDescription = appointmentAddDescriptionLabel.getText();
             String appointmentLocation = appointmentAddLocationLabel.getText();
             String appointmentType = appointmentAddTypeLabel.getText();
-            LocalDateTime appointmentStart = LocalDateTime.of
+            LocalDateTime appointmentStart = LocalDateTime.of(appointmentAddDatePicker.getValue(), startCombo.getSelectionModel().getSelectedItem());
+            LocalDateTime appointmentEnd = LocalDateTime.of(appointmentAddDatePicker.getValue(), endCombo.getSelectionModel().getSelectedItem());
+            Timestamp createDate = Timestamp.valueOf(LocalDateTime.now());
+            String createdBy = Globals.userName;
+            Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
+            String lastUpdateBy = Globals.userName;
+            int customerID = customerCombo.getValue().getCustomerId();
+            int userID = userCombo.getValue().getUserId();
+            int contactID = contactCombo.getValue().getContact_ID();
+
+            AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+
 
 
         } catch (Exception e){

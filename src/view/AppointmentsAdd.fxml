@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AppointmentsAdd">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AppointmentsAdd">
    <children>
       <AnchorPane layoutX="602.0" layoutY="25.0">
          <children>
@@ -53,7 +53,7 @@
                   <TextField fx:id="appointmentAddTitleLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="appointmentAddDescriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="appointmentAddTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                  <DatePicker fx:id="appointmentAddDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                   <ComboBox fx:id="startCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                   <Label text="End time" GridPane.rowIndex="8" />
                   <Label text="Customer ID" GridPane.rowIndex="9" />
