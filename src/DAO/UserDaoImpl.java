@@ -1,11 +1,15 @@
 package DAO;
 
 import helper.JDBC;
+import model.Customer;
 import model.User;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,12 +46,12 @@ public class UserDaoImpl {
                 int userid=result.getInt("User_ID");
                 String userNameG=result.getString("User_Name");
                 String password=result.getString("Password");
-                String createDate=result.getString("Create_Date");
-                String createdBy=result.getString("Created_By");
-                String lastUpdate=result.getString("Last_Update");
+               Timestamp createDate=result.getTimestamp("Create_Date");
+               LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+               String createdBy = result.getString("Created_By");
+               Timestamp lastUpdate=result.getTimestamp("Last_Update");
+               LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
                 String lastUpdateby=result.getString("Last_Updated_By");
-                Calendar createDateCalendar=stringToCalendar(createDate);
-                Calendar lastUpdateCalendar=stringToCalendar(lastUpdate);
                 userResult= new User(userid, userNameG, password,  createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby);
                 return userResult;
            }
@@ -63,16 +67,38 @@ public class UserDaoImpl {
                 int userid=result.getInt("User_ID");
                 String userNameG=result.getString("User_Name");
                 String password=result.getString("Password");
-                String createDate=result.getString("Create_Date");
-                String createdBy=result.getString("Created_By");
-                String lastUpdate=result.getString("Last_Update");
+                 Timestamp createDate=result.getTimestamp("Create_Date");
+                 LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+                 String createdBy = result.getString("Created_By");
+                 Timestamp lastUpdate=result.getTimestamp("Last_Update");
+                 LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
                 String lastUpdateby=result.getString("Last_Updated_By");
-                Calendar createDateCalendar=stringToCalendar(createDate);
-                Calendar lastUpdateCalendar=stringToCalendar(lastUpdate);
                 User userResult= new User(userid, userNameG, password, createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby);
                 allUsers.add(userResult);
             }
         return allUsers;
+    }
+
+    public static User getUserFromUserID(int userID) throws SQLException {
+        String sqlStatement = "select * from users where User_ID = " + userID;
+        Query.makeQuery(sqlStatement);
+        User getUserFromUserIDResult;
+        ResultSet result = Query.getResult();
+        while (result.next()) {
+            int User_ID = result.getInt("User_ID");
+            String User_Name = result.getString("User_Name");
+            String Password = result.getString("Password");
+            Timestamp createDate=result.getTimestamp("Create_Date");
+            LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+            String Created_By = result.getString("Created_By");
+            Timestamp lastUpdate=result.getTimestamp("Last_Update");
+            LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
+            String Last_Updated_By = result.getString("Last_Updated_By");
+
+            getUserFromUserIDResult = new User(User_ID, User_Name, Password, createDateCalendar, Created_By, lastUpdateCalendar, Last_Updated_By);
+            return getUserFromUserIDResult;
+        }
+        return null;
     }
 
 }

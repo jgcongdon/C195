@@ -1,15 +1,14 @@
 package DAO;
 
 import com.mysql.cj.x.protobuf.MysqlxPrepare;
+import controller.AppointmentsModify;
 import controller.CustomersModify;
 import helper.Globals;
 import helper.JDBC;
+import model.Contact;
 import model.Customer;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -123,4 +122,30 @@ public class CustomerDaoImpl {
             throwables.printStackTrace();
         }
     }
+
+    public static Customer getCustomerFromCustomerID(int customerID) throws SQLException {
+        String sqlStatement = "select * from customers where Customer_ID = " + customerID;
+        Query.makeQuery(sqlStatement);
+        Customer getCustomerFromCustomerIDResult;
+        ResultSet result = Query.getResult();
+        while (result.next()) {
+            int Customer_ID = result.getInt("Customer_ID");
+            String Customer_Name = result.getString("Customer_Name");
+            String Address = result.getString("Address");
+            String Postal_Code = result.getString("Postal_Code");
+            String Phone = result.getString("Phone");
+            Timestamp createDate=result.getTimestamp("Create_Date");
+            LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+            String Created_By = result.getString("Created_By");
+            Timestamp lastUpdate=result.getTimestamp("Last_Update");
+            LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
+            String Last_Updated_By = result.getString("Last_Updated_By");
+            int Division_ID = result.getInt("Division_ID");
+
+            getCustomerFromCustomerIDResult = new Customer(Customer_ID, Customer_Name, Address, Postal_Code, Phone, createDateCalendar, Created_By, lastUpdateCalendar, Last_Updated_By, Division_ID);
+            return getCustomerFromCustomerIDResult;
+        }
+        return null;
+    }
+
 }

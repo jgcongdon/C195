@@ -1,5 +1,6 @@
 package model;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
 
 public class User {
@@ -7,12 +8,12 @@ public class User {
         private int userId;
         private String userName;
         private String password;
-        private Calendar createDate;
+        private LocalDateTime createDate;
         private String createdBy;
-        private Calendar lastUpdate;
+        private LocalDateTime lastUpdate;
         private String lastUpdateBy;
 
-        public User(int userId, String userName, String password, Calendar createDate, String createdBy, Calendar lastUpdate, String lastUpdateBy) {
+        public User(int userId, String userName, String password, LocalDateTime createDate, String createdBy, LocalDateTime lastUpdate, String lastUpdateBy) {
             this.userId = userId;
             this.userName = userName;
             this.password = password;
@@ -67,14 +68,14 @@ public class User {
         /**
          * @return the createDate
          */
-        public Calendar getCreateDate() {
+        public LocalDateTime getCreateDate() {
             return createDate;
         }
 
         /**
          * @param createDate the createDate to set
          */
-        public void setCreateDate(Calendar createDate) {
+        public void setCreateDate(LocalDateTime createDate) {
             this.createDate = createDate;
         }
 
@@ -95,14 +96,14 @@ public class User {
         /**
          * @return the lastUpdate
          */
-        public Calendar getLastUpdate() {
+        public LocalDateTime getLastUpdate() {
             return lastUpdate;
         }
 
         /**
          * @param lastUpdate the lastUpdate to set
          */
-        public void setLastUpdate(Calendar lastUpdate) {
+        public void setLastUpdate(LocalDateTime lastUpdate) {
             this.lastUpdate = lastUpdate;
         }
 

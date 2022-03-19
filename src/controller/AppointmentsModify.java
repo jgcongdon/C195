@@ -1,6 +1,8 @@
 package controller;
 
 import DAO.ContactDaoImpl;
+import DAO.CustomerDaoImpl;
+import DAO.UserDaoImpl;
 import helper.Globals;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -114,14 +116,39 @@ public class AppointmentsModify implements Initializable {
         try{
             appointmentModifyContactCombo.setValue(ContactDaoImpl.getContactFromContactID(selectedAppointment.getContact_ID()));
             appointmentModifyContactCombo.setItems(ContactDaoImpl.getAllContacts());
+            appointmentModifyCustomerIDCombo.setValue(CustomerDaoImpl.getCustomerFromCustomerID(selectedAppointment.getCustomer_ID()));
+            appointmentModifyCustomerIDCombo.setItems(CustomerDaoImpl.getAllCustomers());
+            appointmentModifyUserIDCombo.setValue(UserDaoImpl.getUserFromUserID(selectedAppointment.getUser_ID()));
+            appointmentModifyUserIDCombo.setItems(UserDaoImpl.getAllUsers());
+
         } catch (Exception throwables) {
         throwables.printStackTrace();
+        }
+
+        LocalTime startStart = LocalTime.of(8,0);
+        LocalTime startEnd = LocalTime.of(21,45);
+        LocalTime endStart = LocalTime.of(8,15);
+        LocalTime endEnd = LocalTime.of(22,0);
+
+        while(startStart.isBefore(startEnd.plusSeconds(1))){
+            appointmentModifyStartCombo.getItems().add(startStart);
+            startStart = startStart.plusMinutes(15);
+
+            while(endStart.isBefore(endEnd.plusSeconds(1))){
+                appointmentModifyEndCombo.getItems().add(endStart);
+                endStart = endStart.plusMinutes(15);
+            }
         }
 
         appointmentModifyIDLabel.setText(Integer.toString(selectedAppointment.getAppointment_ID()));
         appointmentModifyTitleLabel.setText(selectedAppointment.getTitle());
         appointmentModifyDescriptionLabel.setText(selectedAppointment.getDescription());
         appointmentModifyLocationLabel.setText(selectedAppointment.getLocation());
+        appointmentModifyTypeLabel.setText(selectedAppointment.getType());
+        appointmentModifyDatePicker.setValue(selectedAppointment.getStart().toLocalDate());
+        appointmentModifyStartCombo.setValue(selectedAppointment.getStart().toLocalTime());
+        appointmentModifyEndCombo.setValue(selectedAppointment.getEnd().toLocalTime());
+
 
 
     }
