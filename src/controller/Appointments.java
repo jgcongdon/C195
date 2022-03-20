@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -29,6 +30,15 @@ public class Appointments implements Initializable {
     Parent scene;
 
     ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
+
+    @FXML
+    private RadioButton weekRadioButton;
+
+    @FXML
+    private RadioButton monthRadioButton;
+
+    @FXML
+    private RadioButton allRadioButton;
 
     @FXML
     private TableView<Appointment> AppointmentTable;
@@ -99,16 +109,23 @@ public class Appointments implements Initializable {
 
     @FXML
     void onActionAll(ActionEvent event) {
+        weekRadioButton.setSelected(false);
+        monthRadioButton.setSelected(false);
+
 
     }
 
     @FXML
     void onActionMonth(ActionEvent event) {
+        allRadioButton.setSelected(false);
+        weekRadioButton.setSelected(false);
 
     }
 
     @FXML
     void onActionWeek(ActionEvent event) {
+        allRadioButton.setSelected(false);
+        monthRadioButton.setSelected(false);
 
     }
 

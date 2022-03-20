@@ -42,6 +42,7 @@
                   <Label text="Appointment ID" />
                   <Label text="Title" GridPane.rowIndex="1" />
                   <Label text="Description" GridPane.rowIndex="2" />
+                  <TextField fx:id="appointmentModifyLocationLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="appointmentModifyIDLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" />
                   <Label text="Location" GridPane.rowIndex="3" />
                   <Label text="Contact" GridPane.rowIndex="4" />
@@ -49,7 +50,6 @@
                   <Label text="Start date" GridPane.rowIndex="6" />
                   <Label text="Start time" GridPane.rowIndex="7" />
                   <ComboBox fx:id="appointmentModifyContactCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField fx:id="appointmentModifyLocationLabel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <TextField fx:id="appointmentModifyTitleLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="appointmentModifyDescriptionLabel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="appointmentModifyTypeLabel" GridPane.columnIndex="1" GridPane.rowIndex="5" />
