@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.ContactDaoImpl;
 import DAO.CustomerDaoImpl;
 import DAO.UserDaoImpl;
@@ -92,7 +93,7 @@ public class AppointmentsModify implements Initializable {
             int userID = appointmentModifyUserIDCombo.getValue().getUserId();
             int contactID = appointmentModifyContactCombo.getValue().getContact_ID();
 
-
+            AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 
         } catch (Exception e) {
             e.printStackTrace();

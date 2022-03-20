@@ -103,10 +103,10 @@ public class AppointmentDaoImpl {
             }
         }
 
-    public static void modifyAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
+    public static void modifyAppointment(int appointmentID, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
 
-            String sqlam = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ?";
+            String sqlam = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
 
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlam);
 
@@ -121,6 +121,7 @@ public class AppointmentDaoImpl {
             psti.setInt(9, customerID);
             psti.setInt(10, userID);
             psti.setInt(11, contactID);
+            psti.setInt(12, appointmentID);
 
             psti.execute();
 
