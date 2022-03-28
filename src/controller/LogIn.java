@@ -26,6 +26,7 @@ public class LogIn implements Initializable {
     TimeZone tz = TimeZone.getDefault();
     String tz1 = tz.getID();
 
+    ResourceBundle myBundle = ResourceBundle.getBundle("bundle/lang");
 
     @FXML
     private TextField logInUsernameLabel;
@@ -83,6 +84,8 @@ public class LogIn implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        System.out.println("My test is " + myBundle.getString("TEST"));
 
         locationLabel.setText(tz1);
     }

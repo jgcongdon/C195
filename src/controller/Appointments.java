@@ -1,6 +1,7 @@
 package controller;
 
 import DAO.AppointmentDaoImpl;
+import DAO.CustomerDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -82,7 +83,12 @@ public class Appointments implements Initializable {
     }
 
     @FXML
-    void onActionDeleteAppointment(ActionEvent event) {
+    void onActionDeleteAppointment(ActionEvent event) throws Exception {
+
+        AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
+        Appointment = AppointmentDaoImpl.getAllAppointments();
+        AppointmentTable.setItems(Appointment);
+        AppointmentTable.refresh();
 
     }
 

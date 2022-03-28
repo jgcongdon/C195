@@ -19,9 +19,9 @@
          <children>
             <HBox prefHeight="17.0" prefWidth="143.0">
                <children>
-                  <RadioButton mnemonicParsing="false" onAction="#onActionWeek" text="Week" />
-                  <RadioButton mnemonicParsing="false" onAction="#onActionMonth" text="Month" />
-                  <RadioButton mnemonicParsing="false" onAction="#onActionAll" text="All" />
+                  <RadioButton fx:id="weekRadioButton" mnemonicParsing="false" onAction="#onActionWeek" text="Week" />
+                  <RadioButton fx:id="monthRadioButton" mnemonicParsing="false" onAction="#onActionMonth" text="Month" />
+                  <RadioButton fx:id="allRadioButton" mnemonicParsing="false" onAction="#onActionAll" text="All" />
                </children>
             </HBox>
          </children>

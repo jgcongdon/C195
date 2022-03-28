@@ -131,4 +131,19 @@ public class AppointmentDaoImpl {
         }
 
     }
+
+    public static void deleteAppointment(int appointmentID) {
+        try {
+            String sqlad = "DELETE FROM appointments WHERE Appointment_ID = ?";
+
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlad);
+
+            psti.setInt(1, appointmentID);
+
+            psti.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
     }

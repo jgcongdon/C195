@@ -28,6 +28,9 @@ public class AppointmentsAdd implements Initializable {
     Stage stage;
     Parent scene;
 
+    //private ZonedDateTime startTimeConvert;
+    private ZonedDateTime localnow;
+
     public ComboBox<User> userCombo;
     public ComboBox<Customer> customerCombo;
     public ComboBox<Contact> contactCombo;
@@ -52,6 +55,8 @@ public class AppointmentsAdd implements Initializable {
     @FXML
     private DatePicker appointmentAddDatePicker;
 
+    @FXML
+    private Label appointmentAddIUserIDLabel;
 
     @FXML
     void onActionCancel(ActionEvent event) throws IOException {
@@ -80,7 +85,26 @@ public class AppointmentsAdd implements Initializable {
             int userID = userCombo.getValue().getUserId();
             int contactID = contactCombo.getValue().getContact_ID();
 
-            AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+            System.out.println(appointmentStart);
+
+            ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
+            ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+            LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
+            LocalDateTime bStart = LocalDateTime.of(appointmentAddDatePicker.getValue(), LocalTime.of(8,0));
+            if (LDTstartEST.isBefore(bStart)){
+                System.out.println("bus hours prob");
+            return;
+            }
+
+
+            //startTimeConvert = ZonedDateTime.of(appointmentStart, ZoneId.of("America/New_York"));
+
+            System.out.println(startTimeEST);
+
+            //localnow = ZonedDateTime.now(ZoneId.systemDefault());
+            //System.out.println(localnow);
+
+            //AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 
 
 
@@ -110,7 +134,7 @@ public class AppointmentsAdd implements Initializable {
 
 
 
-        LocalTime startStart = LocalTime.of(8,0);
+        LocalTime startStart = LocalTime.of(5,0);
         LocalTime startEnd = LocalTime.of(21,45);
         LocalTime endStart = LocalTime.of(8,15);
         LocalTime endEnd = LocalTime.of(22,0);
