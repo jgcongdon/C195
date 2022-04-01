@@ -37,6 +37,25 @@ public class UserDaoImpl {
         return false;
     }
 
+    public static boolean validateUserName(String User_Name) throws SQLException {
+
+        try (
+                PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ?")) {
+            ps.setString(1, User_Name);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+        return false;
+    }
+
     public static User getUser(String userName) throws SQLException, Exception{
         String sqlStatement="select * FROM Users WHERE User_Name  = '" + userName+ "'";
         Query.makeQuery(sqlStatement);

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MainMenu">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainMenu">
    <children>
       <AnchorPane layoutX="501.0" layoutY="300.0" />
       <Button layoutX="621.0" layoutY="500.0" mnemonicParsing="false" onAction="#onActionLogOut" text="Log Out" />
@@ -13,7 +13,6 @@
             <Button mnemonicParsing="false" onAction="#onActionCustomers" prefHeight="100.0" prefWidth="200.0" text="Customers" />
             <Button mnemonicParsing="false" onAction="#onActionAppointments" prefHeight="100.0" prefWidth="200.0" text="Appointments" />
             <Button mnemonicParsing="false" onAction="#onActionReports" prefHeight="100.0" prefWidth="200.0" text="Reports" />
-            <Button mnemonicParsing="false" onAction="#onActionUsers" prefHeight="100.0" prefWidth="200.0" text="Users" />
          </children>
       </HBox>
    </children>

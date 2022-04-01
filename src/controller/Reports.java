@@ -1,5 +1,7 @@
 package controller;
 
+import DAO.ContactDaoImpl;
+import DAO.CountryDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,7 +9,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import model.Appointment;
+import model.Contact;
+import model.Country;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +24,25 @@ public class Reports implements Initializable {
 
     Stage stage;
     Parent scene;
+
+
+    @FXML
+    private ComboBox<?> monthCombo;
+
+    @FXML
+    private ComboBox<Appointment> typeCombo;
+
+    @FXML
+    private Label appointmentsTotalLabel;
+
+    @FXML
+    private ComboBox<Contact> contactCombo;
+
+    @FXML
+    private ComboBox<Country> countryCombo;
+
+    @FXML
+    private Label customersTotalLabel;
 
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
@@ -29,6 +55,13 @@ public class Reports implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        try {
+            contactCombo.setItems(ContactDaoImpl.getAllContacts());
+            countryCombo.setItems(CountryDaoImpl.getAllCountries());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

@@ -39,7 +39,7 @@ public class LogIn implements Initializable {
 
     @FXML
     void onActionExit(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myBundle.getString("Exit"));
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
             JDBC.closeConnection();
@@ -55,8 +55,15 @@ public class LogIn implements Initializable {
 
         if (userName.isEmpty() || userName.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("ERROR: Invalid login");
+            alert.setTitle(myBundle.getString("WarningDialog"));
+            alert.setContentText(myBundle.getString("ERROR"));
+            alert.showAndWait();
+        }
+
+        else if (UserDaoImpl.validateUserName(userResult.getUserName()) == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(myBundle.getString("WarningDialog"));
+            alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
@@ -73,10 +80,10 @@ public class LogIn implements Initializable {
             stage.show();
 
         }
-        else{
+        else if (UserDaoImpl.validateLogIn(userResult.getUserName(), password ) == false){
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("ERROR: Invalid login");
+            alert.setTitle(myBundle.getString("WarningDialog"));
+            alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
     }
@@ -85,7 +92,7 @@ public class LogIn implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        System.out.println("My test is " + myBundle.getString("TEST"));
+        //System.out.println("My test is " + myBundle.getString("TEST"));
 
         locationLabel.setText(tz1);
     }

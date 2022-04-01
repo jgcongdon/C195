@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="controller.Reports">
+<AnchorPane prefHeight="732.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Reports">
    <children>
       <AnchorPane layoutX="630.0" layoutY="25.0">
          <children>
@@ -43,9 +42,9 @@
                         <Label text="Month" textAlignment="CENTER" GridPane.halignment="CENTER" />
                         <Label text="Type" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                         <Label text="Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
-                        <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="monthCombo" prefWidth="150.0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="typeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="appointmentsTotalLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -57,7 +56,7 @@
             <HBox>
                <children>
                   <Label text="Schedule by Contact: " />
-                  <ComboBox prefWidth="150.0" />
+                  <ComboBox fx:id="contactCombo" prefWidth="150.0" />
                </children>
             </HBox>
          </children>
@@ -103,8 +102,8 @@
                      <children>
                         <Label text="Country" textAlignment="CENTER" GridPane.halignment="CENTER" />
                         <Label text="Total" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                        <ComboBox prefWidth="150.0" GridPane.rowIndex="1" />
-                        <Label prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="countryCombo" prefWidth="150.0" GridPane.rowIndex="1" />
+                        <Label fx:id="customersTotalLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>
