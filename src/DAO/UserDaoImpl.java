@@ -19,8 +19,10 @@ public class UserDaoImpl {
 
     public static boolean validateLogIn(String User_Name, String Password) throws SQLException {
 
-        try (
-            PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ? and Password = ? ")) {
+        String vLI="select * FROM Users WHERE User_Name = ? AND Password = ?";
+        Query.makeQuery(vLI);
+
+        try (PreparedStatement ps = JDBC.connection.prepareStatement(vLI)) {
             ps.setString(1, User_Name);
             ps.setString(2, Password);
             ResultSet resultSet = ps.executeQuery();
@@ -42,6 +44,25 @@ public class UserDaoImpl {
         try (
                 PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ?")) {
             ps.setString(1, User_Name);
+            ResultSet resultSet = ps.executeQuery();
+
+            if (resultSet.next()) {
+                return true;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+
+        }
+
+        return false;
+    }
+
+    public static boolean validatePassword(String Password) throws SQLException {
+
+        try (
+                PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE Password = ?")) {
+            ps.setString(1, Password);
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {

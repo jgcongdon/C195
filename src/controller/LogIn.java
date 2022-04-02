@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.User;
 
+import java.sql.SQLException;
 import java.util.TimeZone;
 
 import java.io.IOException;
@@ -48,7 +49,7 @@ public class LogIn implements Initializable {
     }
 
     @FXML
-    void onActionLogIn(ActionEvent event) throws Exception {
+    void onActionLogIn(ActionEvent event) throws Exception, SQLException {
         String userName = logInUsernameLabel.getText();
         String password = logInPasswordLabel.getText();
         User userResult = UserDaoImpl.getUser(userName);
@@ -60,14 +61,28 @@ public class LogIn implements Initializable {
             alert.showAndWait();
         }
 
-        else if (UserDaoImpl.validateUserName(userResult.getUserName()) == false) {
+        else if (password.isEmpty() || password.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
-        else if (UserDaoImpl.validateLogIn(userResult.getUserName(), password ) == true) {
+        else if (UserDaoImpl.validateUserName(userName) == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(myBundle.getString("WarningDialog"));
+            alert.setContentText(myBundle.getString("ERROR"));
+            alert.showAndWait();
+        }
+
+        else if (UserDaoImpl.validatePassword(password) == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle(myBundle.getString("WarningDialog"));
+            alert.setContentText(myBundle.getString("ERROR"));
+            alert.showAndWait();
+        }
+
+        else if (UserDaoImpl.validateLogIn(userName, password ) == true) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
             loader.load();
@@ -80,7 +95,7 @@ public class LogIn implements Initializable {
             stage.show();
 
         }
-        else if (UserDaoImpl.validateLogIn(userResult.getUserName(), password ) == false){
+        else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
