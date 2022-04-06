@@ -102,7 +102,7 @@
                      <children>
                         <Label text="Country" textAlignment="CENTER" GridPane.halignment="CENTER" />
                         <Label text="Total" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-                        <ComboBox fx:id="countryCombo" prefWidth="150.0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="countryCombo" onAction="#onActionCountryCombo" prefWidth="150.0" GridPane.rowIndex="1" />
                         <Label fx:id="customersTotalLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>

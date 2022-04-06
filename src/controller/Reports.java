@@ -18,6 +18,7 @@ import model.Country;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class Reports implements Initializable {
@@ -38,8 +39,20 @@ public class Reports implements Initializable {
     @FXML
     private ComboBox<Contact> contactCombo;
 
+
     @FXML
     private ComboBox<Country> countryCombo;
+
+
+    @FXML
+    void onActionCountryCombo(ActionEvent event) throws SQLException {
+        Country selectedCountry = countryCombo.getValue();
+        int selectedCountryID = selectedCountry.getCountry_ID();
+        System.out.println(selectedCountryID);
+        System.out.println(CountryDaoImpl.countCountry(selectedCountry));
+    }
+
+
 
     @FXML
     private Label customersTotalLabel;
@@ -53,6 +66,8 @@ public class Reports implements Initializable {
 
     }
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -62,6 +77,7 @@ public class Reports implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 }

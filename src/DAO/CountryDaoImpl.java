@@ -3,6 +3,7 @@ package DAO;
 import model.Country;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
@@ -68,4 +69,18 @@ public class CountryDaoImpl {
         }
         return null;
     }
+
+    public static int countCountry(Country country) throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS test FROM countries";
+        Query.makeQuery(sqlStatement);
+        int countCountryResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCountryResult = result.getInt("test");
+            return countCountryResult;
+        }
+        return countCountryResult;
+    }
+
 }
