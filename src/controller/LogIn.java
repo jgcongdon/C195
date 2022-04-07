@@ -50,39 +50,39 @@ public class LogIn implements Initializable {
 
     @FXML
     void onActionLogIn(ActionEvent event) throws Exception, SQLException {
-        String userName = logInUsernameLabel.getText();
-        String password = logInPasswordLabel.getText();
-        User userResult = UserDaoImpl.getUser(userName);
+        String User_Name = logInUsernameLabel.getText();
+        String Password = logInPasswordLabel.getText();
+        User userResult = UserDaoImpl.getUser(User_Name);
 
-        if (userName.isEmpty() || userName.isBlank()) {
+        if (User_Name.isEmpty() || User_Name.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
-        else if (password.isEmpty() || password.isBlank()) {
+        else if (Password.isEmpty() || Password.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
-        else if (UserDaoImpl.validateUserName(userName) == false) {
+        else if (UserDaoImpl.validateUserName(User_Name) == false) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
-        else if (UserDaoImpl.validatePassword(password) == false) {
+        else if (UserDaoImpl.validatePassword(Password) == false) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
         }
 
-        else if (UserDaoImpl.validateLogIn(userName, password ) == true) {
+        else if (UserDaoImpl.validateLogIn(User_Name, Password) == true) {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
             loader.load();
@@ -107,8 +107,7 @@ public class LogIn implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        //System.out.println("My test is " + myBundle.getString("TEST"));
-
         locationLabel.setText(tz1);
+
     }
 }

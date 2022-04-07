@@ -19,10 +19,7 @@ public class UserDaoImpl {
 
     public static boolean validateLogIn(String User_Name, String Password) throws SQLException {
 
-        String vLI="select * FROM Users WHERE User_Name = ? AND Password = ?";
-        Query.makeQuery(vLI);
-
-        try (PreparedStatement ps = JDBC.connection.prepareStatement(vLI)) {
+        try (PreparedStatement ps = JDBC.connection.prepareStatement("select * FROM Users WHERE User_Name = ? AND Password = ?")) {
             ps.setString(1, User_Name);
             ps.setString(2, Password);
             ResultSet resultSet = ps.executeQuery();
