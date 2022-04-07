@@ -76,6 +76,21 @@ public class Reports implements Initializable {
 
     ObservableList<String> Months = FXCollections.observableList(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
 
+
+
+    @FXML
+    void onActionTypeCombo(ActionEvent event) {
+appointmentType selectedType = typeCombo.getValue();
+System.out.println(selectedType);
+    }
+
+    @FXML
+    void onActonMonthCombo(ActionEvent event) {
+        String selectedMonth = monthCombo.getValue();
+        System.out.println(selectedMonth);
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

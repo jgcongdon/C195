@@ -42,9 +42,12 @@
                         <Label text="Month" textAlignment="CENTER" GridPane.halignment="CENTER" />
                         <Label text="Type" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
                         <Label text="Total" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-                        <ComboBox fx:id="monthCombo" prefWidth="150.0" GridPane.rowIndex="1" />
-                        <ComboBox fx:id="typeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="appointmentsTotalLabel" prefWidth="100.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="monthCombo" onAction="#onActonMonthCombo" prefWidth="150.0" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="typeCombo" onAction="#onActionTypeCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="appointmentsTotalLabel" prefWidth="50.0" style="-fx-border-color: Black;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets left="25.0" />
+                           </GridPane.margin></Label>
                      </children>
                   </GridPane>
                </children>
