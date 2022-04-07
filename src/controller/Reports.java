@@ -2,6 +2,7 @@ package controller;
 
 import DAO.ContactDaoImpl;
 import DAO.CountryDaoImpl;
+import DAO.CustomerDaoImpl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,19 +44,24 @@ public class Reports implements Initializable {
     @FXML
     private ComboBox<Country> countryCombo;
 
+    @FXML
+    private Label customersTotalLabel;
 
     @FXML
     void onActionCountryCombo(ActionEvent event) throws SQLException {
         Country selectedCountry = countryCombo.getValue();
         int selectedCountryID = selectedCountry.getCountry_ID();
-        System.out.println(selectedCountryID);
-        System.out.println(CountryDaoImpl.countCountry(selectedCountry));
+
+        if (selectedCountryID == 1) {
+            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersUS()));
+        }
+        else if (selectedCountryID == 2) {
+            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersUK()));
+        }
+        else if (selectedCountryID == 3) {
+            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersCAN()));
+        }
     }
-
-
-
-    @FXML
-    private Label customersTotalLabel;
 
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
@@ -65,8 +71,6 @@ public class Reports implements Initializable {
         stage.show();
 
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

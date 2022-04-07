@@ -6,6 +6,7 @@ import controller.CustomersModify;
 import helper.Globals;
 import helper.JDBC;
 import model.Contact;
+import model.Country;
 import model.Customer;
 
 import java.sql.*;
@@ -146,6 +147,45 @@ public class CustomerDaoImpl {
             return getCustomerFromCustomerIDResult;
         }
         return null;
+    }
+
+    public static int countCustomersUS() throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 1 AND 54";
+        Query.makeQuery(sqlStatement);
+        int countCustomersUSResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCustomersUSResult = result.getInt("customerCountry");
+            return countCustomersUSResult;
+        }
+        return countCustomersUSResult;
+    }
+
+    public static int countCustomersUK() throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 101 AND 104";
+        Query.makeQuery(sqlStatement);
+        int countCustomersUKResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCustomersUKResult = result.getInt("customerCountry");
+            return countCustomersUKResult;
+        }
+        return countCustomersUKResult;
+    }
+
+    public static int countCustomersCAN() throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 60 AND 72";
+        Query.makeQuery(sqlStatement);
+        int countCustomersCANResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCustomersCANResult = result.getInt("customerCountry");
+            return countCustomersCANResult;
+        }
+        return countCustomersCANResult;
     }
 
 }
