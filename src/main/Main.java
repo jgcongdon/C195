@@ -24,6 +24,8 @@ public class Main extends Application {
 
         //Locale.setDefault(new Locale("fr"));
 
+
+
         JDBC.openConnection();
 
         launch(args);

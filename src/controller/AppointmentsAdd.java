@@ -85,39 +85,43 @@ public class AppointmentsAdd implements Initializable {
             int userID = userCombo.getValue().getUserId();
             int contactID = contactCombo.getValue().getContact_ID();
 
-            System.out.println(appointmentStart);
-
             ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
             ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
             LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
             LocalDateTime bStart = LocalDateTime.of(appointmentAddDatePicker.getValue(), LocalTime.of(8,0));
-            if (LDTstartEST.isBefore(bStart)){
-                System.out.println("bus hours prob");
+
+            ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
+            ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+            LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
+            LocalDateTime bEnd = LocalDateTime.of(appointmentAddDatePicker.getValue(), LocalTime.of(22,0));
+
+            if (LDTstartEST.isBefore(bStart)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment start time is too early!");
+                alert.showAndWait();
+            }
+            else if (LDTendEST.isAfter(bEnd)){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment end time is too late!");
+                alert.showAndWait();
             return;
             }
+            else {
+                AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
 
-            //startTimeConvert = ZonedDateTime.of(appointmentStart, ZoneId.of("America/New_York"));
-
-            System.out.println(startTimeEST);
-
-            //localnow = ZonedDateTime.now(ZoneId.systemDefault());
-            //System.out.println(localnow);
-
-            //AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
-
-
+            }
 
         } catch (Exception e){
             e.printStackTrace();
             return;
         }
-
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
     }
 
@@ -132,11 +136,9 @@ public class AppointmentsAdd implements Initializable {
             e.printStackTrace();
         }
 
-
-
         LocalTime startStart = LocalTime.of(5,0);
         LocalTime startEnd = LocalTime.of(21,45);
-        LocalTime endStart = LocalTime.of(8,15);
+        LocalTime endStart = LocalTime.of(5,15);
         LocalTime endEnd = LocalTime.of(22,0);
 
         while(startStart.isBefore(startEnd.plusSeconds(1))){
