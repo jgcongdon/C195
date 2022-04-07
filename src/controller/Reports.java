@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.ContactDaoImpl;
 import DAO.CountryDaoImpl;
 import DAO.CustomerDaoImpl;
@@ -78,6 +79,8 @@ public class Reports implements Initializable {
         try {
             contactCombo.setItems(ContactDaoImpl.getAllContacts());
             countryCombo.setItems(CountryDaoImpl.getAllCountries());
+
+            typeCombo.setItems(AppointmentDaoImpl.getAllAppointments());
         } catch (Exception e) {
             e.printStackTrace();
         }
