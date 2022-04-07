@@ -148,4 +148,7 @@ public class Appointment {
         Contact_ID = Contact_ID;
     }
 
+    @Override
+    public String toString(){return Type;}
+
 }
