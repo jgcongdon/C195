@@ -86,11 +86,11 @@ public class Appointments implements Initializable {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setContentText("ERROR: No part selected");
+            alert.setContentText("ERROR: No appointment selected");
             alert.showAndWait();
         }
         else {
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this part?");
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
 
@@ -124,7 +124,7 @@ public class Appointments implements Initializable {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
-            alert.setContentText("ERROR: No part selected");
+            alert.setContentText("ERROR: No appointment selected");
             alert.showAndWait();
         }
         else {

@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
@@ -63,17 +60,57 @@ public class CustomersAdd implements Initializable {
             FirstLevelDivision D = divisionCombo.getValue();
             int Division_ID = D.getDivision_ID();
 
-            CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
+            if (customerName.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The name must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (customerAddress.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The address must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (postalCode.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The postal code must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (customerPhone.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The phone must not be empty");
+                alert.showAndWait();
+            }
+
+            //How to check if combo box is empty?
+            else if (Division_ID is empty) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The division must not be empty");
+                alert.showAndWait();
+            }
+
+            else{
+
+                CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
     }
 

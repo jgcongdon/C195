@@ -9,9 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Customer;
@@ -19,6 +17,7 @@ import model.Customer;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -80,10 +79,26 @@ public class Customers implements Initializable {
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws Exception {
 
-        CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
-        CustomerList = CustomerDaoImpl.getAllCustomers();
-        CustomerTable.setItems(CustomerList);
-        CustomerTable.refresh();
+        if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: No customer selected");
+            alert.showAndWait();
+
+        } else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
+                CustomerList = CustomerDaoImpl.getAllCustomers();
+                CustomerTable.setItems(CustomerList);
+                CustomerTable.refresh();
+            } else {
+                CustomerList = CustomerDaoImpl.getAllCustomers();
+                CustomerTable.setItems(CustomerList);
+                CustomerTable.refresh();
+            }
+        }
     }
 
     @FXML
@@ -97,13 +112,21 @@ public class Customers implements Initializable {
     @FXML
     void onActionModifyCustomer(ActionEvent event) throws IOException {
 
-        CustomersModify.receiveSelectedCustomer(CustomerTable.getSelectionModel().getSelectedItem());
+        if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: No customer selected");
+            alert.showAndWait();
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/CustomersModify.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+        } else {
 
+            CustomersModify.receiveSelectedCustomer(CustomerTable.getSelectionModel().getSelectedItem());
+
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/CustomersModify.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
 
     }
 
