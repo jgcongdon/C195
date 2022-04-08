@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.Appointment;
@@ -21,6 +18,7 @@ import model.Appointment;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Calendar;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,11 +83,30 @@ public class Appointments implements Initializable {
     @FXML
     void onActionDeleteAppointment(ActionEvent event) throws Exception {
 
-        AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
-        Appointment = AppointmentDaoImpl.getAllAppointments();
-        AppointmentTable.setItems(Appointment);
-        AppointmentTable.refresh();
+        if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: No part selected");
+            alert.showAndWait();
+        }
+        else {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this part?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
 
+                AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
+                Appointment = AppointmentDaoImpl.getAllAppointments();
+                AppointmentTable.setItems(Appointment);
+                AppointmentTable.refresh();
+            }
+            else {
+                Appointment = AppointmentDaoImpl.getAllAppointments();
+                AppointmentTable.setItems(Appointment);
+                AppointmentTable.refresh();
+            }
+
+
+        }
     }
 
     @FXML
@@ -104,13 +121,21 @@ public class Appointments implements Initializable {
     @FXML
     void onActionModifyAppointment(ActionEvent event) throws IOException {
 
-        AppointmentsModify.receiveSelectedAppointment(AppointmentTable.getSelectionModel().getSelectedItem());
+        if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: No part selected");
+            alert.showAndWait();
+        }
+        else {
 
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/AppointmentsModify.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
+            AppointmentsModify.receiveSelectedAppointment(AppointmentTable.getSelectionModel().getSelectedItem());
 
+            stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            scene = FXMLLoader.load(getClass().getResource("/view/AppointmentsModify.fxml"));
+            stage.setScene(new Scene(scene));
+            stage.show();
+        }
     }
 
     @FXML

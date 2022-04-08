@@ -24,6 +24,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
 public class AppointmentsModify implements Initializable {
@@ -93,18 +95,43 @@ public class AppointmentsModify implements Initializable {
             int userID = appointmentModifyUserIDCombo.getValue().getUserId();
             int contactID = appointmentModifyContactCombo.getValue().getContact_ID();
 
-            AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+            ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
+            ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+            LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
+            LocalDateTime bStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(8,0));
 
-        } catch (Exception e) {
+            ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
+            ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+            LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
+            LocalDateTime bEnd = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(22,0));
+
+            if (LDTstartEST.isBefore(bStart)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment start time is too early!");
+                alert.showAndWait();
+            }
+            else if (LDTendEST.isAfter(bEnd)){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment end time is too late!");
+                alert.showAndWait();
+                return;
+            }
+            else {
+
+                AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+                }
+            } catch (Exception e) {
             e.printStackTrace();
             return;
         }
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
-
     }
 
     public static void receiveSelectedAppointment(Appointment appointment){
@@ -126,9 +153,9 @@ public class AppointmentsModify implements Initializable {
         throwables.printStackTrace();
         }
 
-        LocalTime startStart = LocalTime.of(8,0);
+        LocalTime startStart = LocalTime.of(5,0);
         LocalTime startEnd = LocalTime.of(21,45);
-        LocalTime endStart = LocalTime.of(8,15);
+        LocalTime endStart = LocalTime.of(5,15);
         LocalTime endEnd = LocalTime.of(22,0);
 
         while(startStart.isBefore(startEnd.plusSeconds(1))){
