@@ -58,7 +58,7 @@ public class CustomersAdd implements Initializable {
             Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
             String lastUpdateBy = Globals.userName;
             FirstLevelDivision D = divisionCombo.getValue();
-            int Division_ID = D.getDivision_ID();
+
 
             if (customerName.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -88,15 +88,23 @@ public class CustomersAdd implements Initializable {
                 alert.showAndWait();
             }
 
-            //How to check if combo box is empty?
-            else if (Division_ID is empty) {
+            else if (divisionCombo.getSelectionModel().getSelectedItem() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The division must not be empty");
                 alert.showAndWait();
             }
 
+            else if (countryCombo.getSelectionModel().getSelectedItem() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The country must not be empty");
+                alert.showAndWait();
+            }
+
             else{
+
+                int Division_ID = D.getDivision_ID();
 
                 CustomerDaoImpl.addCustomer(customerName, customerAddress, postalCode, customerPhone, createDate, createdBy, lastUpdate, lastUpdateBy, Division_ID);
 

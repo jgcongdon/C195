@@ -12,10 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Country;
 import model.Customer;
@@ -82,19 +79,65 @@ public class CustomersModify implements Initializable {
             Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
             String lastUpdateBy = Globals.userName;
             FirstLevelDivision D = divisionCombo.getValue();;
-            int Division_ID = D.getDivision_ID();
 
-            CustomerDaoImpl.modifyCustomer(customerID, customerName, customerAddress, postalCode, customerPhone, lastUpdate, lastUpdateBy, Division_ID);
+            if (customerName.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The name must not be empty");
+                alert.showAndWait();
+            }
 
+            else if (customerAddress.isEmpty()){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The address must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (postalCode.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The postal code must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (customerPhone.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The phone must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (divisionCombo.getSelectionModel().getSelectedItem() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The division must not be empty");
+                alert.showAndWait();
+            }
+
+            else if (countryCombo.getSelectionModel().getSelectedItem() == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: The country must not be empty");
+                alert.showAndWait();
+            }
+
+            else {
+
+                int Division_ID = D.getDivision_ID();
+
+                CustomerDaoImpl.modifyCustomer(customerID, customerName, customerAddress, postalCode, customerPhone, lastUpdate, lastUpdateBy, Division_ID);
+
+                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
+                stage.setScene(new Scene(scene));
+                stage.show();
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
-
-        stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-        scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
-        stage.setScene(new Scene(scene));
-        stage.show();
 
     }
 

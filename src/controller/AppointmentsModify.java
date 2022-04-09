@@ -82,52 +82,106 @@ public class AppointmentsModify implements Initializable {
     void onActionSave(ActionEvent event) throws IOException {
 
         try {
-            int appointmentID = Integer.parseInt(appointmentModifyIDLabel.getText());
-            String appointmentTitle = appointmentModifyTitleLabel.getText();
-            String appointmentDescription = appointmentModifyDescriptionLabel.getText();
-            String appointmentLocation = appointmentModifyLocationLabel.getText();
-            String appointmentType = appointmentModifyTypeLabel.getText();
-            LocalDateTime appointmentStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), appointmentModifyStartCombo.getSelectionModel().getSelectedItem());
-            LocalDateTime appointmentEnd = LocalDateTime.of(appointmentModifyDatePicker.getValue(), appointmentModifyEndCombo.getSelectionModel().getSelectedItem());
-            Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
-            String lastUpdateBy = Globals.userName;
-            int customerID = appointmentModifyCustomerIDCombo.getValue().getCustomerId();
-            int userID = appointmentModifyUserIDCombo.getValue().getUserId();
-            int contactID = appointmentModifyContactCombo.getValue().getContact_ID();
 
-            ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
-            ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
-            LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
-            LocalDateTime bStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(8,0));
-
-            ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
-            ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
-            LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
-            LocalDateTime bEnd = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(22,0));
-
-            if (LDTstartEST.isBefore(bStart)) {
+            if (appointmentModifyDatePicker.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
-                alert.setContentText("ERROR: Appointment start time is too early!");
+                alert.setContentText("ERROR: The date must not be empty");
                 alert.showAndWait();
             }
-            else if (LDTendEST.isAfter(bEnd)){
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning Dialog");
-                alert.setContentText("ERROR: Appointment end time is too late!");
-                alert.showAndWait();
-                return;
-            }
-            else {
 
-                AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+            else if (appointmentModifyDatePicker.getValue() != null) {
 
-                stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
-                scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
-                stage.setScene(new Scene(scene));
-                stage.show();
+                int appointmentID = Integer.parseInt(appointmentModifyIDLabel.getText());
+                String appointmentTitle = appointmentModifyTitleLabel.getText();
+                String appointmentDescription = appointmentModifyDescriptionLabel.getText();
+                String appointmentLocation = appointmentModifyLocationLabel.getText();
+                String appointmentType = appointmentModifyTypeLabel.getText();
+                LocalDateTime appointmentStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), appointmentModifyStartCombo.getSelectionModel().getSelectedItem());
+                LocalDateTime appointmentEnd = LocalDateTime.of(appointmentModifyDatePicker.getValue(), appointmentModifyEndCombo.getSelectionModel().getSelectedItem());
+                Timestamp lastUpdate = Timestamp.valueOf(LocalDateTime.now());
+                String lastUpdateBy = Globals.userName;
+                int customerID = appointmentModifyCustomerIDCombo.getValue().getCustomerId();
+                int userID = appointmentModifyUserIDCombo.getValue().getUserId();
+                int contactID = appointmentModifyContactCombo.getValue().getContact_ID();
+
+                ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
+                ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+                LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
+                LocalDateTime bStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(8, 0));
+
+                ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
+                ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
+                LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
+                LocalDateTime bEnd = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(22, 0));
+
+                if (appointmentTitle.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The title must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentDescription.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The description must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentLocation.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The location must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentModifyContactCombo.getSelectionModel().getSelectedItem() == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The contact must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentType.isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The type must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentModifyStartCombo.getSelectionModel().getSelectedItem() == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The start time must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentModifyEndCombo.getSelectionModel().getSelectedItem() == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The end time must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentModifyCustomerIDCombo.getSelectionModel().getSelectedItem() == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The customer must not be empty");
+                    alert.showAndWait();
+                } else if (appointmentModifyUserIDCombo.getSelectionModel().getSelectedItem() == null) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: The user must not be empty");
+                    alert.showAndWait();
+                } else if (LDTstartEST.isBefore(bStart)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment start time is too early!");
+                    alert.showAndWait();
+                } else if (LDTendEST.isAfter(bEnd)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment end time is too late!");
+                    alert.showAndWait();
+                    return;
+                } else {
+
+                    AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
+
+                    stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+                    scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
+                    stage.setScene(new Scene(scene));
+                    stage.show();
 
                 }
+            }
             } catch (Exception e) {
             e.printStackTrace();
             return;
@@ -176,8 +230,6 @@ public class AppointmentsModify implements Initializable {
         appointmentModifyDatePicker.setValue(selectedAppointment.getStart().toLocalDate());
         appointmentModifyStartCombo.setValue(selectedAppointment.getStart().toLocalTime());
         appointmentModifyEndCombo.setValue(selectedAppointment.getEnd().toLocalTime());
-
-
 
     }
 }
