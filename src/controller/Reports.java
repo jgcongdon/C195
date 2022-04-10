@@ -90,8 +90,9 @@ public class Reports implements Initializable {
     void onActionCountryCombo(ActionEvent event) throws SQLException {
         Country selectedCountry = countryCombo.getValue();
         int selectedCountryID = selectedCountry.getCountry_ID();
+        customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomers(selectedCountryID)));
 
-        if (selectedCountryID == 1) {
+        /*if (selectedCountryID == 1) {
             customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersUS()));
         }
         else if (selectedCountryID == 2) {
@@ -99,7 +100,7 @@ public class Reports implements Initializable {
         }
         else if (selectedCountryID == 3) {
             customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersCAN()));
-        }
+        }*/
     }
 
     @FXML
@@ -119,7 +120,8 @@ public class Reports implements Initializable {
     void onActionTypeCombo(ActionEvent event) throws SQLException {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
-        if (selectedMonth == "January") {
+        appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
+        /*if (selectedMonth == "January") {
             int month = 1;
             appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
         }
@@ -166,7 +168,7 @@ public class Reports implements Initializable {
         else if (selectedMonth == "December") {
             int month = 12;
             appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
+        }*/
 
     }
 
@@ -174,7 +176,8 @@ public class Reports implements Initializable {
     void onActonMonthCombo(ActionEvent event) throws SQLException {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
-        if (selectedMonth == "January") {
+        appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
+        /*if (selectedMonth == "January") {
             int month = 1;
             appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
         }
@@ -221,24 +224,15 @@ public class Reports implements Initializable {
         else if (selectedMonth == "December") {
             int month = 12;
             appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
+        }*/
 
     }
 
     @FXML
     void onActionContactCombo(ActionEvent event) {
 
-        AppointmentTable.getItems().clear();
-        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
-        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
-        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
-        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
-        Contact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
-        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
-        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
-        End.setCellValueFactory(new PropertyValueFactory<>("End"));
-        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
-        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        Appointment.clear();
+
         Contact selectedContact = contactCombo.getValue();
         int selectedContactID = selectedContact.getContact_ID();
            try {
@@ -249,7 +243,7 @@ public class Reports implements Initializable {
                 Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            AppointmentTable.setItems(Appointment);
+
 
         }
 
@@ -267,7 +261,17 @@ public class Reports implements Initializable {
             e.printStackTrace();
         }
 
-
+        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Contact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        AppointmentTable.setItems(Appointment);
     }
 
     }

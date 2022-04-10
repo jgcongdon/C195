@@ -149,6 +149,19 @@ public class CustomerDaoImpl {
         return null;
     }
 
+    public static int countCustomers(int Country_ID) throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID IN (SELECT Division_ID FROM First_Level_Divisions WHERE Country_ID = " + Country_ID + ")";
+        Query.makeQuery(sqlStatement);
+        int countCustomersUSResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCustomersUSResult = result.getInt("customerCountry");
+            return countCustomersUSResult;
+        }
+        return countCustomersUSResult;
+    }
+
     public static int countCustomersUS() throws SQLException {
 
         String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 1 AND 54";

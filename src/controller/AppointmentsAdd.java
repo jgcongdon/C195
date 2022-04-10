@@ -160,7 +160,14 @@ public class AppointmentsAdd implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: Appointment end time is too late!");
                     alert.showAndWait();
+
+                } else if (Appointments.checkOverlap(customerID, 0, appointmentStart, appointmentEnd)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment overlap");
+                    alert.showAndWait();
                     return;
+
                 } else {
                     AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 

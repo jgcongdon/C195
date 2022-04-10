@@ -17,6 +17,7 @@ import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -71,6 +72,22 @@ public class Appointments implements Initializable {
 
     @FXML
     private TableColumn<Appointment, Integer> User_ID;
+
+    public static boolean checkOverlap(int customerID, int appointmentID, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws Exception {
+        ObservableList<model.Appointment> aList = AppointmentDaoImpl.getAllAppointments();
+        for (Appointment a:aList){
+            if (customerID != a.getCustomer_ID()){
+                continue;
+            }
+            if (appointmentID == a.getAppointment_ID()){
+                continue;
+            }
+
+
+
+        }
+        return false;
+    }
 
     @FXML
     void onActionAddAppointment(ActionEvent event) throws IOException {
