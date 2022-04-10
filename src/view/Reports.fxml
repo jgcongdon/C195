@@ -59,27 +59,25 @@
             <HBox>
                <children>
                   <Label text="Schedule by Contact: " />
-                  <ComboBox fx:id="contactCombo" prefWidth="150.0" />
+                  <ComboBox fx:id="contactCombo" onAction="#onActionContactCombo" prefWidth="150.0" />
                </children>
             </HBox>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="60.0" layoutY="175.0">
          <children>
-            <TableView prefWidth="1200.0">
+            <TableView fx:id="AppointmentTable" prefWidth="1200.0">
                <columns>
-                  <TableColumn text="Appointment ID" />
-                  <TableColumn prefWidth="52.0" text="Title" />
-                  <TableColumn prefWidth="75.0" text="Description" />
-                  <TableColumn prefWidth="75.0" text="Location" />
-                  <TableColumn prefWidth="75.0" text="Contact" />
-                  <TableColumn prefWidth="75.0" text="Type" />
-                  <TableColumn prefWidth="75.0" text="Start date" />
-                  <TableColumn prefWidth="75.0" text="Start time" />
-                  <TableColumn prefWidth="75.0" text="End date" />
-                  <TableColumn prefWidth="75.0" text="End time" />
-                  <TableColumn prefWidth="75.0" text="Customer ID" />
-                  <TableColumn prefWidth="75.0" text="User ID" />
+                  <TableColumn fx:id="Appointment_ID" prefWidth="78.0" text="Appointment ID" />
+                  <TableColumn fx:id="Title" prefWidth="54.0" text="Title" />
+                  <TableColumn fx:id="Description" prefWidth="75.0" text="Description" />
+                  <TableColumn fx:id="Location" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="Contact" prefWidth="75.0" text="Contact" />
+                  <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
+                  <TableColumn fx:id="Start" prefWidth="75.0" text="Start" />
+                  <TableColumn fx:id="End" prefWidth="75.0" text="End" />
+                  <TableColumn fx:id="Customer_ID" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="User_ID" prefWidth="75.0" text="User ID" />
                </columns>
             </TableView>
          </children>

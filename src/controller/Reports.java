@@ -12,9 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import model.*;
 
@@ -22,13 +21,17 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Reports implements Initializable {
 
     Stage stage;
     Parent scene;
 
+    ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
 
     @FXML
     private ComboBox<String> monthCombo;
@@ -48,6 +51,40 @@ public class Reports implements Initializable {
 
     @FXML
     private Label customersTotalLabel;
+
+    @FXML
+    private TableView<Appointment> AppointmentTable;
+
+    @FXML
+    private TableColumn<Appointment, Integer> Appointment_ID;
+
+    @FXML
+    private TableColumn<Appointment, String> Title;
+
+    @FXML
+    private TableColumn<Appointment, String> Description;
+
+    @FXML
+    private TableColumn<Appointment, String> Location;
+
+    @FXML
+    private TableColumn<Appointment, Integer> Contact;
+
+    @FXML
+    private TableColumn<Appointment, String> Type;
+
+    @FXML
+    private TableColumn<Appointment, Calendar> Start;
+
+    @FXML
+    private TableColumn<Appointment, Calendar> End;
+
+    @FXML
+    private TableColumn<Appointment, Integer> Customer_ID;
+
+    @FXML
+    private TableColumn<Appointment, Integer> User_ID;
+
 
     @FXML
     void onActionCountryCombo(ActionEvent event) throws SQLException {
@@ -188,6 +225,34 @@ public class Reports implements Initializable {
 
     }
 
+    @FXML
+    void onActionContactCombo(ActionEvent event) {
+
+        AppointmentTable.getItems().clear();
+        Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
+        Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
+        Description.setCellValueFactory(new PropertyValueFactory<>("Description"));
+        Location.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        Contact.setCellValueFactory(new PropertyValueFactory<>("Contact_ID"));
+        Type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        Start.setCellValueFactory(new PropertyValueFactory<>("Start"));
+        End.setCellValueFactory(new PropertyValueFactory<>("End"));
+        Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
+        User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
+        Contact selectedContact = contactCombo.getValue();
+        int selectedContactID = selectedContact.getContact_ID();
+           try {
+
+                Appointment.addAll(AppointmentDaoImpl.getAppointmentsContactID(selectedContactID));
+
+            } catch (Exception ex) {
+                Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            AppointmentTable.setItems(Appointment);
+
+        }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -198,13 +263,12 @@ public class Reports implements Initializable {
             typeCombo.setItems(AppointmentDaoImpl.typeAppt());
             monthCombo.setItems(Months);
 
-
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
 
 
     }
-}
+
+    }
+
