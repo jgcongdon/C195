@@ -79,15 +79,113 @@ public class Reports implements Initializable {
 
 
     @FXML
-    void onActionTypeCombo(ActionEvent event) {
-appointmentType selectedType = typeCombo.getValue();
-System.out.println(selectedType);
+    void onActionTypeCombo(ActionEvent event) throws SQLException {
+        appointmentType selectedType = typeCombo.getValue();
+        String selectedMonth = monthCombo.getValue();
+        if (selectedMonth == "January") {
+            int month = 1;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "February") {
+            int month = 2;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "March") {
+            int month = 3;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "April") {
+            int month = 4;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "May") {
+            int month = 5;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "June") {
+            int month = 6;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "July") {
+            int month = 7;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "August") {
+            int month = 8;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "September") {
+            int month = 9;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "October") {
+            int month = 10;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "November") {
+            int month = 11;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "December") {
+            int month = 12;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+
     }
 
     @FXML
-    void onActonMonthCombo(ActionEvent event) {
+    void onActonMonthCombo(ActionEvent event) throws SQLException {
+        appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
-        System.out.println(selectedMonth);
+        if (selectedMonth == "January") {
+            int month = 1;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "February") {
+            int month = 2;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "March") {
+            int month = 3;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "April") {
+            int month = 4;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "May") {
+            int month = 5;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "June") {
+            int month = 6;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "July") {
+            int month = 7;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "August") {
+            int month = 8;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "September") {
+            int month = 9;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "October") {
+            int month = 10;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "November") {
+            int month = 11;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+        else if (selectedMonth == "December") {
+            int month = 12;
+            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
+        }
+
     }
 
 

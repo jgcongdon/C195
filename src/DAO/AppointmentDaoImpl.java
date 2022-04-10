@@ -163,9 +163,9 @@ public static ObservableList<appointmentType> typeAppt() throws SQLException {
     return typeAppt;
 }
 
-    public static int countMonthType(appointmentType selectedType, String selectedMonth) throws SQLException {
+    public static int countMonthType(appointmentType selectedType, int month) throws SQLException {
 
-        String sqlStatement = "SELECT COUNT(*) AS monthType FROM appointments WHERE Type  = '" + selectedType + "' AND Start is in '" + selectedMonth + "'";
+        String sqlStatement = "SELECT COUNT(*) AS monthType FROM appointments WHERE Type  = '" + selectedType + "' AND MONTH(Start) = '" + month + "'";
         Query.makeQuery(sqlStatement);
         int countMonthTypeResult = 0;
         ResultSet result = Query.getResult();
