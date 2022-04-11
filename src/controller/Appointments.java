@@ -105,24 +105,19 @@ public class Appointments implements Initializable {
             alert.setTitle("Warning Dialog");
             alert.setContentText("ERROR: No appointment selected");
             alert.showAndWait();
-        }
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-
                 AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
                 Appointment = AppointmentDaoImpl.getAllAppointments();
                 AppointmentTable.setItems(Appointment);
                 AppointmentTable.refresh();
-            }
-            else {
+            } else {
                 Appointment = AppointmentDaoImpl.getAllAppointments();
                 AppointmentTable.setItems(Appointment);
                 AppointmentTable.refresh();
             }
-
-
         }
     }
 
@@ -132,7 +127,6 @@ public class Appointments implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
 
     @FXML
@@ -143,9 +137,7 @@ public class Appointments implements Initializable {
             alert.setTitle("Warning Dialog");
             alert.setContentText("ERROR: No appointment selected");
             alert.showAndWait();
-        }
-        else {
-
+        } else {
             AppointmentsModify.receiveSelectedAppointment(AppointmentTable.getSelectionModel().getSelectedItem());
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -156,25 +148,27 @@ public class Appointments implements Initializable {
     }
 
     @FXML
-    void onActionAll(ActionEvent event) {
+    void onActionAll(ActionEvent event) throws Exception {
         weekRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
-
-
+        Appointment.clear();
+        Appointment.addAll(AppointmentDaoImpl.getAllAppointments());
     }
 
     @FXML
-    void onActionMonth(ActionEvent event) {
+    void onActionMonth(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         weekRadioButton.setSelected(false);
-
+        Appointment.clear();
+        Appointment.addAll(AppointmentDaoImpl.getCurrentMonthAppointments());
     }
 
     @FXML
-    void onActionWeek(ActionEvent event) {
+    void onActionWeek(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
-
+        Appointment.clear();
+        Appointment.addAll(AppointmentDaoImpl.getCurrentWeekAppointments());
     }
 
     @Override

@@ -71,7 +71,6 @@ public class AppointmentsAdd implements Initializable {
     void onActionSave(ActionEvent event) throws IOException {
 
         try{
-
             if (appointmentAddDatePicker.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
@@ -160,14 +159,12 @@ public class AppointmentsAdd implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: Appointment end time is too late!");
                     alert.showAndWait();
-
                 } else if (Appointments.checkOverlap(customerID, 0, appointmentStart, appointmentEnd)) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: Appointment overlap");
                     alert.showAndWait();
                     return;
-
                 } else {
                     AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 
@@ -175,15 +172,12 @@ public class AppointmentsAdd implements Initializable {
                     scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
                     stage.setScene(new Scene(scene));
                     stage.show();
-
                 }
             }
-
         } catch (Exception e){
             e.printStackTrace();
             return;
         }
-
     }
 
     @Override

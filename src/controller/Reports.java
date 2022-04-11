@@ -32,6 +32,7 @@ public class Reports implements Initializable {
     Parent scene;
 
     ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
+    ObservableList<String> Months = FXCollections.observableList(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
 
     @FXML
     private ComboBox<String> monthCombo;
@@ -44,7 +45,6 @@ public class Reports implements Initializable {
 
     @FXML
     private ComboBox<Contact> contactCombo;
-
 
     @FXML
     private ComboBox<Country> countryCombo;
@@ -85,22 +85,11 @@ public class Reports implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> User_ID;
 
-
     @FXML
     void onActionCountryCombo(ActionEvent event) throws SQLException {
         Country selectedCountry = countryCombo.getValue();
         int selectedCountryID = selectedCountry.getCountry_ID();
         customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomers(selectedCountryID)));
-
-        /*if (selectedCountryID == 1) {
-            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersUS()));
-        }
-        else if (selectedCountryID == 2) {
-            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersUK()));
-        }
-        else if (selectedCountryID == 3) {
-            customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomersCAN()));
-        }*/
     }
 
     @FXML
@@ -109,67 +98,13 @@ public class Reports implements Initializable {
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
-
-    ObservableList<String> Months = FXCollections.observableList(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
-
-
 
     @FXML
     void onActionTypeCombo(ActionEvent event) throws SQLException {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
         appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
-        /*if (selectedMonth == "January") {
-            int month = 1;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "February") {
-            int month = 2;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "March") {
-            int month = 3;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "April") {
-            int month = 4;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "May") {
-            int month = 5;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "June") {
-            int month = 6;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "July") {
-            int month = 7;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "August") {
-            int month = 8;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "September") {
-            int month = 9;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "October") {
-            int month = 10;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "November") {
-            int month = 11;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "December") {
-            int month = 12;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }*/
-
     }
 
     @FXML
@@ -177,76 +112,21 @@ public class Reports implements Initializable {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
         appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
-        /*if (selectedMonth == "January") {
-            int month = 1;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "February") {
-            int month = 2;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "March") {
-            int month = 3;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "April") {
-            int month = 4;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "May") {
-            int month = 5;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "June") {
-            int month = 6;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "July") {
-            int month = 7;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "August") {
-            int month = 8;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "September") {
-            int month = 9;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "October") {
-            int month = 10;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "November") {
-            int month = 11;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }
-        else if (selectedMonth == "December") {
-            int month = 12;
-            appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, month)));
-        }*/
-
     }
 
     @FXML
     void onActionContactCombo(ActionEvent event) {
 
         Appointment.clear();
-
         Contact selectedContact = contactCombo.getValue();
         int selectedContactID = selectedContact.getContact_ID();
-           try {
 
+        try {
                 Appointment.addAll(AppointmentDaoImpl.getAppointmentsContactID(selectedContactID));
-
-            } catch (Exception ex) {
+        } catch (Exception ex) {
                 Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-
-
         }
-
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -272,7 +152,7 @@ public class Reports implements Initializable {
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("Customer_ID"));
         User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
         AppointmentTable.setItems(Appointment);
-    }
 
     }
+}
 
