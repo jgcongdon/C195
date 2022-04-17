@@ -30,15 +30,15 @@
          <children>
             <TableView fx:id="AppointmentTable" prefWidth="1200.0">
               <columns>
-                <TableColumn fx:id="Appointment_ID" text="Appointment ID" />
-                <TableColumn fx:id="Title" prefWidth="52.0" text="Title" />
-                  <TableColumn fx:id="Description" prefWidth="75.0" text="Description" />
+                <TableColumn fx:id="Appointment_ID" prefWidth="100.0" text="Appointment ID" />
+                <TableColumn fx:id="Title" prefWidth="150.0" text="Title" />
+                  <TableColumn fx:id="Description" prefWidth="150.0" text="Description" />
                   <TableColumn fx:id="Location" prefWidth="75.0" text="Location" />
                   <TableColumn fx:id="Contact" prefWidth="75.0" text="Contact" />
                   <TableColumn fx:id="Type" prefWidth="75.0" text="Type" />
-                  <TableColumn fx:id="Start" prefWidth="75.0" text="Start" />
-                  <TableColumn fx:id="End" prefWidth="75.0" text="End" />
-                  <TableColumn fx:id="Customer_ID" prefWidth="75.0" text="Customer ID" />
+                  <TableColumn fx:id="Start" prefWidth="110.0" text="Start" />
+                  <TableColumn fx:id="End" prefWidth="110.0" text="End" />
+                  <TableColumn fx:id="Customer_ID" prefWidth="90.0" text="Customer ID" />
                   <TableColumn fx:id="User_ID" prefWidth="75.0" text="User ID" />
               </columns>
             </TableView>

@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.User;
 
 import java.sql.SQLException;
@@ -36,7 +37,22 @@ public class LogIn implements Initializable {
     private PasswordField logInPasswordLabel;
 
     @FXML
+    private Label userNameLabel;
+
+    @FXML
+    private Label passwordLabel;
+
+    @FXML
+    private Label locationText;
+
+    @FXML
     private Label locationLabel;
+
+    @FXML
+    private Button logInButton;
+
+    @FXML
+    private Button exitButton;
 
     @FXML
     void onActionExit(ActionEvent event) {
@@ -104,10 +120,17 @@ public class LogIn implements Initializable {
     }
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         locationLabel.setText(tz1);
+
+        userNameLabel.setText(myBundle.getString("Username"));
+        passwordLabel.setText(myBundle.getString("Password"));
+        locationText.setText(myBundle.getString("Location"));
+        logInButton.setText(myBundle.getString("Login"));
+        exitButton.setText(myBundle.getString("Exit"));
 
     }
 }

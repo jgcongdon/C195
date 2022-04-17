@@ -27,8 +27,8 @@
                <children>
                   <TextField fx:id="logInUsernameLabel" GridPane.columnIndex="1" />
                   <PasswordField fx:id="logInPasswordLabel" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                    <Label text="Username" />
-                  <Label text="Password" GridPane.rowIndex="1" />
+                    <Label fx:id="userNameLabel" text="Username" />
+                  <Label fx:id="passwordLabel" text="Password" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>
@@ -42,7 +42,7 @@
                             <Font size="14.0" />
                         </font>
                     </Button>
-                  <Button minHeight="30.0" mnemonicParsing="false" onAction="#onActionExit" prefWidth="57.0" text="Exit" />
+                  <Button fx:id="exitButton" minHeight="30.0" mnemonicParsing="false" onAction="#onActionExit" prefWidth="57.0" text="Exit" />
                </children>
             </HBox>
          </children>
@@ -51,7 +51,7 @@
          <children>
             <HBox>
                <children>
-                  <Label text="Location: " />
+                  <Label fx:id="locationText" text="Location: " />
                   <Label fx:id="locationLabel" />
                </children>
             </HBox>
