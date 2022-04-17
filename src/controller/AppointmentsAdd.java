@@ -159,6 +159,11 @@ public class AppointmentsAdd implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: Appointment end time is before start time!");
                     alert.showAndWait();
+                } else if (LDTstartEST.isEqual(LDTendEST)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment start time is same time as end time!");
+                    alert.showAndWait();
                 } else if (LDTstartEST.isBefore(bStart)) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");

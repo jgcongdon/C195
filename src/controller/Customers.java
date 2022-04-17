@@ -1,5 +1,6 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.CustomerDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import model.Appointment;
 import model.Customer;
 
 import java.io.IOException;
@@ -76,8 +78,20 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    public static boolean checkCustAppt(int customerID) throws Exception {
+        ObservableList<Appointment> aList = AppointmentDaoImpl.getAppointmentsCustomerID(customerID);
+        if (aList.size()>0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws Exception {
+
+        int customerID = CustomerTable.getSelectionModel().getSelectedItem().getCustomerId();
 
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -85,7 +99,19 @@ public class Customers implements Initializable {
             alert.setContentText("ERROR: No customer selected");
             alert.showAndWait();
 
-        } else {
+        } else if (checkCustAppt(customerID) == true){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning Dialog");
+            alert.setContentText("ERROR: Must delete all customer appointments first");
+            alert.showAndWait();
+
+            ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
+            for (Appointment a : aList) {
+                
+            }
+        }
+
+        else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
