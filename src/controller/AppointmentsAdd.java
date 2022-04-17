@@ -149,6 +149,16 @@ public class AppointmentsAdd implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: The user must not be empty");
                     alert.showAndWait();
+                } else if (LDTstartEST.isAfter(LDTendEST)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment start time is after end time!");
+                    alert.showAndWait();
+                } else if (LDTendEST.isBefore(LDTstartEST)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment end time is before start time!");
+                    alert.showAndWait();
                 } else if (LDTstartEST.isBefore(bStart)) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");
@@ -159,11 +169,7 @@ public class AppointmentsAdd implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: Appointment end time is too late!");
                     alert.showAndWait();
-                } else if (Appointments.checkOverlap(customerID, 0, appointmentStart, appointmentEnd)) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning Dialog");
-                    alert.setContentText("ERROR: Appointment overlap");
-                    alert.showAndWait();
+                } else if (Appointments.checkOverlap(customerID, 0, appointmentStart, appointmentEnd) == true) {
                     return;
                 } else {
                     AppointmentDaoImpl.addAppointment(appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, createDate, createdBy, lastUpdate, lastUpdateBy, customerID, userID, contactID);

@@ -160,6 +160,16 @@ public class AppointmentsModify implements Initializable {
                     alert.setTitle("Warning Dialog");
                     alert.setContentText("ERROR: The user must not be empty");
                     alert.showAndWait();
+                } else if (LDTstartEST.isAfter(LDTendEST)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment start time is after end time!");
+                    alert.showAndWait();
+                } else if (LDTendEST.isBefore(LDTstartEST)) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setContentText("ERROR: Appointment end time is before start time!");
+                    alert.showAndWait();
                 } else if (LDTstartEST.isBefore(bStart)) {
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");
@@ -171,11 +181,7 @@ public class AppointmentsModify implements Initializable {
                     alert.setContentText("ERROR: Appointment end time is too late!");
                     alert.showAndWait();
                     return;
-                } else if (Appointments.checkOverlap(customerID, appointmentID, appointmentStart, appointmentEnd)) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning Dialog");
-                    alert.setContentText("ERROR: Appointment overlap");
-                    alert.showAndWait();
+                } else if (Appointments.checkOverlap(customerID, appointmentID, appointmentStart, appointmentEnd) == true) {
                     return;
                 } else {
 

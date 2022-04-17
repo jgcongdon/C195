@@ -17,6 +17,7 @@ import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Optional;
@@ -29,7 +30,7 @@ public class Appointments implements Initializable {
     Stage stage;
     Parent scene;
 
-    ObservableList<model.Appointment> Appointment = FXCollections.observableArrayList();
+    ObservableList<model.Appointment> Appointments = FXCollections.observableArrayList();
 
     @FXML
     private RadioButton weekRadioButton;
@@ -73,18 +74,48 @@ public class Appointments implements Initializable {
     @FXML
     private TableColumn<Appointment, Integer> User_ID;
 
+
+
     public static boolean checkOverlap(int customerID, int appointmentID, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws Exception {
-        ObservableList<model.Appointment> aList = AppointmentDaoImpl.getAllAppointments();
-        for (Appointment a:aList){
-            if (customerID != a.getCustomer_ID()){
+        ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
+        LocalDateTime checkApptStart;
+        LocalDateTime checkApptEnd;
+
+        for (Appointment a : aList) {
+            checkApptStart = a.getStart();
+            checkApptEnd = a.getEnd();
+
+            if (customerID != a.getCustomer_ID()) {
+                System.out.println("customerID");
                 continue;
             }
-            if (appointmentID == a.getAppointment_ID()){
+            if (appointmentID == a.getAppointment_ID()) {
+                System.out.println("appointmentID");
                 continue;
             }
 
+            else if (checkApptStart.isEqual(appointmentStart) || checkApptStart.isEqual(appointmentEnd) || checkApptEnd.isEqual(appointmentStart) || checkApptEnd.isEqual(appointmentEnd)){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointments must not start or end at same time as existing customer appointments");
+                alert.showAndWait();
+                return true;
+            }
 
-
+            else if (appointmentStart.isAfter(checkApptStart) && (appointmentStart.isBefore(checkApptEnd))){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment start must not be during existing customer appointments");
+                alert.showAndWait();
+                return true;
+            }
+            else if (appointmentEnd.isAfter(checkApptStart) && appointmentEnd.isBefore(checkApptEnd)){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning Dialog");
+                alert.setContentText("ERROR: Appointment end must not be during existing customer appointments");
+                alert.showAndWait();
+                return true;
+            }
         }
         return false;
     }
@@ -110,12 +141,12 @@ public class Appointments implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
                 AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
-                Appointment = AppointmentDaoImpl.getAllAppointments();
-                AppointmentTable.setItems(Appointment);
+                Appointments = AppointmentDaoImpl.getAllAppointments();
+                AppointmentTable.setItems(Appointments);
                 AppointmentTable.refresh();
             } else {
-                Appointment = AppointmentDaoImpl.getAllAppointments();
-                AppointmentTable.setItems(Appointment);
+                Appointments = AppointmentDaoImpl.getAllAppointments();
+                AppointmentTable.setItems(Appointments);
                 AppointmentTable.refresh();
             }
         }
@@ -151,24 +182,24 @@ public class Appointments implements Initializable {
     void onActionAll(ActionEvent event) throws Exception {
         weekRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
-        Appointment.clear();
-        Appointment.addAll(AppointmentDaoImpl.getAllAppointments());
+        Appointments.clear();
+        Appointments.addAll(AppointmentDaoImpl.getAllAppointments());
     }
 
     @FXML
     void onActionMonth(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         weekRadioButton.setSelected(false);
-        Appointment.clear();
-        Appointment.addAll(AppointmentDaoImpl.getCurrentMonthAppointments());
+        Appointments.clear();
+        Appointments.addAll(AppointmentDaoImpl.getCurrentMonthAppointments());
     }
 
     @FXML
     void onActionWeek(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
-        Appointment.clear();
-        Appointment.addAll(AppointmentDaoImpl.getCurrentWeekAppointments());
+        Appointments.clear();
+        Appointments.addAll(AppointmentDaoImpl.getCurrentWeekAppointments());
     }
 
     @Override
@@ -186,12 +217,13 @@ public class Appointments implements Initializable {
         User_ID.setCellValueFactory(new PropertyValueFactory<>("User_ID"));
 
         try {
-            Appointment.addAll(AppointmentDaoImpl.getAllAppointments());
+            Appointments.addAll(AppointmentDaoImpl.getAllAppointments());
 
         } catch (Exception ex) {
             Logger.getLogger(Appointments.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        AppointmentTable.setItems(Appointment);
+        AppointmentTable.setItems(Appointments);
+        allRadioButton.setSelected(true);
     }
 }
