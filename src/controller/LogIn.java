@@ -130,7 +130,7 @@ public class LogIn implements Initializable {
         passwordLabel.setText(myBundle.getString("Password"));
         locationText.setText(myBundle.getString("Location"));
         logInButton.setText(myBundle.getString("Login"));
-        exitButton.setText(myBundle.getString("Exit"));
+        exitButton.setText(myBundle.getString("ExitButton"));
 
     }
 }

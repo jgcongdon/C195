@@ -147,6 +147,21 @@ public class AppointmentDaoImpl {
         }
     }
 
+    public static void deleteApptCustID(int customerID, int appointmentID) {
+        try {
+            String sqlcd = "DELETE FROM appointments WHERE Customer_ID = ? AND Appointment_ID = ?";
+
+            PreparedStatement psti = JDBC.connection.prepareStatement(sqlcd);
+
+            psti.setInt(1, customerID);
+            psti.setInt(2, appointmentID);
+
+            psti.execute();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
 public static ObservableList<appointmentType> typeAppt() throws SQLException {
     ObservableList<appointmentType> typeAppt=FXCollections.observableArrayList();
     String sqlStatement = "select distinct Type from appointments";
@@ -303,5 +318,20 @@ public static ObservableList<appointmentType> typeAppt() throws SQLException {
         }
         return AppointmentsCustomerID;
     }
+
+    public static int countCustAppt(int customerID) throws SQLException {
+
+        String sqlStatement = "SELECT COUNT(*) AS custAppt FROM appointments WHERE Customer_ID  = '" + customerID + "'";
+        Query.makeQuery(sqlStatement);
+        int countCustApptResult = 0;
+        ResultSet result = Query.getResult();
+        while(result.next()) {
+            countCustApptResult = result.getInt("custAppt");
+            return countCustApptResult;
+        }
+        return countCustApptResult;
+    }
+
+
 
     }

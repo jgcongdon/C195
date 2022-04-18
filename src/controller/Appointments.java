@@ -86,11 +86,9 @@ public class Appointments implements Initializable {
             checkApptEnd = a.getEnd();
 
             if (customerID != a.getCustomer_ID()) {
-                System.out.println("customerID");
-                continue;
+               continue;
             }
             if (appointmentID == a.getAppointment_ID()) {
-                System.out.println("appointmentID");
                 continue;
             }
 
@@ -140,7 +138,17 @@ public class Appointments implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
+
+                int deletedApptID = AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID();
+                String deletedApptType = AppointmentTable.getSelectionModel().getSelectedItem().getType();
+
                 AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
+
+                Alert alert3 = new Alert(Alert.AlertType.WARNING);
+                alert3.setTitle("Warning Dialog");
+                alert3.setContentText("Appointment ID # " + deletedApptID + " of type " + deletedApptType + " successfully deleted.");
+                alert3.showAndWait();
+
                 Appointments = AppointmentDaoImpl.getAllAppointments();
                 AppointmentTable.setItems(Appointments);
                 AppointmentTable.refresh();

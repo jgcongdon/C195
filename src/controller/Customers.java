@@ -91,7 +91,7 @@ public class Customers implements Initializable {
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws Exception {
 
-        int customerID = CustomerTable.getSelectionModel().getSelectedItem().getCustomerId();
+        //int customerID = CustomerTable.getSelectionModel().getSelectedItem().getCustomerId();
 
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -99,26 +99,51 @@ public class Customers implements Initializable {
             alert.setContentText("ERROR: No customer selected");
             alert.showAndWait();
 
-        } else if (checkCustAppt(customerID) == true){
+        } /*else if (checkCustAppt(customerID) == true){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("ERROR: Must delete all customer appointments first");
             alert.showAndWait();
 
-            ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
+            /*ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
             for (Appointment a : aList) {
-                
-            }
-        }
+            }*/
+
+        //}
 
         else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
-                CustomerList = CustomerDaoImpl.getAllCustomers();
-                CustomerTable.setItems(CustomerList);
-                CustomerTable.refresh();
+                ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
+                for (Appointment a : aList) {
+                    if (a.getCustomer_ID() == CustomerTable.getSelectionModel().getSelectedItem().getCustomerId()) {
+                        Alert alertAppt = new Alert(Alert.AlertType.CONFIRMATION, "WARNING: Must delete all appointments first. \n \n Are you sure you want to delete Appointment ID " + a.getAppointment_ID() + "?");
+                        Optional<ButtonType> resultAppt = alertAppt.showAndWait();
+                        if (resultAppt.isPresent() && resultAppt.get() == ButtonType.OK) {
+                            AppointmentDaoImpl.deleteApptCustID(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId(), a.getAppointment_ID());
+                        }
+                    }
+                }
+                if (AppointmentDaoImpl.countCustAppt(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId()) > 0){
+                    Alert alert3 = new Alert(Alert.AlertType.WARNING);
+                    alert3.setTitle("Warning Dialog");
+                    alert3.setContentText("ERROR: Must delete all appointments first before deleting customer");
+                    alert3.showAndWait();
+                }
+                else {
+                    String deletedName = CustomerTable.getSelectionModel().getSelectedItem().getCustomerName();
+                    CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
+
+                    Alert alert3 = new Alert(Alert.AlertType.WARNING);
+                    alert3.setTitle("Warning Dialog");
+                    alert3.setContentText(deletedName + " successfully deleted.");
+                    alert3.showAndWait();
+
+                    CustomerList = CustomerDaoImpl.getAllCustomers();
+                    CustomerTable.setItems(CustomerList);
+                    CustomerTable.refresh();
+                }
             } else {
                 CustomerList = CustomerDaoImpl.getAllCustomers();
                 CustomerTable.setItems(CustomerList);
