@@ -1,7 +1,9 @@
 package controller;
 
+import DAO.AppointmentDaoImpl;
 import DAO.UserDaoImpl;
 import helper.*;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,6 +106,16 @@ public class LogIn implements Initializable {
             loader.load();
 
             Globals.userName = userResult.getUserName();
+
+            int userID = UserDaoImpl.getUserIDFromUserName(Globals.userName);
+            ObservableList<Appointment> appointments = AppointmentDaoImpl.getAllAppointments();
+            for (Appointment appointment : appointments) {
+
+
+
+            }
+
+
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();

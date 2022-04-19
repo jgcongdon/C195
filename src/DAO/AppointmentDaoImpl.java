@@ -14,8 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class AppointmentDaoImpl {
-    public static Appointment getAppointment(String title) throws SQLException, Exception{
-        String sqlStatement="select * FROM Appointments WHERE title  = '" + title + "'";
+    public static Appointment getAppointmentUserID(int userID) throws SQLException, Exception{
+        String sqlStatement="select * FROM Appointments WHERE User_ID  = '" + userID + "'";
         Query.makeQuery(sqlStatement);
         Appointment appointmentResult;
         ResultSet result=Query.getResult();

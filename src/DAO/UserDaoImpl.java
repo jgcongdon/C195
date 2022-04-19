@@ -138,4 +138,18 @@ public class UserDaoImpl {
         return null;
     }
 
+    public static int getUserIDFromUserName(String userName) throws SQLException {
+        int userID = 0;
+        String sqlStatement = "select User_ID from users where User_Name = '" + userName+ "'";
+        Query.makeQuery(sqlStatement);
+        ResultSet result = Query.getResult();
+        while (result.next()) {
+            userID = result.getInt("User_ID");
+
+            int getUserIDFromUserNameResult = userID;
+            return getUserIDFromUserNameResult;
+        }
+        return userID;
+    }
+
 }
