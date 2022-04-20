@@ -14,7 +14,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class AppointmentDaoImpl {
-    public static Appointment getAppointmentUserID(int userID) throws SQLException, Exception{
+    public static ObservableList<Appointment> getAppointmentUserID(int userID) throws SQLException, Exception{
+        ObservableList<Appointment> userIDAppointments=FXCollections.observableArrayList();
         String sqlStatement="select * FROM Appointments WHERE User_ID  = '" + userID + "'";
         Query.makeQuery(sqlStatement);
         Appointment appointmentResult;
@@ -22,9 +23,9 @@ public class AppointmentDaoImpl {
         while(result.next()){
             int Appointment_ID=result.getInt("Appointment_ID");
             String Title=result.getString("Title");
-            String Description=result.getString("Address");
+            String Description=result.getString("Description");
             String Location=result.getString("Location");
-            String Type=result.getString("TYpe");
+            String Type=result.getString("Type");
             Timestamp Start=result.getTimestamp("Start");
             LocalDateTime StartCalendar=Start.toLocalDateTime();
             Timestamp End=result.getTimestamp("End");
@@ -40,9 +41,10 @@ public class AppointmentDaoImpl {
             int Contact_ID=result.getInt("Contact_ID");
 
             appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
-            return appointmentResult;
+            userIDAppointments.add(appointmentResult);
+
         }
-        return null;
+        return userIDAppointments;
     }
 
     public static ObservableList<Appointment> getAllAppointments() throws SQLException, Exception{

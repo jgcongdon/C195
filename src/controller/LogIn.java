@@ -3,6 +3,7 @@ package controller;
 import DAO.AppointmentDaoImpl;
 import DAO.UserDaoImpl;
 import helper.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import model.Appointment;
 import model.User;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.TimeZone;
 
 import java.io.IOException;
@@ -77,61 +79,67 @@ public class LogIn implements Initializable {
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
-        }
-
-        else if (Password.isEmpty() || Password.isBlank()) {
+        } else if (Password.isEmpty() || Password.isBlank()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
-        }
-
-        else if (UserDaoImpl.validateUserName(User_Name) == false) {
+        } else if (UserDaoImpl.validateUserName(User_Name) == false) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
-        }
-
-        else if (UserDaoImpl.validatePassword(Password) == false) {
+        } else if (UserDaoImpl.validatePassword(Password) == false) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle(myBundle.getString("WarningDialog"));
             alert.setContentText(myBundle.getString("ERROR"));
             alert.showAndWait();
-        }
+        } else if (UserDaoImpl.validateLogIn(User_Name, Password) == true) {
+            Globals.userName = userResult.getUserName();
+            int userID = UserDaoImpl.getUserIDFromUserName(Globals.userName);
 
-        else if (UserDaoImpl.validateLogIn(User_Name, Password) == true) {
+            LocalDateTime nowLDT = LocalDateTime.now();
+            LocalDateTime plus15LDT = nowLDT.plusMinutes(15);
+
+            ObservableList<Appointment> scheduledAppts = FXCollections.observableArrayList();
+            ObservableList<Appointment> appointments = AppointmentDaoImpl.getAppointmentUserID(userID);
+
+            if (appointments != null) {
+                for (Appointment appointment : appointments) {
+                    if ((appointment.getStart().isAfter(nowLDT) || appointment.getStart().isEqual(nowLDT)) && (appointment.getStart().isBefore(plus15LDT) || appointment.getStart().isEqual(plus15LDT))) {
+                        scheduledAppts.add(appointment);
+                        if (scheduledAppts.size() > 0) {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle(myBundle.getString("WarningDialog"));
+                            alert.setContentText("Notice: Appointment # " + appointment.getAppointment_ID() + " at " + appointment.getStart() + " starts soon.");
+                            alert.showAndWait();
+                        }
+                    }
+                }
+                if (scheduledAppts.size() < 1) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle(myBundle.getString("WarningDialog"));
+                    alert.setContentText("No appointments within 15 minutes.");
+                    alert.showAndWait();
+                }
+            }
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/MainMenu.fxml"));
             loader.load();
-
-            Globals.userName = userResult.getUserName();
-
-            int userID = UserDaoImpl.getUserIDFromUserName(Globals.userName);
-            ObservableList<Appointment> appointments = AppointmentDaoImpl.getAllAppointments();
-            for (Appointment appointment : appointments) {
-
-
-
-            }
-
-
-
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             Parent scene = loader.getRoot();
             stage.setScene(new Scene(scene));
             stage.show();
 
-        }
-        else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle(myBundle.getString("WarningDialog"));
-            alert.setContentText(myBundle.getString("ERROR"));
-            alert.showAndWait();
-        }
     }
-
-
+        else {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(myBundle.getString("WarningDialog"));
+        alert.setContentText(myBundle.getString("ERROR"));
+        alert.showAndWait();
+    }
+}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
