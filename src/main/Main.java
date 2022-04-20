@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.TimeZone;
 
 public class Main extends Application {
     @Override
@@ -26,6 +27,8 @@ public class Main extends Application {
     public static void main(String[] args) {
 
         //Locale.setDefault(new Locale("fr"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
+        //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
         JDBC.openConnection();
 
