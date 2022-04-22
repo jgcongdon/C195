@@ -4,8 +4,6 @@ import DAO.CountryDaoImpl;
 import DAO.CustomerDaoImpl;
 import DAO.FirstLevelDivisionDaoImpl;
 import helper.Globals;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,47 +27,32 @@ public class CustomersModify implements Initializable {
 
     Stage stage;
     Parent scene;
-
     private static Customer selectedCustomer;
     private static int selectedCountryID;
     private static Country selectedCountry;
 
-    @FXML
-    private ComboBox<FirstLevelDivision> divisionCombo;
+    @FXML private ComboBox<FirstLevelDivision> divisionCombo;
 
-    @FXML
-    private ComboBox<Country> countryCombo;
+    @FXML private ComboBox<Country> countryCombo;
 
-    @FXML
-    private Label customersModifyIDLabel;
+    @FXML private Label customersModifyIDLabel;
 
-    @FXML
-    private TextField customersModifyNameLabel;
+    @FXML private TextField customersModifyNameLabel;
 
-    @FXML
-    private TextField customersModifyPhoneLabel;
+    @FXML private TextField customersModifyPhoneLabel;
 
-    @FXML
-    private TextField customersModifyAddressLabel;
+    @FXML private TextField customersModifyAddressLabel;
 
-    @FXML
-    private TextField customersModifyPostalLabel;
+    @FXML private TextField customersModifyPostalLabel;
 
-    public CustomersModify() throws SQLException {
-    }
-
-    @FXML
-    void onActionCancel(ActionEvent event) throws IOException {
+    @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
 
-    @FXML
-    void onActionSave(ActionEvent event) throws IOException {
-
+    @FXML void onActionSave(ActionEvent event) throws IOException {
         try {
             int customerID = Integer.parseInt(customersModifyIDLabel.getText());
             String customerName = customersModifyNameLabel.getText();
@@ -85,78 +68,59 @@ public class CustomersModify implements Initializable {
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The name must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (customerAddress.isEmpty()){
+            } else if (customerAddress.isEmpty()){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The address must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (postalCode.isEmpty()) {
+            } else if (postalCode.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The postal code must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (customerPhone.isEmpty()) {
+            } else if (customerPhone.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The phone must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (divisionCombo.getSelectionModel().getSelectedItem() == null) {
+            } else if (divisionCombo.getSelectionModel().getSelectedItem() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The division must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (countryCombo.getSelectionModel().getSelectedItem() == null) {
+            } else if (countryCombo.getSelectionModel().getSelectedItem() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The country must not be empty");
                 alert.showAndWait();
-            }
-
-            else {
+            } else {
 
                 int Division_ID = D.getDivision_ID();
-
                 CustomerDaoImpl.modifyCustomer(customerID, customerName, customerAddress, postalCode, customerPhone, lastUpdate, lastUpdateBy, Division_ID);
 
                 stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                 scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
                 stage.setScene(new Scene(scene));
                 stage.show();
-
             }
         } catch (Exception e) {
             e.printStackTrace();
             return;
         }
-
     }
 
-    @FXML
-    void onActionCountryCombo(ActionEvent event) throws SQLException {
+    @FXML void onActionCountryCombo(ActionEvent event) throws SQLException {
         divisionCombo.setValue(null);
         Country C = countryCombo.getValue();
         divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
-
     }
 
     public static void receiveSelectedCustomer(Customer customer) {
         selectedCustomer = customer;
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try {
             divisionCombo.setValue(FirstLevelDivisionDaoImpl.getDivFromDivID(selectedCustomer.getDivision_ID()));
             FirstLevelDivision selectedDivision = FirstLevelDivisionDaoImpl.getDivision(divisionCombo.getValue());
@@ -175,6 +139,5 @@ public class CustomersModify implements Initializable {
         customersModifyAddressLabel.setText(selectedCustomer.getCustomerAddress());
         customersModifyPhoneLabel.setText(selectedCustomer.getCustomerPhone());
         customersModifyPostalLabel.setText(selectedCustomer.getPostalCode());
-
     }
 }

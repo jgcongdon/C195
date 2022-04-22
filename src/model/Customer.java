@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDateTime;
 
 public class Customer {
-
     private int customerId;
     private String customerName;
     private String customerAddress;
@@ -110,5 +109,4 @@ public class Customer {
 
     @Override
     public String toString(){return customerName;}
-
 }

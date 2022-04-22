@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDateTime;
 
 public class FirstLevelDivision {
-
     private int Division_ID;
     private String Division;
     private LocalDateTime Create_Date;
@@ -80,5 +79,4 @@ public class FirstLevelDivision {
 
     @Override
     public String toString(){return Division;}
-
 }

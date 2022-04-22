@@ -31,87 +31,43 @@ public class Customers implements Initializable {
 
     ObservableList<model.Customer> CustomerList = FXCollections.observableArrayList();
 
-    /*private static Customer selectedCustomer;
+    @FXML private TableView<Customer> CustomerTable;
 
-    public static void sendSelectedCustomer(Customer customer){
-        selectedCustomer = customer;
-    }*/
+    @FXML private TableColumn<Customer, Integer> Customer_ID;
 
-    @FXML
-    private TableView<Customer> CustomerTable;
+    @FXML private TableColumn<Customer, String> Customer_Name;
 
-    @FXML
-    private TableColumn<Customer, Integer> Customer_ID;
+    @FXML private TableColumn<Customer, String> Address;
 
-    @FXML
-    private TableColumn<Customer, String> Customer_Name;
+    @FXML private TableColumn<Customer, String> Postal_Code;
 
-    @FXML
-    private TableColumn<Customer, String> Address;
+    @FXML private TableColumn<Customer, String> Phone_Number;
 
-    @FXML
-    private TableColumn<Customer, String> Postal_Code;
+    @FXML private TableColumn<Customer, Calendar> Create_Date;
 
-    @FXML
-    private TableColumn<Customer, String> Phone_Number;
+    @FXML private TableColumn<Customer, String> Create_By;
 
-    @FXML
-    private TableColumn<Customer, Calendar> Create_Date;
+    @FXML private TableColumn<Customer, Calendar> Last_Update;
 
-    @FXML
-    private TableColumn<Customer, String> Create_By;
+    @FXML private TableColumn<Customer, String> Last_Updated_By;
 
-    @FXML
-    private TableColumn<Customer, Calendar> Last_Update;
+    @FXML private TableColumn<Customer, Integer> Division_ID;
 
-    @FXML
-    private TableColumn<Customer, String> Last_Updated_By;
-
-    @FXML
-    private TableColumn<Customer, Integer> Division_ID;
-
-    @FXML
-    void onActionAddCustomer(ActionEvent event) throws IOException {
+    @FXML void onActionAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CustomersAdd.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
     }
 
-    public static boolean checkCustAppt(int customerID) throws Exception {
-        ObservableList<Appointment> aList = AppointmentDaoImpl.getAppointmentsCustomerID(customerID);
-        if (aList.size()>0){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws Exception {
-
-        //int customerID = CustomerTable.getSelectionModel().getSelectedItem().getCustomerId();
-
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("ERROR: No customer selected");
             alert.showAndWait();
-
-        } /*else if (checkCustAppt(customerID) == true){
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setContentText("ERROR: Must delete all customer appointments first");
-            alert.showAndWait();
-
-            /*ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
-            for (Appointment a : aList) {
-            }*/
-
-        //}
-
-        else {
+        } else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this customer?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -126,12 +82,11 @@ public class Customers implements Initializable {
                     }
                 }
                 if (AppointmentDaoImpl.countCustAppt(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId()) > 0){
-                    Alert alert3 = new Alert(Alert.AlertType.WARNING);
-                    alert3.setTitle("Warning Dialog");
-                    alert3.setContentText("ERROR: Must delete all appointments first before deleting customer");
-                    alert3.showAndWait();
-                }
-                else {
+                    Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                    alert2.setTitle("Warning Dialog");
+                    alert2.setContentText("ERROR: Must delete all appointments first before deleting customer");
+                    alert2.showAndWait();
+                } else {
                     String deletedName = CustomerTable.getSelectionModel().getSelectedItem().getCustomerName();
                     CustomerDaoImpl.deleteCustomer(CustomerTable.getSelectionModel().getSelectedItem().getCustomerId());
 
@@ -152,25 +107,20 @@ public class Customers implements Initializable {
         }
     }
 
-    @FXML
-    void onActionMainMenu(ActionEvent event) throws IOException {
+    @FXML void onActionMainMenu(ActionEvent event) throws IOException {
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
     }
 
-    @FXML
-    void onActionModifyCustomer(ActionEvent event) throws IOException {
-
+    @FXML void onActionModifyCustomer(ActionEvent event) throws IOException {
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
             alert.setContentText("ERROR: No customer selected");
             alert.showAndWait();
-
         } else {
-
             CustomersModify.receiveSelectedCustomer(CustomerTable.getSelectionModel().getSelectedItem());
 
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -178,12 +128,10 @@ public class Customers implements Initializable {
             stage.setScene(new Scene(scene));
             stage.show();
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));
         Customer_Name.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         Address.setCellValueFactory(new PropertyValueFactory<>("customerAddress"));
@@ -197,13 +145,9 @@ public class Customers implements Initializable {
 
         try {
             CustomerList.addAll(CustomerDaoImpl.getAllCustomers());
-        }
-
-        catch (Exception ex) {
+        } catch (Exception ex) {
             Logger.getLogger(Customers.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         CustomerTable.setItems(CustomerList);
-
     }
 }

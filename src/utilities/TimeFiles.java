@@ -10,7 +10,7 @@ public class TimeFiles {
        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
        Date date = sdf. parse(strDate);
        Calendar calendar=Calendar.getInstance();
-        calendar.setTime(date);
-        return calendar;
+       calendar.setTime(date);
+       return calendar;
    } 
 }

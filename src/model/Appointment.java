@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDateTime;
 
 public class Appointment {
-
     private int Appointment_ID;
     private String Title;
     private String Description;
@@ -150,5 +149,4 @@ public class Appointment {
 
     @Override
     public String toString(){return Type;}
-
 }

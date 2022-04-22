@@ -1,7 +1,6 @@
 package model;
 
 public class appointmentType {
-
     private String Type;
 
     public appointmentType(String Type){
@@ -18,5 +17,4 @@ public class appointmentType {
 
     @Override
     public String toString(){return Type;}
-
 }

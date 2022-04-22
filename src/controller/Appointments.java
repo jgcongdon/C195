@@ -1,7 +1,6 @@
 package controller;
 
 import DAO.AppointmentDaoImpl;
-import DAO.CustomerDaoImpl;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,7 +16,6 @@ import model.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Optional;
@@ -29,52 +27,35 @@ public class Appointments implements Initializable {
 
     Stage stage;
     Parent scene;
-
     ObservableList<model.Appointment> Appointments = FXCollections.observableArrayList();
 
-    @FXML
-    private RadioButton weekRadioButton;
+    @FXML private RadioButton weekRadioButton;
 
-    @FXML
-    private RadioButton monthRadioButton;
+    @FXML private RadioButton monthRadioButton;
 
-    @FXML
-    private RadioButton allRadioButton;
+    @FXML private RadioButton allRadioButton;
 
-    @FXML
-    private TableView<Appointment> AppointmentTable;
+    @FXML private TableView<Appointment> AppointmentTable;
 
-    @FXML
-    private TableColumn<Appointment, Integer> Appointment_ID;
+    @FXML private TableColumn<Appointment, Integer> Appointment_ID;
 
-    @FXML
-    private TableColumn<Appointment, String> Title;
+    @FXML private TableColumn<Appointment, String> Title;
 
-    @FXML
-    private TableColumn<Appointment, String> Description;
+    @FXML private TableColumn<Appointment, String> Description;
 
-    @FXML
-    private TableColumn<Appointment, String> Location;
+    @FXML private TableColumn<Appointment, String> Location;
 
-    @FXML
-    private TableColumn<Appointment, Integer> Contact;
+    @FXML private TableColumn<Appointment, Integer> Contact;
 
-    @FXML
-    private TableColumn<Appointment, String> Type;
+    @FXML private TableColumn<Appointment, String> Type;
 
-    @FXML
-    private TableColumn<Appointment, Calendar> Start;
+    @FXML private TableColumn<Appointment, Calendar> Start;
 
-    @FXML
-    private TableColumn<Appointment, Calendar> End;
+    @FXML private TableColumn<Appointment, Calendar> End;
 
-    @FXML
-    private TableColumn<Appointment, Integer> Customer_ID;
+    @FXML private TableColumn<Appointment, Integer> Customer_ID;
 
-    @FXML
-    private TableColumn<Appointment, Integer> User_ID;
-
-
+    @FXML private TableColumn<Appointment, Integer> User_ID;
 
     public static boolean checkOverlap(int customerID, int appointmentID, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws Exception {
         ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
@@ -84,30 +65,24 @@ public class Appointments implements Initializable {
         for (Appointment a : aList) {
             checkApptStart = a.getStart();
             checkApptEnd = a.getEnd();
-
             if (customerID != a.getCustomer_ID()) {
                continue;
             }
             if (appointmentID == a.getAppointment_ID()) {
                 continue;
-            }
-
-            else if (checkApptStart.isEqual(appointmentStart) || checkApptStart.isEqual(appointmentEnd) || checkApptEnd.isEqual(appointmentStart) || checkApptEnd.isEqual(appointmentEnd)){
+            } else if (checkApptStart.isEqual(appointmentStart) || checkApptStart.isEqual(appointmentEnd) || checkApptEnd.isEqual(appointmentStart) || checkApptEnd.isEqual(appointmentEnd)){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: Appointments must not start or end at same time as existing customer appointments");
                 alert.showAndWait();
                 return true;
-            }
-
-            else if (appointmentStart.isAfter(checkApptStart) && (appointmentStart.isBefore(checkApptEnd))){
+            } else if (appointmentStart.isAfter(checkApptStart) && (appointmentStart.isBefore(checkApptEnd))){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: Appointment start must not be during existing customer appointments");
                 alert.showAndWait();
                 return true;
-            }
-            else if (appointmentEnd.isAfter(checkApptStart) && appointmentEnd.isBefore(checkApptEnd)){
+            } else if (appointmentEnd.isAfter(checkApptStart) && appointmentEnd.isBefore(checkApptEnd)){
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: Appointment end must not be during existing customer appointments");
@@ -118,17 +93,14 @@ public class Appointments implements Initializable {
         return false;
     }
 
-    @FXML
-    void onActionAddAppointment(ActionEvent event) throws IOException {
+    @FXML void onActionAddAppointment(ActionEvent event) throws IOException {
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/AppointmentsAdd.fxml"));
             stage.setScene(new Scene(scene));
             stage.show();
     }
 
-    @FXML
-    void onActionDeleteAppointment(ActionEvent event) throws Exception {
-
+    @FXML void onActionDeleteAppointment(ActionEvent event) throws Exception {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -138,16 +110,14 @@ public class Appointments implements Initializable {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this appointment?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.isPresent() && result.get() == ButtonType.OK) {
-
                 int deletedApptID = AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID();
                 String deletedApptType = AppointmentTable.getSelectionModel().getSelectedItem().getType();
-
                 AppointmentDaoImpl.deleteAppointment(AppointmentTable.getSelectionModel().getSelectedItem().getAppointment_ID());
 
-                Alert alert3 = new Alert(Alert.AlertType.WARNING);
-                alert3.setTitle("Warning Dialog");
-                alert3.setContentText("Appointment ID # " + deletedApptID + " of type " + deletedApptType + " successfully deleted.");
-                alert3.showAndWait();
+                Alert alert2 = new Alert(Alert.AlertType.WARNING);
+                alert2.setTitle("Warning Dialog");
+                alert2.setContentText("Appointment ID # " + deletedApptID + " of type " + deletedApptType + " successfully deleted.");
+                alert2.showAndWait();
 
                 Appointments = AppointmentDaoImpl.getAllAppointments();
                 AppointmentTable.setItems(Appointments);
@@ -168,9 +138,7 @@ public class Appointments implements Initializable {
         stage.show();
     }
 
-    @FXML
-    void onActionModifyAppointment(ActionEvent event) throws IOException {
-
+    @FXML void onActionModifyAppointment(ActionEvent event) throws IOException {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -186,24 +154,21 @@ public class Appointments implements Initializable {
         }
     }
 
-    @FXML
-    void onActionAll(ActionEvent event) throws Exception {
+    @FXML void onActionAll(ActionEvent event) throws Exception {
         weekRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
         Appointments.clear();
         Appointments.addAll(AppointmentDaoImpl.getAllAppointments());
     }
 
-    @FXML
-    void onActionMonth(ActionEvent event) throws Exception {
+    @FXML void onActionMonth(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         weekRadioButton.setSelected(false);
         Appointments.clear();
         Appointments.addAll(AppointmentDaoImpl.getCurrentMonthAppointments());
     }
 
-    @FXML
-    void onActionWeek(ActionEvent event) throws Exception {
+    @FXML void onActionWeek(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
         Appointments.clear();
@@ -212,7 +177,6 @@ public class Appointments implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));
         Title.setCellValueFactory(new PropertyValueFactory<>("Title"));
         Description.setCellValueFactory(new PropertyValueFactory<>("Description"));

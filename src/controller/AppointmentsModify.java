@@ -20,7 +20,6 @@ import model.User;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -32,66 +31,45 @@ public class AppointmentsModify implements Initializable {
 
     Stage stage;
     Parent scene;
-
     private static Appointment selectedAppointment;
 
-    @FXML
-    private Label appointmentModifyIDLabel;
+    @FXML private Label appointmentModifyIDLabel;
 
-    @FXML
-    private ComboBox<Contact> appointmentModifyContactCombo;
+    @FXML private ComboBox<Contact> appointmentModifyContactCombo;
 
-    @FXML
-    private TextField appointmentModifyLocationLabel;
+    @FXML private TextField appointmentModifyLocationLabel;
 
-    @FXML
-    private TextField appointmentModifyTitleLabel;
+    @FXML private TextField appointmentModifyTitleLabel;
 
-    @FXML
-    private TextField appointmentModifyDescriptionLabel;
+    @FXML private TextField appointmentModifyDescriptionLabel;
 
-    @FXML
-    private TextField appointmentModifyTypeLabel;
+    @FXML private TextField appointmentModifyTypeLabel;
 
-    @FXML
-    private DatePicker appointmentModifyDatePicker;
+    @FXML private DatePicker appointmentModifyDatePicker;
 
-    @FXML
-    private ComboBox<LocalTime> appointmentModifyStartCombo;
+    @FXML private ComboBox<LocalTime> appointmentModifyStartCombo;
 
-    @FXML
-    private ComboBox<LocalTime> appointmentModifyEndCombo;
+    @FXML private ComboBox<LocalTime> appointmentModifyEndCombo;
 
-    @FXML
-    private ComboBox<Customer> appointmentModifyCustomerIDCombo;
+    @FXML private ComboBox<Customer> appointmentModifyCustomerIDCombo;
 
-    @FXML
-    private ComboBox<User> appointmentModifyUserIDCombo;
+    @FXML private ComboBox<User> appointmentModifyUserIDCombo;
 
-
-    @FXML
-    void onActionCancel(ActionEvent event) throws IOException {
+    @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
 
-    @FXML
-    void onActionSave(ActionEvent event) throws IOException {
-
+    @FXML void onActionSave(ActionEvent event) throws IOException {
         try {
-
             if (appointmentModifyDatePicker.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The date must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (appointmentModifyDatePicker.getValue() != null) {
-
+            } else if (appointmentModifyDatePicker.getValue() != null) {
                 int appointmentID = Integer.parseInt(appointmentModifyIDLabel.getText());
                 String appointmentTitle = appointmentModifyTitleLabel.getText();
                 String appointmentDescription = appointmentModifyDescriptionLabel.getText();
@@ -104,12 +82,10 @@ public class AppointmentsModify implements Initializable {
                 int customerID = appointmentModifyCustomerIDCombo.getValue().getCustomerId();
                 int userID = appointmentModifyUserIDCombo.getValue().getUserId();
                 int contactID = appointmentModifyContactCombo.getValue().getContact_ID();
-
                 ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
                 ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
                 LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
                 LocalDateTime bStart = LocalDateTime.of(appointmentModifyDatePicker.getValue(), LocalTime.of(8, 0));
-
                 ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
                 ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
                 LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
@@ -184,14 +160,12 @@ public class AppointmentsModify implements Initializable {
                 } else if (Appointments.checkOverlap(customerID, appointmentID, appointmentStart, appointmentEnd) == true) {
                     return;
                 } else {
-
                     AppointmentDaoImpl.modifyAppointment(appointmentID, appointmentTitle, appointmentDescription, appointmentLocation, appointmentType, appointmentStart, appointmentEnd, lastUpdate, lastUpdateBy, customerID, userID, contactID);
 
                     stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
                     scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
                     stage.setScene(new Scene(scene));
                     stage.show();
-
                 }
             }
             } catch (Exception e) {
@@ -206,7 +180,6 @@ public class AppointmentsModify implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try{
             appointmentModifyContactCombo.setValue(ContactDaoImpl.getContactFromContactID(selectedAppointment.getContact_ID()));
             appointmentModifyContactCombo.setItems(ContactDaoImpl.getAllContacts());
@@ -214,7 +187,6 @@ public class AppointmentsModify implements Initializable {
             appointmentModifyCustomerIDCombo.setItems(CustomerDaoImpl.getAllCustomers());
             appointmentModifyUserIDCombo.setValue(UserDaoImpl.getUserFromUserID(selectedAppointment.getUser_ID()));
             appointmentModifyUserIDCombo.setItems(UserDaoImpl.getAllUsers());
-
         } catch (Exception throwables) {
         throwables.printStackTrace();
         }
@@ -242,6 +214,5 @@ public class AppointmentsModify implements Initializable {
         appointmentModifyDatePicker.setValue(selectedAppointment.getStart().toLocalDate());
         appointmentModifyStartCombo.setValue(selectedAppointment.getStart().toLocalTime());
         appointmentModifyEndCombo.setValue(selectedAppointment.getEnd().toLocalTime());
-
     }
 }

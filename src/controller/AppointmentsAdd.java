@@ -27,59 +27,37 @@ public class AppointmentsAdd implements Initializable {
 
     Stage stage;
     Parent scene;
-
-    //private ZonedDateTime startTimeConvert;
-    private ZonedDateTime localnow;
-
     public ComboBox<User> userCombo;
     public ComboBox<Customer> customerCombo;
     public ComboBox<Contact> contactCombo;
     public ComboBox<LocalTime> startCombo;
     public ComboBox<LocalTime> endCombo;
 
-    @FXML
-    private Label appointmentAddIDLabel;
+    @FXML private TextField appointmentAddLocationLabel;
 
-    @FXML
-    private TextField appointmentAddLocationLabel;
+    @FXML private TextField appointmentAddTitleLabel;
 
-    @FXML
-    private TextField appointmentAddTitleLabel;
+    @FXML private TextField appointmentAddDescriptionLabel;
 
-    @FXML
-    private TextField appointmentAddDescriptionLabel;
+    @FXML private TextField appointmentAddTypeLabel;
 
-    @FXML
-    private TextField appointmentAddTypeLabel;
+    @FXML private DatePicker appointmentAddDatePicker;
 
-    @FXML
-    private DatePicker appointmentAddDatePicker;
-
-    @FXML
-    private Label appointmentAddIUserIDLabel;
-
-    @FXML
-    void onActionCancel(ActionEvent event) throws IOException {
+    @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
         stage.setScene(new Scene(scene));
         stage.show();
-
     }
 
-    @FXML
-    void onActionSave(ActionEvent event) throws IOException {
-
+    @FXML void onActionSave(ActionEvent event) throws IOException {
         try{
             if (appointmentAddDatePicker.getValue() == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning Dialog");
                 alert.setContentText("ERROR: The date must not be empty");
                 alert.showAndWait();
-            }
-
-            else if (appointmentAddDatePicker.getValue() != null) {
-
+            } else if (appointmentAddDatePicker.getValue() != null) {
                 String appointmentTitle = appointmentAddTitleLabel.getText();
                 String appointmentDescription = appointmentAddDescriptionLabel.getText();
                 String appointmentLocation = appointmentAddLocationLabel.getText();
@@ -93,12 +71,10 @@ public class AppointmentsAdd implements Initializable {
                 int customerID = customerCombo.getValue().getCustomerId();
                 int userID = userCombo.getValue().getUserId();
                 int contactID = contactCombo.getValue().getContact_ID();
-
                 ZonedDateTime startTimeConvert = appointmentStart.atZone(ZoneId.systemDefault());
                 ZonedDateTime startTimeEST = startTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
                 LocalDateTime LDTstartEST = startTimeEST.toLocalDateTime();
                 LocalDateTime bStart = LocalDateTime.of(appointmentAddDatePicker.getValue(), LocalTime.of(8, 0));
-
                 ZonedDateTime endTimeConvert = appointmentEnd.atZone(ZoneId.systemDefault());
                 ZonedDateTime endTimeEST = endTimeConvert.withZoneSameInstant(ZoneId.of("America/New_York"));
                 LocalDateTime LDTendEST = endTimeEST.toLocalDateTime();
@@ -193,7 +169,6 @@ public class AppointmentsAdd implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         try {
             userCombo.setItems(UserDaoImpl.getAllUsers());
             customerCombo.setItems(CustomerDaoImpl.getAllCustomers());

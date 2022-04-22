@@ -18,12 +18,11 @@ public class Query {
                 result=stmt.executeQuery(q);
              if(query.toLowerCase().startsWith("delete")||query.toLowerCase().startsWith("insert")||query.toLowerCase().startsWith("update"))
                 stmt.executeUpdate(q);
-            
-        }
-        catch(Exception ex){
+        } catch(Exception ex){
             System.out.println("Error: "+ex.getMessage());
         }
     }
+
     public static ResultSet getResult(){
         return result;
     }

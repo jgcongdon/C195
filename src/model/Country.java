@@ -3,7 +3,6 @@ package model;
 import java.time.LocalDateTime;
 
 public class Country {
-
     private int Country_ID;
     private String Country;
     private LocalDateTime Create_Date;
@@ -70,5 +69,4 @@ public class Country {
 
     @Override
     public String toString(){return Country;}
-
 }
