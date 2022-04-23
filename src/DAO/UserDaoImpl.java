@@ -1,7 +1,6 @@
 package DAO;
 
 import helper.JDBC;
-import model.Customer;
 import model.User;
 
 import java.sql.PreparedStatement;
@@ -9,16 +8,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
-import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import static utilities.TimeFiles.stringToCalendar;
 
 public class UserDaoImpl {
 
     public static boolean validateLogIn(String User_Name, String Password) throws SQLException {
-
         try (PreparedStatement ps = JDBC.connection.prepareStatement("select * FROM Users WHERE User_Name = ? AND Password = ?")) {
             ps.setString(1, User_Name);
             ps.setString(2, Password);
@@ -27,50 +22,37 @@ public class UserDaoImpl {
             if (resultSet.next()) {
                 return true;
             }
-
         } catch (SQLException e) {
          e.printStackTrace();
-
         }
-
         return false;
     }
 
     public static boolean validateUserName(String User_Name) throws SQLException {
-
-        try (
-                PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ?")) {
+        try (PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ?")) {
             ps.setString(1, User_Name);
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 return true;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
-
         return false;
     }
 
     public static boolean validatePassword(String Password) throws SQLException {
-
-        try (
-                PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE Password = ?")) {
+        try (PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE Password = ?")) {
             ps.setString(1, Password);
             ResultSet resultSet = ps.executeQuery();
 
             if (resultSet.next()) {
                 return true;
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
-
         }
-
         return false;
     }
 
@@ -80,17 +62,18 @@ public class UserDaoImpl {
            User userResult;
            ResultSet result=Query.getResult();
            while(result.next()){
-                int userid=result.getInt("User_ID");
-                String userNameG=result.getString("User_Name");
-                String password=result.getString("Password");
+               int userid=result.getInt("User_ID");
+               String userNameG=result.getString("User_Name");
+               String password=result.getString("Password");
                Timestamp createDate=result.getTimestamp("Create_Date");
                LocalDateTime createDateCalendar=createDate.toLocalDateTime();
                String createdBy = result.getString("Created_By");
                Timestamp lastUpdate=result.getTimestamp("Last_Update");
                LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
-                String lastUpdateby=result.getString("Last_Updated_By");
-                userResult= new User(userid, userNameG, password,  createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby);
-                return userResult;
+               String lastUpdateby=result.getString("Last_Updated_By");
+
+               userResult= new User(userid, userNameG, password,  createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby);
+               return userResult;
            }
         return null;
     }
@@ -104,12 +87,13 @@ public class UserDaoImpl {
                 int userid=result.getInt("User_ID");
                 String userNameG=result.getString("User_Name");
                 String password=result.getString("Password");
-                 Timestamp createDate=result.getTimestamp("Create_Date");
-                 LocalDateTime createDateCalendar=createDate.toLocalDateTime();
-                 String createdBy = result.getString("Created_By");
-                 Timestamp lastUpdate=result.getTimestamp("Last_Update");
-                 LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
+                Timestamp createDate=result.getTimestamp("Create_Date");
+                LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+                String createdBy = result.getString("Created_By");
+                Timestamp lastUpdate=result.getTimestamp("Last_Update");
+                LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
                 String lastUpdateby=result.getString("Last_Updated_By");
+
                 User userResult= new User(userid, userNameG, password, createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby);
                 allUsers.add(userResult);
             }
@@ -151,5 +135,4 @@ public class UserDaoImpl {
         }
         return userID;
     }
-
 }

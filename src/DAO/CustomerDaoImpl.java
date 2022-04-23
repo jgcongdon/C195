@@ -1,12 +1,6 @@
 package DAO;
 
-import com.mysql.cj.x.protobuf.MysqlxPrepare;
-import controller.AppointmentsModify;
-import controller.CustomersModify;
-import helper.Globals;
 import helper.JDBC;
-import model.Contact;
-import model.Country;
 import model.Customer;
 
 import java.sql.*;
@@ -15,58 +9,33 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class CustomerDaoImpl {
-     public static Customer getCustomer(String customerName) throws SQLException, Exception{
-        String sqlStatement="select * FROM Customers WHERE customerName  = '" + customerName+ "'";
-        Query.makeQuery(sqlStatement);
-           Customer customerResult;
-           ResultSet result=Query.getResult();
-           while(result.next()){
-               int customerid=result.getInt("Customer_ID");
-               String customerNameG=result.getString("Customer_Name");
-               String address=result.getString("Address");
-               String postalCode=result.getString("Postal_Code");
-               String phone=result.getString("Phone");
-               Timestamp createDate=result.getTimestamp("Create_Date");
-               LocalDateTime createDateCalendar=createDate.toLocalDateTime();
-               String createdBy=result.getString("Created_By");
-               Timestamp lastUpdate=result.getTimestamp("Last_Update");
-               LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
-               String lastUpdateby=result.getString("Last_Updated_By");
-               int Division_ID=result.getInt("Division_ID");
-               customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, Division_ID);
-               return customerResult;
-           }
-        return null;
-    }
-
     public static ObservableList<Customer> getAllCustomers() throws SQLException, Exception{
         ObservableList<Customer> allCustomers=FXCollections.observableArrayList();
-            String sqlStatement="select * from Customers";
-            Query.makeQuery(sqlStatement);
-            ResultSet result=Query.getResult();
-             while(result.next()){
-                 int customerid=result.getInt("Customer_ID");
-                 String customerNameG=result.getString("Customer_Name");
-                 String address=result.getString("Address");
-                 String postalCode=result.getString("Postal_Code");
-                 String phone=result.getString("Phone");
-                 Timestamp createDate=result.getTimestamp("Create_Date");
-                 LocalDateTime createDateCalendar=createDate.toLocalDateTime();
-                 String createdBy=result.getString("Created_By");
-                 Timestamp lastUpdate=result.getTimestamp("Last_Update");
-                 LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
-                 String lastUpdateby=result.getString("Last_Updated_By");
-                 int Division_ID=result.getInt("Division_ID");
-                Customer customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, Division_ID);
-                allCustomers.add(customerResult);
-            }
+        String sqlStatement="select * from Customers";
+        Query.makeQuery(sqlStatement);
+        ResultSet result=Query.getResult();
+        while(result.next()){
+            int customerid=result.getInt("Customer_ID");
+            String customerNameG=result.getString("Customer_Name");
+            String address=result.getString("Address");
+            String postalCode=result.getString("Postal_Code");
+            String phone=result.getString("Phone");
+            Timestamp createDate=result.getTimestamp("Create_Date");
+            LocalDateTime createDateCalendar=createDate.toLocalDateTime();
+            String createdBy=result.getString("Created_By");
+            Timestamp lastUpdate=result.getTimestamp("Last_Update");
+            LocalDateTime lastUpdateCalendar=lastUpdate.toLocalDateTime();
+            String lastUpdateby=result.getString("Last_Updated_By");
+            int Division_ID=result.getInt("Division_ID");
+            Customer customerResult= new Customer(customerid, customerNameG, address, postalCode, phone, createDateCalendar, createdBy, lastUpdateCalendar, lastUpdateby, Division_ID);
+            allCustomers.add(customerResult);
+        }
         return allCustomers;
     }
 
     public static void addCustomer(String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
             String sqlca = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlca);
 
             psti.setString(1, customerName);
@@ -80,7 +49,6 @@ public class CustomerDaoImpl {
             psti.setInt(9, Division_ID);
 
             psti.execute();
-
         }
         catch (SQLException ex){
             ex.printStackTrace();
@@ -90,7 +58,6 @@ public class CustomerDaoImpl {
     public static void modifyCustomer(int customerID, String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
             String sqlcm = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlcm);
 
             psti.setString(1, customerName);
@@ -103,9 +70,7 @@ public class CustomerDaoImpl {
             psti.setInt(8, customerID);
 
             psti.execute();
-
-
-    } catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
@@ -113,7 +78,6 @@ public class CustomerDaoImpl {
     public static void deleteCustomer(int customerID) {
         try {
             String sqlcd = "DELETE FROM customers WHERE Customer_ID = ?";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlcd);
 
             psti.setInt(1, customerID);
@@ -150,55 +114,15 @@ public class CustomerDaoImpl {
     }
 
     public static int countCustomers(int Country_ID) throws SQLException {
-
         String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID IN (SELECT Division_ID FROM First_Level_Divisions WHERE Country_ID = " + Country_ID + ")";
         Query.makeQuery(sqlStatement);
         int countCustomersUSResult = 0;
         ResultSet result = Query.getResult();
         while(result.next()) {
             countCustomersUSResult = result.getInt("customerCountry");
+
             return countCustomersUSResult;
         }
         return countCustomersUSResult;
     }
-
-    public static int countCustomersUS() throws SQLException {
-
-        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 1 AND 54";
-        Query.makeQuery(sqlStatement);
-        int countCustomersUSResult = 0;
-        ResultSet result = Query.getResult();
-        while(result.next()) {
-            countCustomersUSResult = result.getInt("customerCountry");
-            return countCustomersUSResult;
-        }
-        return countCustomersUSResult;
-    }
-
-    public static int countCustomersUK() throws SQLException {
-
-        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 101 AND 104";
-        Query.makeQuery(sqlStatement);
-        int countCustomersUKResult = 0;
-        ResultSet result = Query.getResult();
-        while(result.next()) {
-            countCustomersUKResult = result.getInt("customerCountry");
-            return countCustomersUKResult;
-        }
-        return countCustomersUKResult;
-    }
-
-    public static int countCustomersCAN() throws SQLException {
-
-        String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID BETWEEN 60 AND 72";
-        Query.makeQuery(sqlStatement);
-        int countCustomersCANResult = 0;
-        ResultSet result = Query.getResult();
-        while(result.next()) {
-            countCustomersCANResult = result.getInt("customerCountry");
-            return countCustomersCANResult;
-        }
-        return countCustomersCANResult;
-    }
-
 }

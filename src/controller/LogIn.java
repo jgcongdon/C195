@@ -19,7 +19,6 @@ import model.User;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;

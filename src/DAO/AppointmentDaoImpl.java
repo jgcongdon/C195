@@ -1,6 +1,5 @@
 package DAO;
 
-import helper.Globals;
 import helper.JDBC;
 import model.Appointment;
 import model.appointmentType;
@@ -42,7 +41,6 @@ public class AppointmentDaoImpl {
 
             appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             userIDAppointments.add(appointmentResult);
-
         }
         return userIDAppointments;
     }
@@ -74,7 +72,6 @@ public class AppointmentDaoImpl {
 
             Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             allAppointments.add(appointmentResult);
-
         }
         return allAppointments;
     }
@@ -82,7 +79,6 @@ public class AppointmentDaoImpl {
     public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
             String sqlaa = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlaa);
 
             psti.setString(1, appointmentTitle);
@@ -100,7 +96,6 @@ public class AppointmentDaoImpl {
             psti.setInt(13, contactID);
 
             psti.execute();
-
         } catch(SQLException ex){
             ex.printStackTrace();
             }
@@ -108,9 +103,7 @@ public class AppointmentDaoImpl {
 
     public static void modifyAppointment(int appointmentID, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
-
             String sqlam = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlam);
 
             psti.setString(1, appointmentTitle);
@@ -127,18 +120,14 @@ public class AppointmentDaoImpl {
             psti.setInt(12, appointmentID);
 
             psti.execute();
-
-
         } catch(SQLException throwables) {
             throwables.printStackTrace();
         }
-
     }
 
     public static void deleteAppointment(int appointmentID) {
         try {
             String sqlad = "DELETE FROM appointments WHERE Appointment_ID = ?";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlad);
 
             psti.setInt(1, appointmentID);
@@ -152,7 +141,6 @@ public class AppointmentDaoImpl {
     public static void deleteApptCustID(int customerID, int appointmentID) {
         try {
             String sqlcd = "DELETE FROM appointments WHERE Customer_ID = ? AND Appointment_ID = ?";
-
             PreparedStatement psti = JDBC.connection.prepareStatement(sqlcd);
 
             psti.setInt(1, customerID);
@@ -164,30 +152,28 @@ public class AppointmentDaoImpl {
         }
     }
 
-public static ObservableList<appointmentType> typeAppt() throws SQLException {
-    ObservableList<appointmentType> typeAppt=FXCollections.observableArrayList();
-    String sqlStatement = "select distinct Type from appointments";
-    Query.makeQuery(sqlStatement);
-    ResultSet result=Query.getResult();
-    while(result.next()){
-        String Type=result.getString("Type");
+    public static ObservableList<appointmentType> typeAppt() throws SQLException {
+        ObservableList<appointmentType> typeAppt=FXCollections.observableArrayList();
+        String sqlStatement = "select distinct Type from appointments";
+        Query.makeQuery(sqlStatement);
+        ResultSet result=Query.getResult();
+        while(result.next()){
+            String Type=result.getString("Type");
 
-        appointmentType appointmentTypeResult= new appointmentType(Type);
-        typeAppt.add(appointmentTypeResult);
-
-
-    }
+            appointmentType appointmentTypeResult= new appointmentType(Type);
+            typeAppt.add(appointmentTypeResult);
+        }
     return typeAppt;
-}
+    }
 
     public static int countMonthType(appointmentType selectedType, String month) throws SQLException {
-
         String sqlStatement = "SELECT COUNT(*) AS monthType FROM appointments WHERE Type  = '" + selectedType + "' AND MONTHNAME(Start) = '" + month + "'";
         Query.makeQuery(sqlStatement);
         int countMonthTypeResult = 0;
         ResultSet result = Query.getResult();
         while(result.next()) {
             countMonthTypeResult = result.getInt("monthType");
+
             return countMonthTypeResult;
         }
         return countMonthTypeResult;
@@ -220,7 +206,6 @@ public static ObservableList<appointmentType> typeAppt() throws SQLException {
 
             Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             AppointmentsContactID.add(appointmentResult);
-
         }
         return AppointmentsContactID;
     }
@@ -252,7 +237,6 @@ public static ObservableList<appointmentType> typeAppt() throws SQLException {
 
             Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             currentMonthAppointments.add(appointmentResult);
-
         }
         return currentMonthAppointments;
     }
@@ -284,56 +268,20 @@ public static ObservableList<appointmentType> typeAppt() throws SQLException {
 
             Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             currentWeekAppointments.add(appointmentResult);
-
         }
         return currentWeekAppointments;
     }
 
-    public static ObservableList<Appointment> getAppointmentsCustomerID(int customerID) throws SQLException, Exception{
-        ObservableList<Appointment> AppointmentsCustomerID=FXCollections.observableArrayList();
-        String sqlStatement="select * from Appointments where Customer_ID = '" + customerID + "'";
-        Query.makeQuery(sqlStatement);
-        ResultSet result=Query.getResult();
-        while(result.next()){
-            int Appointment_ID=result.getInt("Appointment_ID");
-            String Title=result.getString("Title");
-            String Description=result.getString("Description");
-            String Location=result.getString("Location");
-            String Type=result.getString("Type");
-            Timestamp Start=result.getTimestamp("Start");
-            LocalDateTime StartCalendar=Start.toLocalDateTime();
-            Timestamp End=result.getTimestamp("End");
-            LocalDateTime EndCalendar=End.toLocalDateTime();
-            Timestamp Create_Date=result.getTimestamp("Create_Date");
-            LocalDateTime Create_DateCalendar=Create_Date.toLocalDateTime();
-            String Created_By=result.getString("Created_By");
-            Timestamp Last_Update=result.getTimestamp("Last_Update");
-            LocalDateTime Last_UpdateCalendar=Last_Update.toLocalDateTime();
-            String Last_Updated_By=result.getString("Last_Updated_By");
-            int Customer_ID=result.getInt("Customer_ID");
-            int User_ID=result.getInt("User_ID");
-            int Contact_ID=result.getInt("Contact_ID");
-
-            Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
-            AppointmentsCustomerID.add(appointmentResult);
-
-        }
-        return AppointmentsCustomerID;
-    }
-
     public static int countCustAppt(int customerID) throws SQLException {
-
         String sqlStatement = "SELECT COUNT(*) AS custAppt FROM appointments WHERE Customer_ID  = '" + customerID + "'";
         Query.makeQuery(sqlStatement);
         int countCustApptResult = 0;
         ResultSet result = Query.getResult();
         while(result.next()) {
             countCustApptResult = result.getInt("custAppt");
+
             return countCustApptResult;
         }
         return countCustApptResult;
     }
-
-
-
-    }
+}
