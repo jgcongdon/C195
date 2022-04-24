@@ -64,9 +64,7 @@ public class LogIn implements Initializable {
     /** This lambda indicates that no username was provided at the timestamp.
      *
      */
-
     public GeneralInterface messageNoUser = s -> {
-
         return "No username provided at " + s;
     };
 
