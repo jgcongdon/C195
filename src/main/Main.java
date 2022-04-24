@@ -1,6 +1,6 @@
 package main;
 
-import Interfaces.GeneralInterface;
+import Interfaces.*;
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -27,12 +27,43 @@ public class Main extends Application {
         //TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
         //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 
-        GeneralInterface square = n -> {
+        GeneralInterface square = a -> a * a;
+        System.out.println("GI: " + square.calculateSquare(5));
+
+        GeneralInterface2 square2 = b -> b * b;
+        System.out.println("GI2: " + square2.calculateSquare(5));
+
+        GeneralInterface3 message = s -> "GI3: Hello " + s;
+        System.out.println(message.getMessage("Jackson"));
+
+        GeneralInterface4 message2 = t -> System.out.println("GI4: Hello again " + t);
+        message2.displayMessage("Jackson!");
+
+        GeneralInterface5 sum = (c1, c2) -> c1 + c2;
+        System.out.println("GI5: " + sum.calculateSum(5, 10));
+
+        GeneralInterface6 message3 = () -> System.out.println("GI6: Hello World! ");
+        message3.displayMessage2();
+
+        GeneralInterface7 square3 = e -> {
+            int result = e * e;
+            return result;
+        };
+        System.out.println("GI7: " + square3.calculateSquare(6));
+
+        final int num = 50;
+        GeneralInterface8 square4 = f -> f * f;
+        System.out.println("GI8: " + square4.calculateSquare(num));
+
+
+
+
+        /*GeneralInterface square = n -> {
           int result = n * n;
           return result;
         };
 
-        System.out.println(square.calculateSquare(6));
+        System.out.println(square.calculateSquare(6));*/
 
         JDBC.openConnection();
         launch(args);
