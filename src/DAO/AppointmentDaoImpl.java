@@ -179,8 +179,28 @@ public class AppointmentDaoImpl {
         return countMonthTypeResult;
     }
 
+    /** The Lambda filters appointments based on Contact ID
+     *
+     * @param selectedContactID
+     * @return
+     * @throws SQLException
+     * @throws Exception
+     */
+
     public static ObservableList<Appointment> getAppointmentsContactID(int selectedContactID) throws SQLException, Exception{
-        ObservableList<Appointment> AppointmentsContactID=FXCollections.observableArrayList();
+
+        ObservableList<Appointment> allAppointments = getAllAppointments();
+        ObservableList<Appointment> contactList = allAppointments.filtered(a -> {
+
+            if (a.getContact_ID() == selectedContactID){
+                return true;
+            }
+
+            return false;
+        });
+        return contactList;
+
+        /*ObservableList<Appointment> AppointmentsContactID=FXCollections.observableArrayList();
         String sqlStatement="select * from Appointments where Contact_ID = '" + selectedContactID + "'";
         Query.makeQuery(sqlStatement);
         ResultSet result=Query.getResult();
@@ -207,7 +227,7 @@ public class AppointmentDaoImpl {
             Appointment appointmentResult= new Appointment(Appointment_ID, Title, Description, Location, Type, StartCalendar, EndCalendar, Create_DateCalendar, Created_By, Last_UpdateCalendar, Last_Updated_By, Customer_ID, User_ID, Contact_ID);
             AppointmentsContactID.add(appointmentResult);
         }
-        return AppointmentsContactID;
+        return AppointmentsContactID;*/
     }
 
     public static ObservableList<Appointment> getCurrentMonthAppointments() throws SQLException, Exception{

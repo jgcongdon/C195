@@ -2,6 +2,7 @@ package controller;
 
 import DAO.AppointmentDaoImpl;
 import DAO.UserDaoImpl;
+import Interfaces.GeneralInterface;
 import helper.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -60,6 +61,15 @@ public class LogIn implements Initializable {
         }
     }
 
+    /** This lambda indicates that no username was provided at the timestamp.
+     *
+     */
+
+    public GeneralInterface messageNoUser = s -> {
+
+        return "No username provided at " + s;
+    };
+
     @FXML void onActionLogIn(ActionEvent event) throws Exception, SQLException, IOException {
         String User_Name = logInUsernameLabel.getText();
         String Password = logInPasswordLabel.getText();
@@ -73,7 +83,7 @@ public class LogIn implements Initializable {
         ZonedDateTime LDTUTC = LDTConvert.withZoneSameInstant(ZoneId.of("Etc/UTC"));
 
         if (User_Name.isEmpty() || User_Name.isBlank()) {
-            outputFile.println("No username provided at " + LDTUTC);
+            outputFile.println(messageNoUser.getMessage(LDTUTC.toString()));
             outputFile.close();
 
             Alert alert = new Alert(Alert.AlertType.WARNING);
