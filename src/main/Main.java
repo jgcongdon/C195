@@ -1,5 +1,6 @@
 package main;
 
+import Interfaces.GeneralInterface;
 import helper.JDBC;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,13 @@ public class Main extends Application {
         //Locale.setDefault(new Locale("fr"));
         //TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
         //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
+        GeneralInterface square = n -> {
+          int result = n * n;
+          return result;
+        };
+
+        System.out.println(square.calculateSquare(6));
 
         JDBC.openConnection();
         launch(args);
