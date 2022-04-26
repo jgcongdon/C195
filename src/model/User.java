@@ -2,6 +2,10 @@ package model;
 
 import java.time.LocalDateTime;
 
+/**
+ * This class creates the User objects.
+ * @author Jackson Congdon
+ */
 public class User {
         private int userId;
         private String userName;
@@ -21,7 +25,7 @@ public class User {
             this.lastUpdateBy = lastUpdateBy;
         }
 
-    /**
+        /**
          * @return the userId
          */
         public int getUserId() {
@@ -119,6 +123,9 @@ public class User {
             this.lastUpdateBy = lastUpdateBy;
         }
 
+        /**
+         * @return the User String name
+         */
         @Override
         public String toString(){return userName;}
     }

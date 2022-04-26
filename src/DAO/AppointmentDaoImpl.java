@@ -12,7 +12,18 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class creates the Appointment database methods.
+ * @author Jackson Congdon
+ */
 public class AppointmentDaoImpl {
+    /**
+     * This is the method to create an ObservableList of appointments containing the User ID. This method executes an SQL query to find all appointments containing the User ID and then adds the appointments to the ObservableList userIDAppointments.
+     * @param userID
+     * @return the ObservableList userIDAppointments containing appointments with the User ID
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getAppointmentUserID(int userID) throws SQLException, Exception{
         ObservableList<Appointment> userIDAppointments=FXCollections.observableArrayList();
         String sqlStatement="select * FROM Appointments WHERE User_ID  = '" + userID + "'";
@@ -45,6 +56,12 @@ public class AppointmentDaoImpl {
         return userIDAppointments;
     }
 
+    /**
+     *
+     * @return the ObservableList allAppointments with all appointments
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getAllAppointments() throws SQLException, Exception{
         ObservableList<Appointment> allAppointments=FXCollections.observableArrayList();
         String sqlStatement="select * from Appointments";
@@ -76,6 +93,22 @@ public class AppointmentDaoImpl {
         return allAppointments;
     }
 
+    /**
+     *
+     * @param appointmentTitle
+     * @param appointmentDescription
+     * @param appointmentLocation
+     * @param appointmentType
+     * @param appointmentStart
+     * @param appointmentEnd
+     * @param createDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdateBy
+     * @param customerID
+     * @param userID
+     * @param contactID
+     */
     public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
             String sqlaa = "INSERT INTO appointments(Title, Description, Location, Type, Start, End, Create_Date, Created_By, Last_Update, Last_Updated_By, Customer_ID, User_ID, Contact_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -101,6 +134,21 @@ public class AppointmentDaoImpl {
             }
         }
 
+    /**
+     *
+     * @param appointmentID
+     * @param appointmentTitle
+     * @param appointmentDescription
+     * @param appointmentLocation
+     * @param appointmentType
+     * @param appointmentStart
+     * @param appointmentEnd
+     * @param lastUpdate
+     * @param lastUpdateBy
+     * @param customerID
+     * @param userID
+     * @param contactID
+     */
     public static void modifyAppointment(int appointmentID, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
             String sqlam = "UPDATE appointments SET Title = ?, Description = ?, Location = ?, Type = ?, Start = ?, End = ?, Last_Update = ?, Last_Updated_By = ?, Customer_ID = ?, User_ID = ?, Contact_ID = ? WHERE Appointment_ID = ?";
@@ -125,6 +173,10 @@ public class AppointmentDaoImpl {
         }
     }
 
+    /**
+     *
+     * @param appointmentID
+     */
     public static void deleteAppointment(int appointmentID) {
         try {
             String sqlad = "DELETE FROM appointments WHERE Appointment_ID = ?";
@@ -138,6 +190,11 @@ public class AppointmentDaoImpl {
         }
     }
 
+    /**
+     *
+     * @param customerID
+     * @param appointmentID
+     */
     public static void deleteApptCustID(int customerID, int appointmentID) {
         try {
             String sqlcd = "DELETE FROM appointments WHERE Customer_ID = ? AND Appointment_ID = ?";
@@ -152,6 +209,11 @@ public class AppointmentDaoImpl {
         }
     }
 
+    /**
+     *
+     * @return the ObservableList typeAppt with only the distinct appointment types
+     * @throws SQLException
+     */
     public static ObservableList<appointmentType> typeAppt() throws SQLException {
         ObservableList<appointmentType> typeAppt=FXCollections.observableArrayList();
         String sqlStatement = "select distinct Type from appointments";
@@ -166,6 +228,13 @@ public class AppointmentDaoImpl {
     return typeAppt;
     }
 
+    /**
+     *
+     * @param selectedType
+     * @param month
+     * @return the number of appointments with both the selected type and the selected month
+     * @throws SQLException
+     */
     public static int countMonthType(appointmentType selectedType, String month) throws SQLException {
         String sqlStatement = "SELECT COUNT(*) AS monthType FROM appointments WHERE Type  = '" + selectedType + "' AND MONTHNAME(Start) = '" + month + "'";
         Query.makeQuery(sqlStatement);
@@ -179,10 +248,10 @@ public class AppointmentDaoImpl {
         return countMonthTypeResult;
     }
 
-    /** The Lambda filters appointments based on Contact ID
-     *
+    /**
+     * The Lambda filters appointments based on Contact ID
      * @param selectedContactID
-     * @return
+     * @return the ObservableList contactList of appointments containing the Contact ID
      * @throws SQLException
      * @throws Exception
      */
@@ -197,6 +266,12 @@ public class AppointmentDaoImpl {
         return contactList;
     }
 
+    /**
+     *
+     * @return the ObservableList currentMonthAppointments of appointments this month
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getCurrentMonthAppointments() throws SQLException, Exception{
         ObservableList<Appointment> currentMonthAppointments=FXCollections.observableArrayList();
         String sqlStatement="select * from Appointments where MONTH(Start) = MONTH(CURDATE())";
@@ -228,6 +303,12 @@ public class AppointmentDaoImpl {
         return currentMonthAppointments;
     }
 
+    /**
+     *
+     * @return the ObservableList currentWeekAppointments of appointments this week
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Appointment> getCurrentWeekAppointments() throws SQLException, Exception{
         ObservableList<Appointment> currentWeekAppointments=FXCollections.observableArrayList();
         String sqlStatement="select * from Appointments where WEEK(Start) = WEEK(CURDATE())";
@@ -259,6 +340,12 @@ public class AppointmentDaoImpl {
         return currentWeekAppointments;
     }
 
+    /**
+     *
+     * @param customerID
+     * @return the number of appointments containing the Customer ID
+     * @throws SQLException
+     */
     public static int countCustAppt(int customerID) throws SQLException {
         String sqlStatement = "SELECT COUNT(*) AS custAppt FROM appointments WHERE Customer_ID  = '" + customerID + "'";
         Query.makeQuery(sqlStatement);
