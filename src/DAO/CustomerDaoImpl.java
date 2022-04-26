@@ -8,7 +8,17 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class creates the Customer database methods.
+ * @author Jackson Congdon
+ */
 public class CustomerDaoImpl {
+    /**
+     * This is the method to create an ObservableList to get all customers. This method executes an SQL query to find all customers and then adds the customers to the ObservableList allCustomers.
+     * @return the ObservableList allCustomers
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Customer> getAllCustomers() throws SQLException, Exception{
         ObservableList<Customer> allCustomers=FXCollections.observableArrayList();
         String sqlStatement="select * from Customers";
@@ -33,6 +43,18 @@ public class CustomerDaoImpl {
         return allCustomers;
     }
 
+    /**
+     * This is the method to add a customer. The method executes an SQL query to insert a new Customer into the Customers table of the database using the data inputted on the CustomersAdd screen.
+     * @param customerName
+     * @param customerAddress
+     * @param postalCode
+     * @param customerPhone
+     * @param createDate
+     * @param createdBy
+     * @param lastUpdate
+     * @param lastUpdateBy
+     * @param Division_ID
+     */
     public static void addCustomer(String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
             String sqlca = "INSERT INTO customers(Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -55,6 +77,17 @@ public class CustomerDaoImpl {
         }
     }
 
+    /**
+     * This is the method to modify a Customer. The method executes an SQL query to update an existing Customer in the Customers table of the database using the data inputted on the CustomersModify screen.
+     * @param customerID
+     * @param customerName
+     * @param customerAddress
+     * @param postalCode
+     * @param customerPhone
+     * @param lastUpdate
+     * @param lastUpdateBy
+     * @param Division_ID
+     */
     public static void modifyCustomer(int customerID, String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
             String sqlcm = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = ?, Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
@@ -75,6 +108,10 @@ public class CustomerDaoImpl {
         }
     }
 
+    /**
+     * This is the method to delete a customer. The method executes an SQL query to delete an existing Customer in the Customers table of the database with the selected Customer ID.
+     * @param customerID
+     */
     public static void deleteCustomer(int customerID) {
         try {
             String sqlcd = "DELETE FROM customers WHERE Customer_ID = ?";
@@ -88,6 +125,12 @@ public class CustomerDaoImpl {
         }
     }
 
+    /**
+     * This is the method to get a Customer object from a Customer ID. The method executes an SQL query to select the customer from the Customers table with the selected Customer ID.
+     * @param customerID
+     * @return the Customer getCustomerFromCustomerIDResult
+     * @throws SQLException
+     */
     public static Customer getCustomerFromCustomerID(int customerID) throws SQLException {
         String sqlStatement = "select * from customers where Customer_ID = " + customerID;
         Query.makeQuery(sqlStatement);
@@ -113,16 +156,22 @@ public class CustomerDaoImpl {
         return null;
     }
 
+    /**
+     * This is the method to count the number of customers with the selected Country ID. The method executes an SQL query to count the numbers of customers where the Division ID is found by using the selected Country ID and then matching the Country ID to its range of FirstLevelDivision IDs.
+     * @param Country_ID
+     * @return the number of customers with the selected Country ID
+     * @throws SQLException
+     */
     public static int countCustomers(int Country_ID) throws SQLException {
         String sqlStatement = "SELECT COUNT(*) AS customerCountry FROM customers WHERE Division_ID IN (SELECT Division_ID FROM First_Level_Divisions WHERE Country_ID = " + Country_ID + ")";
         Query.makeQuery(sqlStatement);
-        int countCustomersUSResult = 0;
+        int countCustomersResult = 0;
         ResultSet result = Query.getResult();
         while(result.next()) {
-            countCustomersUSResult = result.getInt("customerCountry");
+            countCustomersResult = result.getInt("customerCountry");
 
-            return countCustomersUSResult;
+            return countCustomersResult;
         }
-        return countCustomersUSResult;
+        return countCustomersResult;
     }
 }

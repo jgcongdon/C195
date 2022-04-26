@@ -6,7 +6,17 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class creates the Contact database methods.
+ * @author Jackson Congdon
+ */
 public class ContactDaoImpl {
+    /**
+     * This is the method to create an ObservableList to get all contacts. This method executes an SQL query to find all contacts and then adds the contacts to the ObservableList allContacts.
+     * @return the ObservableList allContacts
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Contact> getAllContacts() throws SQLException, Exception {
         ObservableList<Contact> allContacts = FXCollections.observableArrayList();
         String sqlStatement = "select * from Contacts";
@@ -23,6 +33,12 @@ public class ContactDaoImpl {
         return allContacts;
     }
 
+    /**
+     * This is the method to get a Contact object from a Contact ID. The method executes an SQL query to select the contact from the Contacts table with the selected Contact ID.
+     * @param contactID
+     * @return the Contact getContactFromContactIDResult
+     * @throws SQLException
+     */
     public static Contact getContactFromContactID(int contactID) throws SQLException {
         String sqlStatement = "select * from contacts where Contact_ID = " + contactID;
         Query.makeQuery(sqlStatement);

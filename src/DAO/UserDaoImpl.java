@@ -11,8 +11,18 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class creates the User database methods.
+ * @author Jackson Congdon
+ */
 public class UserDaoImpl {
-
+    /**
+     * This is the method to validate that a User exists in the Users table with both the provided username and the provided password. The method executes an SQL query to select all users with both a username and a password matching the username and password provided, and then return true if any users are found or return false if no users are found.
+     * @param User_Name
+     * @param Password
+     * @return true if user is found matching username and password, false if no user is found
+     * @throws SQLException
+     */
     public static boolean validateLogIn(String User_Name, String Password) throws SQLException {
         try (PreparedStatement ps = JDBC.connection.prepareStatement("select * FROM Users WHERE User_Name = ? AND Password = ?")) {
             ps.setString(1, User_Name);
@@ -28,6 +38,12 @@ public class UserDaoImpl {
         return false;
     }
 
+    /**
+     * This is the method to validate that a username exists in the Users table. The method executes an SQL query to select all users with a username matching the username provided, and then return true if any users are found or return false if no users are found.
+     * @param User_Name
+     * @return true if user is found matching username, false if no user is found
+     * @throws SQLException
+     */
     public static boolean validateUserName(String User_Name) throws SQLException {
         try (PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE User_Name = ?")) {
             ps.setString(1, User_Name);
@@ -42,6 +58,12 @@ public class UserDaoImpl {
         return false;
     }
 
+    /**
+     * This is the method to validate that a password exists in the Users table. The method executes an SQL query to select all users with a password matching the password provided, and then return true if any users are found or return false if no users are found.
+     * @param Password
+     * @return true is user is found matching password, false if no user is found
+     * @throws SQLException
+     */
     public static boolean validatePassword(String Password) throws SQLException {
         try (PreparedStatement ps = JDBC.connection.prepareStatement("SELECT * FROM users WHERE Password = ?")) {
             ps.setString(1, Password);
@@ -56,6 +78,13 @@ public class UserDaoImpl {
         return false;
     }
 
+    /**
+     * This is the method to get a User from the provided userName. The method executes an SQL query to select the user from the Users table with a matching userName.
+     * @param userName
+     * @return the User userResult matching the selected userName
+     * @throws SQLException
+     * @throws Exception
+     */
     public static User getUser(String userName) throws SQLException, Exception{
         String sqlStatement="select * FROM Users WHERE User_Name  = '" + userName+ "'";
         Query.makeQuery(sqlStatement);
@@ -78,6 +107,12 @@ public class UserDaoImpl {
         return null;
     }
 
+    /**
+     * This is the method to get all users. The method executes an SQL query that selects all users from the Users table and adds the users to the ObservableList allUsers.
+     * @return the ObservableList allUsers containing all users
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<User> getAllUsers() throws SQLException, Exception{
         ObservableList<User> allUsers=FXCollections.observableArrayList();
             String sqlStatement="select * from Users";
@@ -100,6 +135,12 @@ public class UserDaoImpl {
         return allUsers;
     }
 
+    /**
+     * This is the method to return the User matching the selected userID. The method executes an SQL query to select the User from the Users table with a matching userID.
+     * @param userID
+     * @return the User getUserFromUserIDResult matching the selected userID
+     * @throws SQLException
+     */
     public static User getUserFromUserID(int userID) throws SQLException {
         String sqlStatement = "select * from users where User_ID = " + userID;
         Query.makeQuery(sqlStatement);
@@ -122,6 +163,12 @@ public class UserDaoImpl {
         return null;
     }
 
+    /**
+     * This is the method to return the User ID of a userName. The method executes an SQL query to select the User ID matching the selected userName.
+     * @param userName
+     * @return the User ID matching the selected userName
+     * @throws SQLException
+     */
     public static int getUserIDFromUserName(String userName) throws SQLException {
         int userID = 0;
         String sqlStatement = "select User_ID from users where User_Name = '" + userName+ "'";

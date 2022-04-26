@@ -8,7 +8,17 @@ import java.time.LocalDateTime;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * This class creates the Country database methods.
+ * @author Jackson Congdon
+ */
 public class CountryDaoImpl {
+    /**
+     * This is the method to create an ObservableList to get all countries. This method executes an SQL query to find all countries and then adds the countries to the ObservableList allCountries.
+     * @return the ObservableList allCountries
+     * @throws SQLException
+     * @throws Exception
+     */
     public static ObservableList<Country> getAllCountries() throws SQLException, Exception{
         ObservableList<Country> allCountries=FXCollections.observableArrayList();
         String sqlStatement="select * from countries";
@@ -30,6 +40,13 @@ public class CountryDaoImpl {
         return allCountries;
     }
 
+    /**
+     * This is the method to get a Country object from a Country ID. The method executes an SQL query to select the country from the Countries table with the selected Country ID.
+     * @param CountryID
+     * @return the Country countryResult
+     * @throws SQLException
+     * @throws Exception
+     */
     public static Country getCountryFromCountryID(int CountryID) throws SQLException, Exception{
         String sqlStatement="select * FROM countries WHERE Country_ID  = '" + CountryID + "'";
         Query.makeQuery(sqlStatement);

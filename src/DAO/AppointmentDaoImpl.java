@@ -57,7 +57,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to create an ObservableList to get all appointments. This method executes an SQL query to find all appointments and then adds the appointments to the ObservableList allAppointments.
      * @return the ObservableList allAppointments with all appointments
      * @throws SQLException
      * @throws Exception
@@ -94,7 +94,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to add an appointment. The method executes an SQL query to insert a new Appointment into the Appointments table of the database using the data inputted on the AppointmentsAdd screen.
      * @param appointmentTitle
      * @param appointmentDescription
      * @param appointmentLocation
@@ -135,7 +135,7 @@ public class AppointmentDaoImpl {
         }
 
     /**
-     *
+     * This is the method to modify an appointment. The method executes an SQL query to update an existing Appointment in the Appointments table of the database using the data inputted on the AppointmentsModify screen.
      * @param appointmentID
      * @param appointmentTitle
      * @param appointmentDescription
@@ -174,7 +174,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to delete an appointment. The method executes an SQL query to delete an existing Appointment in the Appointments table of the database with the selected Appointment ID.
      * @param appointmentID
      */
     public static void deleteAppointment(int appointmentID) {
@@ -191,7 +191,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to delete an appointment when a customer is deleted. The method executes an SQL query to delete an existing Appointment in the Appointments table of the database with the selected Customer ID.
      * @param customerID
      * @param appointmentID
      */
@@ -210,7 +210,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to create the ObservableList typeAppt with only the distinct appointment types. The method executes an SQL query to select only the distinct Type strings from the Appointments table.
      * @return the ObservableList typeAppt with only the distinct appointment types
      * @throws SQLException
      */
@@ -229,7 +229,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to count the number of appointments with both the selected type and the selected month. The method executes an SQL query to count from the Appointments table where the selected type and the selected month are in an appointment.
      * @param selectedType
      * @param month
      * @return the number of appointments with both the selected type and the selected month
@@ -267,7 +267,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to create the ObservableList currentMonthAppointments with only appointments with start timestamps within the current month. The method executes an SQL query to select only appointments in the Appointments table where the month of the start attribute matches the current month.
      * @return the ObservableList currentMonthAppointments of appointments this month
      * @throws SQLException
      * @throws Exception
@@ -304,7 +304,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to create the ObservableList currentWeekAppointments with only appointments with start timestamps within the current week. The method executes an SQL query to select only appointments in the Appointments table where the week of the start attribute matches the current week.
      * @return the ObservableList currentWeekAppointments of appointments this week
      * @throws SQLException
      * @throws Exception
@@ -341,7 +341,7 @@ public class AppointmentDaoImpl {
     }
 
     /**
-     *
+     * This is the method to count the number of appointments with the selected Customer ID. The method executes an SQL query to count from the Appointments table where the selected Customer ID is in an appointment.
      * @param customerID
      * @return the number of appointments containing the Customer ID
      * @throws SQLException
