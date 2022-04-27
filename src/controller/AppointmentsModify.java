@@ -27,6 +27,10 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the AppointmentsModify controller.
+ * @author Jackson Congdon
+ */
 public class AppointmentsModify implements Initializable {
 
     Stage stage;

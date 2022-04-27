@@ -13,6 +13,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the MainMenu controller.
+ * @author Jackson Congdon
+ */
 public class MainMenu implements Initializable {
 
     Stage stage;

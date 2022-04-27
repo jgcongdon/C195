@@ -23,6 +23,10 @@ import java.sql.Timestamp;
 import java.time.*;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the AppointmentsAdd controller.
+ * @author Jackson Congdon
+ */
 public class AppointmentsAdd implements Initializable {
 
     Stage stage;

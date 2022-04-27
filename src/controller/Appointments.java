@@ -23,6 +23,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class creates the Appointments controller.
+ * @author Jackson Congdon
+ */
 public class Appointments implements Initializable {
 
     Stage stage;
@@ -30,33 +34,29 @@ public class Appointments implements Initializable {
     ObservableList<model.Appointment> Appointments = FXCollections.observableArrayList();
 
     @FXML private RadioButton weekRadioButton;
-
     @FXML private RadioButton monthRadioButton;
-
     @FXML private RadioButton allRadioButton;
-
     @FXML private TableView<Appointment> AppointmentTable;
-
     @FXML private TableColumn<Appointment, Integer> Appointment_ID;
-
     @FXML private TableColumn<Appointment, String> Title;
-
     @FXML private TableColumn<Appointment, String> Description;
-
     @FXML private TableColumn<Appointment, String> Location;
-
     @FXML private TableColumn<Appointment, Integer> Contact;
-
     @FXML private TableColumn<Appointment, String> Type;
-
     @FXML private TableColumn<Appointment, Calendar> Start;
-
     @FXML private TableColumn<Appointment, Calendar> End;
-
     @FXML private TableColumn<Appointment, Integer> Customer_ID;
-
     @FXML private TableColumn<Appointment, Integer> User_ID;
 
+    /**
+     * This is the method to check for an appointment overlap. The method checks the various combinations of overlaps and returns true if a condition is met. The method returns false if no overlaps are found.
+     * @param customerID
+     * @param appointmentID
+     * @param appointmentStart
+     * @param appointmentEnd
+     * @return true if appointment overlap found, false if no overlap
+     * @throws Exception
+     */
     public static boolean checkOverlap(int customerID, int appointmentID, LocalDateTime appointmentStart, LocalDateTime appointmentEnd) throws Exception {
         ObservableList<Appointment> aList = AppointmentDaoImpl.getAllAppointments();
         LocalDateTime checkApptStart;
@@ -93,6 +93,11 @@ public class Appointments implements Initializable {
         return false;
     }
 
+    /**
+     * This method loads the AppointmentsAdd screen when the user clicks the Add button from the Appointments screen.
+     * @param event
+     * @throws IOException
+     */
     @FXML void onActionAddAppointment(ActionEvent event) throws IOException {
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/AppointmentsAdd.fxml"));
@@ -100,6 +105,11 @@ public class Appointments implements Initializable {
             stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     @FXML void onActionDeleteAppointment(ActionEvent event) throws Exception {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -130,6 +140,11 @@ public class Appointments implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onActionMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
@@ -138,6 +153,11 @@ public class Appointments implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML void onActionModifyAppointment(ActionEvent event) throws IOException {
         if (AppointmentTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -154,6 +174,11 @@ public class Appointments implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     @FXML void onActionAll(ActionEvent event) throws Exception {
         weekRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
@@ -161,6 +186,11 @@ public class Appointments implements Initializable {
         Appointments.addAll(AppointmentDaoImpl.getAllAppointments());
     }
 
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     @FXML void onActionMonth(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         weekRadioButton.setSelected(false);
@@ -168,6 +198,11 @@ public class Appointments implements Initializable {
         Appointments.addAll(AppointmentDaoImpl.getCurrentMonthAppointments());
     }
 
+    /**
+     *
+     * @param event
+     * @throws Exception
+     */
     @FXML void onActionWeek(ActionEvent event) throws Exception {
         allRadioButton.setSelected(false);
         monthRadioButton.setSelected(false);
@@ -175,6 +210,11 @@ public class Appointments implements Initializable {
         Appointments.addAll(AppointmentDaoImpl.getCurrentWeekAppointments());
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Appointment_ID.setCellValueFactory(new PropertyValueFactory<>("Appointment_ID"));

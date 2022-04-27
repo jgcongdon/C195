@@ -30,6 +30,10 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the LogIn controller.
+ * @author Jackson Congdon
+ */
 public class LogIn implements Initializable {
     Stage stage;
     TimeZone tz = TimeZone.getDefault();

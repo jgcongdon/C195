@@ -24,6 +24,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class creates the Customers controller.
+ * @author Jackson Congdon
+ */
 public class Customers implements Initializable {
 
     Stage stage;

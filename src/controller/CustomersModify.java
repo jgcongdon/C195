@@ -23,6 +23,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the CustomersModify controller.
+ * @author Jackson Congdon
+ */
 public class CustomersModify implements Initializable {
 
     Stage stage;

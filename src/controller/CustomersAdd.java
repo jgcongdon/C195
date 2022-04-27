@@ -20,6 +20,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+/**
+ * This class creates the CustomersAdd controller.
+ * @author Jackson Congdon
+ */
 public class CustomersAdd implements Initializable {
     Stage stage;
     Parent scene;

@@ -26,6 +26,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class creates the Reports controller.
+ * @author Jackson Congdon
+ */
 public class Reports implements Initializable {
 
     Stage stage;
