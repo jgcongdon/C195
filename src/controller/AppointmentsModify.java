@@ -38,27 +38,22 @@ public class AppointmentsModify implements Initializable {
     private static Appointment selectedAppointment;
 
     @FXML private Label appointmentModifyIDLabel;
-
     @FXML private ComboBox<Contact> appointmentModifyContactCombo;
-
     @FXML private TextField appointmentModifyLocationLabel;
-
     @FXML private TextField appointmentModifyTitleLabel;
-
     @FXML private TextField appointmentModifyDescriptionLabel;
-
     @FXML private TextField appointmentModifyTypeLabel;
-
     @FXML private DatePicker appointmentModifyDatePicker;
-
     @FXML private ComboBox<LocalTime> appointmentModifyStartCombo;
-
     @FXML private ComboBox<LocalTime> appointmentModifyEndCombo;
-
     @FXML private ComboBox<Customer> appointmentModifyCustomerIDCombo;
-
     @FXML private ComboBox<User> appointmentModifyUserIDCombo;
 
+    /**
+     * This is the method to return to the Appointments screen when the user clicks the Cancel button. No inputted information is saved.
+     * @param event the user clicks the Cancel button
+     * @throws IOException
+     */
     @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -66,6 +61,11 @@ public class AppointmentsModify implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the method to modify an existing appointment when the user clicks the Save button. This method updates an existing appointment using the information inputted on the AppointmentsModify screen and updates the modified appointment in the Appointments table of the database. The method updates the existing appointment being modified within the Appointments table of the database using the appointment ID.
+     * @param event the user clicks the Save button on the AppointmentsModify screen
+     * @throws IOException
+     */
     @FXML void onActionSave(ActionEvent event) throws IOException {
         try {
             if (appointmentModifyDatePicker.getValue() == null) {
@@ -178,10 +178,19 @@ public class AppointmentsModify implements Initializable {
         }
     }
 
+    /**
+     * This method takes the appointment selected on the Appointments screen to be modified and sends the appointment data to the fields on the AppointmentsModify screen.
+     * @param appointment
+     */
     public static void receiveSelectedAppointment(Appointment appointment){
         selectedAppointment = appointment;
     }
 
+    /**
+     * This is the method to set the combo boxes with all appropriate values, set the combo boxes to select the data from the modified appointment, and populate all fields with the data from the modified appointment.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try{

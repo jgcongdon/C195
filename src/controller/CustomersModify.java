@@ -36,19 +36,18 @@ public class CustomersModify implements Initializable {
     private static Country selectedCountry;
 
     @FXML private ComboBox<FirstLevelDivision> divisionCombo;
-
     @FXML private ComboBox<Country> countryCombo;
-
     @FXML private Label customersModifyIDLabel;
-
     @FXML private TextField customersModifyNameLabel;
-
     @FXML private TextField customersModifyPhoneLabel;
-
     @FXML private TextField customersModifyAddressLabel;
-
     @FXML private TextField customersModifyPostalLabel;
 
+    /**
+     * This is the method to return to the Customers screen when the user clicks the Cancel button. No inputted information is saved.
+     * @param event the user clicks the Cancel button on the CustomersModify screen
+     * @throws IOException
+     */
     @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
@@ -56,6 +55,11 @@ public class CustomersModify implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the method to modify an existing customer when the user clicks the Save button. This method updates an existing customer using the information inputted on the CustomersModify screen and updates the modified customer in the Customers table of the database. The method updates the existing customer being modified within the Customers table of the database using the customer ID.
+     * @param event the user clicks the Save button on the CustomersModify screen
+     * @throws IOException
+     */
     @FXML void onActionSave(ActionEvent event) throws IOException {
         try {
             int customerID = Integer.parseInt(customersModifyIDLabel.getText());
@@ -113,16 +117,30 @@ public class CustomersModify implements Initializable {
         }
     }
 
+    /**
+     * This is the method to set the divisionCombo combo box with only the divisions for only the specific country when the user selects a country from the countryCombo combo box.
+     * @param event the user selects a country from the countryCombo combo box
+     * @throws SQLException
+     */
     @FXML void onActionCountryCombo(ActionEvent event) throws SQLException {
         divisionCombo.setValue(null);
         Country C = countryCombo.getValue();
         divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
     }
 
+    /**
+     * This method takes the customer selected on the Customers screen to be modified and sends the customer data to the fields on the CUstomersModify screen.
+     * @param customer
+     */
     public static void receiveSelectedCustomer(Customer customer) {
         selectedCustomer = customer;
     }
 
+    /**
+     * This is the method to set the combo boxes with all appropriate values, set the combo boxes to select the data from the modified customer, and populate all fields with the data from the modified customer.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

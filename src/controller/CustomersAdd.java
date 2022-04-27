@@ -31,13 +31,15 @@ public class CustomersAdd implements Initializable {
     public ComboBox<FirstLevelDivision> divisionCombo;
 
     @FXML private TextField customersAddNameLabel;
-
     @FXML private TextField customersAddPhoneLabel;
-
     @FXML private TextField customersAddAddressLabel;
-
     @FXML private TextField customersAddPostalLabel;
 
+    /**
+     * This is the method to save a new customer when the user clicks the Save button. This method creates a new customer using the information inputted on the CustomersAdd screen and inserts the new customer into the Customers table of the database.
+     * @param event the user clicks the Save button on the CustomersAdd screen
+     * @throws IOException
+     */
     @FXML void onActionSave(ActionEvent event) throws IOException {
         try {
             String customerName = customersAddNameLabel.getText();
@@ -95,6 +97,11 @@ public class CustomersAdd implements Initializable {
         }
     }
 
+    /**
+     * This is the method to return to the Customers screen when the user clicks the Cancel button. No inputted information is saved.
+     * @param event the user clicks the Cancel button on the CustomersAdd screen
+     * @throws IOException
+     */
     @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Customers.fxml"));
@@ -102,11 +109,21 @@ public class CustomersAdd implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the method to set the divisionCombo combo box with only the divisions for only the specific country when the user selects a country from the countryCombo combo box.
+     * @param event the user selects a country from the countryCombo combo box
+     * @throws SQLException
+     */
     @FXML void OnActionCountryCombo(ActionEvent event) throws SQLException {
         Country C = countryCombo.getValue();
         divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
     }
 
+    /**
+     * This is the method to set the countryCombo combo box.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

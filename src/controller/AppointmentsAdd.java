@@ -38,15 +38,16 @@ public class AppointmentsAdd implements Initializable {
     public ComboBox<LocalTime> endCombo;
 
     @FXML private TextField appointmentAddLocationLabel;
-
     @FXML private TextField appointmentAddTitleLabel;
-
     @FXML private TextField appointmentAddDescriptionLabel;
-
     @FXML private TextField appointmentAddTypeLabel;
-
     @FXML private DatePicker appointmentAddDatePicker;
 
+    /**
+     * This is the method to return to the Appointments screen when the user clicks the Cancel button. No inputted information is saved.
+     * @param event the user clicks the Cancel button on the AppointmentsAdd screen
+     * @throws IOException
+     */
     @FXML void onActionCancel(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/Appointments.fxml"));
@@ -54,6 +55,11 @@ public class AppointmentsAdd implements Initializable {
         stage.show();
     }
 
+    /**
+     * This is the method to save a new appointment when the user clicks the Save button. This method creates a new appointment using the information inputted on the AppointmentsAdd screen and inserts the new appointment into the Appointments table of the database.
+     * @param event the user clicks the Save button on the AppointmentsAdd screen
+     * @throws IOException
+     */
     @FXML void onActionSave(ActionEvent event) throws IOException {
         try{
             if (appointmentAddDatePicker.getValue() == null) {
@@ -171,6 +177,11 @@ public class AppointmentsAdd implements Initializable {
         }
     }
 
+    /**
+     * This is the method to set the combo boxes with all appropriate values.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

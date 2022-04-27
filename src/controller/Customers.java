@@ -36,27 +36,22 @@ public class Customers implements Initializable {
     ObservableList<model.Customer> CustomerList = FXCollections.observableArrayList();
 
     @FXML private TableView<Customer> CustomerTable;
-
     @FXML private TableColumn<Customer, Integer> Customer_ID;
-
     @FXML private TableColumn<Customer, String> Customer_Name;
-
     @FXML private TableColumn<Customer, String> Address;
-
     @FXML private TableColumn<Customer, String> Postal_Code;
-
     @FXML private TableColumn<Customer, String> Phone_Number;
-
     @FXML private TableColumn<Customer, Calendar> Create_Date;
-
     @FXML private TableColumn<Customer, String> Create_By;
-
     @FXML private TableColumn<Customer, Calendar> Last_Update;
-
     @FXML private TableColumn<Customer, String> Last_Updated_By;
-
     @FXML private TableColumn<Customer, Integer> Division_ID;
 
+    /**
+     * This method loads the CustomersAdd screen when the user clicks the Add button from the Customers screen.
+     * @param event user clicks the Add button from the Customers screen
+     * @throws IOException
+     */
     @FXML void onActionAddCustomer(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/CustomersAdd.fxml"));
@@ -64,6 +59,11 @@ public class Customers implements Initializable {
         stage.show();
     }
 
+    /**
+     * This method to delete a customer when the user clicks the Delete button from the Customers screen.
+     * @param event user clicks the Delete button from the Customers screen
+     * @throws Exception
+     */
     @FXML
     void onActionDeleteCustomer(ActionEvent event) throws Exception {
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
@@ -111,6 +111,11 @@ public class Customers implements Initializable {
         }
     }
 
+    /**
+     * This method loads the MainMenu screen when the user clicks the Main Menu button from the Customers screen.
+     * @param event the user clicks the Main Menu button on the Customers screen
+     * @throws IOException
+     */
     @FXML void onActionMainMenu(ActionEvent event) throws IOException {
             stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
             scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
@@ -118,6 +123,11 @@ public class Customers implements Initializable {
             stage.show();
     }
 
+    /**
+     * This method loads the CustomersModify screen when the user clicks the Modify button from the Customers screen.
+     * @param event the user clicks the Modify button on the Customers screen
+     * @throws IOException
+     */
     @FXML void onActionModifyCustomer(ActionEvent event) throws IOException {
         if (CustomerTable.getSelectionModel().getSelectedItem() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -134,6 +144,11 @@ public class Customers implements Initializable {
         }
     }
 
+    /**
+     * This is the method to set the CustomerTable.
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Customer_ID.setCellValueFactory(new PropertyValueFactory<>("customerId"));

@@ -95,7 +95,7 @@ public class Appointments implements Initializable {
 
     /**
      * This method loads the AppointmentsAdd screen when the user clicks the Add button from the Appointments screen.
-     * @param event
+     * @param event user clicks the Add button from the Appointments screen
      * @throws IOException
      */
     @FXML void onActionAddAppointment(ActionEvent event) throws IOException {
@@ -106,8 +106,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This method to delete an appointment when the user clicks the Delete button from the Appointments screen.
+     * @param event user clicks the Delete button from the Appointments screen
      * @throws Exception
      */
     @FXML void onActionDeleteAppointment(ActionEvent event) throws Exception {
@@ -141,8 +141,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This method loads the MainMenu screen when the user clicks the Main Menu button from the Appointments screen.
+     * @param event the user clicks the Main Menu button on the Appointments screen
      * @throws IOException
      */
     @FXML
@@ -154,8 +154,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This method loads the AppointmentsModify screen when the user clicks the Modify button from the Appointments screen.
+     * @param event the user clicks the Modify button on the Appointments screen
      * @throws IOException
      */
     @FXML void onActionModifyAppointment(ActionEvent event) throws IOException {
@@ -175,8 +175,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This is the method to change the AppointmentTable view to all appointments when the user clicks the All radio button on the Appointments screen.
+     * @param event the user clicks the All radio button on the Appointments screen
      * @throws Exception
      */
     @FXML void onActionAll(ActionEvent event) throws Exception {
@@ -187,8 +187,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This is the method to change the AppointmentTable view to only the current month when the user clicks the Month radio button on the Appointments screen.
+     * @param event the user clicks the Month radio button on the Appointments screen
      * @throws Exception
      */
     @FXML void onActionMonth(ActionEvent event) throws Exception {
@@ -199,8 +199,8 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
-     * @param event
+     * This is the method to change the AppointmentTable view to only the current week when the user clicks the Week radio button on the Appointments screen.
+     * @param event the user clicks the Week radio button on the Appointments screen
      * @throws Exception
      */
     @FXML void onActionWeek(ActionEvent event) throws Exception {
@@ -211,7 +211,7 @@ public class Appointments implements Initializable {
     }
 
     /**
-     *
+     * This is the method to set AppointmentsTable and default select the All radio button.
      * @param url
      * @param resourceBundle
      */
