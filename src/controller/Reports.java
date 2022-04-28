@@ -38,45 +38,39 @@ public class Reports implements Initializable {
     ObservableList<String> Months = FXCollections.observableList(Arrays.asList("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"));
 
     @FXML private ComboBox<String> monthCombo;
-
     @FXML private ComboBox<appointmentType> typeCombo;
-
     @FXML private Label appointmentsTotalLabel;
-
     @FXML private ComboBox<Contact> contactCombo;
-
     @FXML private ComboBox<Country> countryCombo;
-
     @FXML private Label customersTotalLabel;
-
     @FXML private TableView<Appointment> AppointmentTable;
-
     @FXML private TableColumn<Appointment, Integer> Appointment_ID;
-
     @FXML private TableColumn<Appointment, String> Title;
-
     @FXML private TableColumn<Appointment, String> Description;
-
     @FXML private TableColumn<Appointment, String> Location;
-
     @FXML private TableColumn<Appointment, Integer> Contact;
-
     @FXML private TableColumn<Appointment, String> Type;
-
     @FXML private TableColumn<Appointment, Calendar> Start;
-
     @FXML private TableColumn<Appointment, Calendar> End;
-
     @FXML private TableColumn<Appointment, Integer> Customer_ID;
-
     @FXML private TableColumn<Appointment, Integer> User_ID;
 
+    /**
+     *
+     * @param event the user selects a country from the countryCombo combo box
+     * @throws SQLException
+     */
     @FXML void onActionCountryCombo(ActionEvent event) throws SQLException {
         Country selectedCountry = countryCombo.getValue();
         int selectedCountryID = selectedCountry.getCountry_ID();
         customersTotalLabel.setText(String.valueOf(CustomerDaoImpl.countCustomers(selectedCountryID)));
     }
 
+    /**
+     *
+     * @param event the user clicks the Main Menu button
+     * @throws IOException
+     */
     @FXML void onActionMainMenu(ActionEvent event) throws IOException {
         stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
         scene = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
@@ -84,18 +78,32 @@ public class Reports implements Initializable {
         stage.show();
     }
 
+    /**
+     *
+     * @param event the user selects a type from the typeCombo combo box
+     * @throws SQLException
+     */
     @FXML void onActionTypeCombo(ActionEvent event) throws SQLException {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
         appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
     }
 
+    /**
+     *
+     * @param event the user selects a month from the monthCombo combo box
+     * @throws SQLException
+     */
     @FXML void onActonMonthCombo(ActionEvent event) throws SQLException {
         appointmentType selectedType = typeCombo.getValue();
         String selectedMonth = monthCombo.getValue();
         appointmentsTotalLabel.setText(String.valueOf(AppointmentDaoImpl.countMonthType(selectedType, selectedMonth)));
     }
 
+    /**
+     *
+     * @param event the user selects a contact from the contactCombo combo box
+     */
     @FXML void onActionContactCombo(ActionEvent event) {
         Appointment.clear();
         Contact selectedContact = contactCombo.getValue();
@@ -108,6 +116,11 @@ public class Reports implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {

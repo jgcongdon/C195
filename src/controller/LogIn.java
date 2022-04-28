@@ -41,21 +41,18 @@ public class LogIn implements Initializable {
     ResourceBundle myBundle = ResourceBundle.getBundle("bundle/lang");
 
     @FXML private TextField logInUsernameLabel;
-
     @FXML private PasswordField logInPasswordLabel;
-
     @FXML private Label userNameLabel;
-
     @FXML private Label passwordLabel;
-
     @FXML private Label locationText;
-
     @FXML private Label locationLabel;
-
     @FXML private Button logInButton;
-
     @FXML private Button exitButton;
 
+    /**
+     *
+     * @param event the user clicks the Exit button
+     */
     @FXML void onActionExit(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, myBundle.getString("Exit"));
         Optional<ButtonType> result = alert.showAndWait();
@@ -66,12 +63,18 @@ public class LogIn implements Initializable {
     }
 
     /** This lambda indicates that no username was provided at the timestamp.
-     *
      */
     public GeneralInterface messageNoUser = s -> {
         return "No username provided at " + s;
     };
 
+    /**
+     *
+     * @param event the user clicks the Log In button
+     * @throws Exception
+     * @throws SQLException
+     * @throws IOException
+     */
     @FXML void onActionLogIn(ActionEvent event) throws Exception, SQLException, IOException {
         String User_Name = logInUsernameLabel.getText();
         String Password = logInPasswordLabel.getText();
@@ -170,6 +173,11 @@ public class LogIn implements Initializable {
     }
 }
 
+    /**
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         locationLabel.setText(tz1);
