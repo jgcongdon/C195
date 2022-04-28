@@ -50,7 +50,7 @@ public class LogIn implements Initializable {
     @FXML private Button exitButton;
 
     /**
-     *
+     * This method exits the program when the user clicks the Exit button
      * @param event the user clicks the Exit button
      */
     @FXML void onActionExit(ActionEvent event) {
@@ -69,7 +69,7 @@ public class LogIn implements Initializable {
     };
 
     /**
-     *
+     * This method receives the user inputted username and password when the user clicks the Log In button. This method validates that the username and password are not empty and then validates the username and password combo with the records in the Users table of the database.
      * @param event the user clicks the Log In button
      * @throws Exception
      * @throws SQLException
@@ -174,7 +174,7 @@ public class LogIn implements Initializable {
 }
 
     /**
-     *
+     * This is the method to set the user's location and set the text on the Log In page in either English or French depending on the user's location.
      * @param url
      * @param resourceBundle
      */

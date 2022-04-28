@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 /**
- * <h1>Colandar -  a GUI-based scheduling desktop application with filtering options  (C195 - Software II)</h1>
+ * <h1>Colandar - a GUI-based scheduling desktop application with filtering options  (C195 - Software II)</h1>
  * This class creates an app that manages a database of customers and their appointments.
  * <p><b>
  * Lambdas found on line 64 of LogIn.java and on line 182 of AppointmentDaoImpl.java

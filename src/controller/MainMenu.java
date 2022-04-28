@@ -23,7 +23,7 @@ public class MainMenu implements Initializable {
     Parent scene;
 
     /**
-     *
+     * This is the method to load the Appointments screen when the user clicks the Appointments button.
      * @param event the user clicks the Appointments button
      * @throws IOException
      */
@@ -35,7 +35,7 @@ public class MainMenu implements Initializable {
     }
 
     /**
-     *
+     * This is the method to load the Customers screen when the user clicks the Customers button.
      * @param event the user clicks the Customers button
      * @throws IOException
      */
@@ -47,7 +47,7 @@ public class MainMenu implements Initializable {
     }
 
     /**
-     *
+     * This is the method to load the Reports screen when the user clicks the Reports button.
      * @param event The user clicks the Reports button
      * @throws IOException
      */
@@ -59,7 +59,7 @@ public class MainMenu implements Initializable {
     }
 
     /**
-     *
+     * This is the method to load the LogIn screen when the user clicks the Log Out button.
      * @param event The user clicks the Log Out button
      * @throws IOException
      */
@@ -71,7 +71,7 @@ public class MainMenu implements Initializable {
     }
 
     /**
-     *
+     * This is the method to initialize the MainMenu controller.
      * @param url
      * @param resourceBundle
      */

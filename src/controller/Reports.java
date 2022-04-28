@@ -56,7 +56,7 @@ public class Reports implements Initializable {
     @FXML private TableColumn<Appointment, Integer> User_ID;
 
     /**
-     *
+     * This is the method to display the count of the number of customers per country when the user selects a country from the countryCombo combo box.
      * @param event the user selects a country from the countryCombo combo box
      * @throws SQLException
      */
@@ -67,7 +67,7 @@ public class Reports implements Initializable {
     }
 
     /**
-     *
+     * This method loads the MainMenu screen when the user clicks the Main Menu button from the Reports screen.
      * @param event the user clicks the Main Menu button
      * @throws IOException
      */
@@ -79,7 +79,7 @@ public class Reports implements Initializable {
     }
 
     /**
-     *
+     * This is the method to display the count of the selected type of appointments in the already selected month when the user selects an appointmentType from the typeCombo combo box.
      * @param event the user selects a type from the typeCombo combo box
      * @throws SQLException
      */
@@ -90,7 +90,7 @@ public class Reports implements Initializable {
     }
 
     /**
-     *
+     * This is the method to display the count of the already selected type of appointments in the selected month when the user selects a month from the monthCombo combo box.
      * @param event the user selects a month from the monthCombo combo box
      * @throws SQLException
      */
@@ -101,7 +101,7 @@ public class Reports implements Initializable {
     }
 
     /**
-     *
+     * This is the method to display the appointments for the selected contact when the user selects a contact from the contactCombo combo box.
      * @param event the user selects a contact from the contactCombo combo box
      */
     @FXML void onActionContactCombo(ActionEvent event) {
@@ -117,7 +117,7 @@ public class Reports implements Initializable {
     }
 
     /**
-     *
+     * This is the method to set the combo boxes and set the AppointmentTable from the Appointments table in the database.
      * @param url
      * @param resourceBundle
      */
