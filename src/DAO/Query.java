@@ -15,7 +15,7 @@ public class Query {
 
     /**
      * This is the method to make an SQL query.
-     * @param q
+     * @param q the String to make the query from
      */
     public static void makeQuery(String q){
         query =q;

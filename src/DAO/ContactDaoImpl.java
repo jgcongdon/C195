@@ -35,7 +35,7 @@ public class ContactDaoImpl {
 
     /**
      * This is the method to get a Contact object from a Contact ID. The method executes an SQL query to select the contact from the Contacts table with the selected Contact ID.
-     * @param contactID
+     * @param contactID the contact ID to find the contact object for
      * @return the Contact getContactFromContactIDResult
      * @throws SQLException
      */

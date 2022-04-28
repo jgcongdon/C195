@@ -18,8 +18,8 @@ import javafx.collections.ObservableList;
 public class UserDaoImpl {
     /**
      * This is the method to validate that a User exists in the Users table with both the provided username and the provided password. The method executes an SQL query to select all users with both a username and a password matching the username and password provided, and then return true if any users are found or return false if no users are found.
-     * @param User_Name
-     * @param Password
+     * @param User_Name the username to validate for
+     * @param Password the password to validate for
      * @return true if user is found matching username and password, false if no user is found
      * @throws SQLException
      */
@@ -40,7 +40,7 @@ public class UserDaoImpl {
 
     /**
      * This is the method to validate that a username exists in the Users table. The method executes an SQL query to select all users with a username matching the username provided, and then return true if any users are found or return false if no users are found.
-     * @param User_Name
+     * @param User_Name the username to validate that it exists
      * @return true if user is found matching username, false if no user is found
      * @throws SQLException
      */
@@ -60,7 +60,7 @@ public class UserDaoImpl {
 
     /**
      * This is the method to validate that a password exists in the Users table. The method executes an SQL query to select all users with a password matching the password provided, and then return true if any users are found or return false if no users are found.
-     * @param Password
+     * @param Password the password to validate if it exists
      * @return true is user is found matching password, false if no user is found
      * @throws SQLException
      */
@@ -80,7 +80,7 @@ public class UserDaoImpl {
 
     /**
      * This is the method to get a User from the provided userName. The method executes an SQL query to select the user from the Users table with a matching userName.
-     * @param userName
+     * @param userName the username to get the User object for
      * @return the User userResult matching the selected userName
      * @throws SQLException
      * @throws Exception
@@ -137,7 +137,7 @@ public class UserDaoImpl {
 
     /**
      * This is the method to return the User matching the selected userID. The method executes an SQL query to select the User from the Users table with a matching userID.
-     * @param userID
+     * @param userID the userID to get the User object for
      * @return the User getUserFromUserIDResult matching the selected userID
      * @throws SQLException
      */
@@ -165,7 +165,7 @@ public class UserDaoImpl {
 
     /**
      * This is the method to return the User ID of a userName. The method executes an SQL query to select the User ID matching the selected userName.
-     * @param userName
+     * @param userName the username to get the userID for
      * @return the User ID matching the selected userName
      * @throws SQLException
      */

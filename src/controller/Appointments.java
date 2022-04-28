@@ -50,10 +50,10 @@ public class Appointments implements Initializable {
 
     /**
      * This is the method to check for an appointment overlap. The method checks the various combinations of overlaps and returns true if a condition is met. The method returns false if no overlaps are found.
-     * @param customerID
-     * @param appointmentID
-     * @param appointmentStart
-     * @param appointmentEnd
+     * @param customerID the customer ID to check overlaps for
+     * @param appointmentID the appointment ID being created
+     * @param appointmentStart the start time of the appointment being created
+     * @param appointmentEnd the end time of the appointment being created
      * @return true if appointment overlap found, false if no overlap
      * @throws Exception
      */

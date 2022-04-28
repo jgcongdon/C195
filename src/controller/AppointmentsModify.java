@@ -180,7 +180,7 @@ public class AppointmentsModify implements Initializable {
 
     /**
      * This method takes the appointment selected on the Appointments screen to be modified and sends the appointment data to the fields on the AppointmentsModify screen.
-     * @param appointment
+     * @param appointment the selected existing appointment being received to modify
      */
     public static void receiveSelectedAppointment(Appointment appointment){
         selectedAppointment = appointment;

@@ -45,15 +45,15 @@ public class CustomerDaoImpl {
 
     /**
      * This is the method to add a customer. The method executes an SQL query to insert a new Customer into the Customers table of the database using the data inputted on the CustomersAdd screen.
-     * @param customerName
-     * @param customerAddress
-     * @param postalCode
-     * @param customerPhone
-     * @param createDate
-     * @param createdBy
-     * @param lastUpdate
-     * @param lastUpdateBy
-     * @param Division_ID
+     * @param customerName the name of the customer to add
+     * @param customerAddress the address of the customer to add
+     * @param postalCode the postal code of the customer to add
+     * @param customerPhone the phone number of the customer to add
+     * @param createDate the create date of the customer to add
+     * @param createdBy the user creating the customer to add
+     * @param lastUpdate the last updated time of the customer to add
+     * @param lastUpdateBy the last user to update the customer to add
+     * @param Division_ID the division ID of the customer to add
      */
     public static void addCustomer(String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
@@ -79,14 +79,14 @@ public class CustomerDaoImpl {
 
     /**
      * This is the method to modify a Customer. The method executes an SQL query to update an existing Customer in the Customers table of the database using the data inputted on the CustomersModify screen.
-     * @param customerID
-     * @param customerName
-     * @param customerAddress
-     * @param postalCode
-     * @param customerPhone
-     * @param lastUpdate
-     * @param lastUpdateBy
-     * @param Division_ID
+     * @param customerID the ID of the customer to modify
+     * @param customerName the name of the customer to modify
+     * @param customerAddress the address of the customer to modify
+     * @param postalCode the postal code of the customer to modify
+     * @param customerPhone the phone number of the customer to modify
+     * @param lastUpdate the last updated time of the customer to modify
+     * @param lastUpdateBy the last user to update the customer to modify
+     * @param Division_ID the division ID of the customer to modify
      */
     public static void modifyCustomer(int customerID, String customerName, String customerAddress, String postalCode, String customerPhone, Timestamp lastUpdate, String lastUpdateBy, int Division_ID) {
         try {
@@ -110,7 +110,7 @@ public class CustomerDaoImpl {
 
     /**
      * This is the method to delete a customer. The method executes an SQL query to delete an existing Customer in the Customers table of the database with the selected Customer ID.
-     * @param customerID
+     * @param customerID the ID of the customer to delete
      */
     public static void deleteCustomer(int customerID) {
         try {
@@ -127,7 +127,7 @@ public class CustomerDaoImpl {
 
     /**
      * This is the method to get a Customer object from a Customer ID. The method executes an SQL query to select the customer from the Customers table with the selected Customer ID.
-     * @param customerID
+     * @param customerID the customer ID to get the customer object for
      * @return the Customer getCustomerFromCustomerIDResult
      * @throws SQLException
      */
@@ -158,7 +158,7 @@ public class CustomerDaoImpl {
 
     /**
      * This is the method to count the number of customers with the selected Country ID. The method executes an SQL query to count the numbers of customers where the Division ID is found by using the selected Country ID and then matching the Country ID to its range of FirstLevelDivision IDs.
-     * @param Country_ID
+     * @param Country_ID the country ID of which to count customers for
      * @return the number of customers with the selected Country ID
      * @throws SQLException
      */

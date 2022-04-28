@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
 public class FirstLevelDivisionDaoImpl {
     /**
      * This is the method to get the FirstLevelDivision from the getValue of the divisionCombo combo box in CustomersModify. The method executes an SQL query that select the FirstLevelDivision containing the Division matching the getValue of the divisionCombo combo box.
-     * @param FirstLevelDivision
+     * @param FirstLevelDivision the FirstLevelDivision to get the FirstLevelDivision for
      * @return the FirstLevelDivision divisionResult
      * @throws SQLException
      * @throws Exception
@@ -44,7 +44,7 @@ public class FirstLevelDivisionDaoImpl {
 
     /**
      * This is the method to set the ObservableList div with FirstLevelDivisions from a Country ID. The method executes an SQL query to select the FirstLevelDivisions with a Country ID matching the selected Country ID.
-     * @param country_id
+     * @param country_id the country ID to get the FirstLevelDivisions for
      * @return the ObservableList div
      * @throws SQLException
      */
@@ -72,7 +72,7 @@ public class FirstLevelDivisionDaoImpl {
 
     /**
      * This is the method to get a FirstLevelDivision from a Division ID. The method executes an SQL query to select the FirstLevelDivision object with the selected Division ID.
-     * @param division_id
+     * @param division_id the division ID to get the FirstLevelDivision object for
      * @return the FirstLevelDivision getDivFromDivIDResult
      * @throws SQLException
      */

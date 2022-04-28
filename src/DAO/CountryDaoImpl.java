@@ -42,7 +42,7 @@ public class CountryDaoImpl {
 
     /**
      * This is the method to get a Country object from a Country ID. The method executes an SQL query to select the country from the Countries table with the selected Country ID.
-     * @param CountryID
+     * @param CountryID the country ID to get the country object for
      * @return the Country countryResult
      * @throws SQLException
      * @throws Exception

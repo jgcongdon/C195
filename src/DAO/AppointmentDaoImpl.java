@@ -19,7 +19,7 @@ import javafx.collections.ObservableList;
 public class AppointmentDaoImpl {
     /**
      * This is the method to create an ObservableList of appointments containing the User ID. This method executes an SQL query to find all appointments containing the User ID and then adds the appointments to the ObservableList userIDAppointments.
-     * @param userID
+     * @param userID the userID to get the appointment of
      * @return the ObservableList userIDAppointments containing appointments with the User ID
      * @throws SQLException
      * @throws Exception
@@ -95,19 +95,19 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to add an appointment. The method executes an SQL query to insert a new Appointment into the Appointments table of the database using the data inputted on the AppointmentsAdd screen.
-     * @param appointmentTitle
-     * @param appointmentDescription
-     * @param appointmentLocation
-     * @param appointmentType
-     * @param appointmentStart
-     * @param appointmentEnd
-     * @param createDate
-     * @param createdBy
-     * @param lastUpdate
-     * @param lastUpdateBy
-     * @param customerID
-     * @param userID
-     * @param contactID
+     * @param appointmentTitle the title of the appointment to add
+     * @param appointmentDescription the description of the appointment to add
+     * @param appointmentLocation the location of the appointment to add
+     * @param appointmentType the type of the appointment to add
+     * @param appointmentStart the start of the appointment to add
+     * @param appointmentEnd the end of the appointment to add
+     * @param createDate the create date of the appointment to add
+     * @param createdBy the user creating the appointment to add
+     * @param lastUpdate the last updated time of the appointment to add
+     * @param lastUpdateBy the last user to update the appointment to add
+     * @param customerID the customer ID of the appointment to add
+     * @param userID the user ID of the appointment to add
+     * @param contactID the contact ID of the appointment to add
      */
     public static void addAppointment(String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp createDate, String createdBy, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
@@ -136,18 +136,18 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to modify an appointment. The method executes an SQL query to update an existing Appointment in the Appointments table of the database using the data inputted on the AppointmentsModify screen.
-     * @param appointmentID
-     * @param appointmentTitle
-     * @param appointmentDescription
-     * @param appointmentLocation
-     * @param appointmentType
-     * @param appointmentStart
-     * @param appointmentEnd
-     * @param lastUpdate
-     * @param lastUpdateBy
-     * @param customerID
-     * @param userID
-     * @param contactID
+     * @param appointmentID the ID of the appointment to modify
+     * @param appointmentTitle the title of the appointment to modify
+     * @param appointmentDescription the description of the appointment to modify
+     * @param appointmentLocation the location of the appointment to modify
+     * @param appointmentType the type of the appointment to modify
+     * @param appointmentStart the start time of the appointment to modify
+     * @param appointmentEnd the end time of the appointment to modify
+     * @param lastUpdate the last updated time of the appointment to modify
+     * @param lastUpdateBy the last user to update the appointment to modify
+     * @param customerID the customer ID of the appointment to modify
+     * @param userID the user ID of the appointment to modify
+     * @param contactID the contact ID of the appointment to modify
      */
     public static void modifyAppointment(int appointmentID, String appointmentTitle, String appointmentDescription, String appointmentLocation, String appointmentType, LocalDateTime appointmentStart, LocalDateTime appointmentEnd, Timestamp lastUpdate, String lastUpdateBy, int customerID, int userID, int contactID) {
         try{
@@ -175,7 +175,7 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to delete an appointment. The method executes an SQL query to delete an existing Appointment in the Appointments table of the database with the selected Appointment ID.
-     * @param appointmentID
+     * @param appointmentID the ID of the appointment to delete
      */
     public static void deleteAppointment(int appointmentID) {
         try {
@@ -192,8 +192,8 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to delete an appointment when a customer is deleted. The method executes an SQL query to delete an existing Appointment in the Appointments table of the database with the selected Customer ID.
-     * @param customerID
-     * @param appointmentID
+     * @param customerID the ID of the customer being deleted
+     * @param appointmentID the ID of the appointment to delete
      */
     public static void deleteApptCustID(int customerID, int appointmentID) {
         try {
@@ -230,8 +230,8 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to count the number of appointments with both the selected type and the selected month. The method executes an SQL query to count from the Appointments table where the selected type and the selected month are in an appointment.
-     * @param selectedType
-     * @param month
+     * @param selectedType the type of appointment to count
+     * @param month the month for which to count
      * @return the number of appointments with both the selected type and the selected month
      * @throws SQLException
      */
@@ -250,7 +250,7 @@ public class AppointmentDaoImpl {
 
     /**
      * The Lambda filters appointments based on Contact ID
-     * @param selectedContactID
+     * @param selectedContactID the contact ID by which to filter appointments
      * @return the ObservableList contactList of appointments containing the Contact ID
      * @throws SQLException
      * @throws Exception
@@ -342,7 +342,7 @@ public class AppointmentDaoImpl {
 
     /**
      * This is the method to count the number of appointments with the selected Customer ID. The method executes an SQL query to count from the Appointments table where the selected Customer ID is in an appointment.
-     * @param customerID
+     * @param customerID the customer ID to count appointments for
      * @return the number of appointments containing the Customer ID
      * @throws SQLException
      */

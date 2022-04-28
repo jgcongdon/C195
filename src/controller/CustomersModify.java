@@ -130,7 +130,7 @@ public class CustomersModify implements Initializable {
 
     /**
      * This method takes the customer selected on the Customers screen to be modified and sends the customer data to the fields on the CUstomersModify screen.
-     * @param customer
+     * @param customer the selected existing customer being received to modify
      */
     public static void receiveSelectedCustomer(Customer customer) {
         selectedCustomer = customer;
