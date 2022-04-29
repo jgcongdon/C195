@@ -13,7 +13,6 @@ import java.util.ResourceBundle;
  * This class creates an app that manages a database of customers and their appointments.
  * <p><b>
  * Lambdas found on line 64 of LogIn.java and on line 182 of AppointmentDaoImpl.java
- * Lambda found on
  * </b></p>
  * After unzipping c195jacksoncongdon.zip, the Javadocs files can be found at /javadoc
  * @author Jackson Congdon
