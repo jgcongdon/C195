@@ -1,5 +1,5 @@
 TITLE:                                                                      Colandar
-PURPOSE OF THE APPLICATION:                                                 A GUI-based scheduling desktop application with filtering options
+PURPOSE OF THE APPLICATION:                                                 A GUI-based scheduling desktop application with filtering options for maintaining a database of customers and appointments.
 AUTHOR:                                                                     Jackson Congdon
 CONTACT INFORMATION:                                                        jcongd3@wgu.edu
                                                                             (847)693-9583

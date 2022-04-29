@@ -7,8 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.ResourceBundle;
-import java.util.Locale;
-import java.util.TimeZone;
 
 /**
  * <h1>Colandar - a GUI-based scheduling desktop application with filtering options  (C195 - Software II)</h1>
@@ -40,10 +38,6 @@ public class Main extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        //Locale.setDefault(new Locale("fr"));
-        //TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"));
-        //TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-
         JDBC.openConnection();
         launch(args);
         JDBC.closeConnection();

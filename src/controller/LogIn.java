@@ -37,14 +37,8 @@ import java.util.ResourceBundle;
 public class LogIn implements Initializable {
     Stage stage;
     ResourceBundle myBundle = ResourceBundle.getBundle("bundle/lang");
-
-
-    //Why does this display "GMT-7:00" and not "America/Chicago" in the VM?
     TimeZone tz = TimeZone.getDefault();
     String tz1 = tz.getID();
-    ZoneId z = ZoneId.systemDefault();
-
-
 
     @FXML private TextField logInUsernameLabel;
     @FXML private PasswordField logInPasswordLabel;
@@ -186,12 +180,7 @@ public class LogIn implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //Why does this display "GMT-7:00" and not "America/Chicago" in the VM?
-        System.out.println(tz1);
-        System.out.println(z);
         locationLabel.setText(tz1);
-
         userNameLabel.setText(myBundle.getString("Username"));
         passwordLabel.setText(myBundle.getString("Password"));
         locationText.setText(myBundle.getString("Location"));
