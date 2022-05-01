@@ -119,6 +119,11 @@ public class CustomersAdd implements Initializable {
         divisionCombo.setItems(FirstLevelDivisionDaoImpl.getDiv(C.getCountry_ID()));
     }
 
+    @FXML
+    void onActionDivisionCombo(ActionEvent event) {
+
+    }
+
     /**
      * This is the method to set the countryCombo combo box.
      * @param url
