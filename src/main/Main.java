@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  * <p><b>
  * Lambdas found on line 64 of LogIn.java and on line 182 of AppointmentDaoImpl.java
  * </b></p>
- * After unzipping c195jacksoncongdon.zip, the Javadocs files can be found at /javadoc
+ * After unzipping c195jacksoncongdon2.zip, the Javadocs files can be found at /javadoc
  * @author Jackson Congdon
  */
 public class Main extends Application {
